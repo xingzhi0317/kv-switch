@@ -1,0 +1,7 @@
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 7322.12it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 6494.55it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+41 41 [('<|im_start|>', '<|start_header_id|>'), ('user', '<|end_header_id|>'), ('\n', '\n\n'), ('Tell', 'Tell'), (' me', ' me'), (' a', ' a'), (' short', ' short'), (' fact', ' fact'), (' about', ' about'), (' Lisbon', ' Lisbon'), (' and', ' and'), (' Côte', 'ôte'), (' d', ' d'), ("'I", "'I"), ('voire', 'ire'), (',', ','), (' ', ' '), ('1', '12'), ('2', '12'), (',', ',')]
+split-vs-full maxabs 0.46875 top1 1.0
+oracle-replay-vs-native maxabs 0.53125 top1 0.9333333969116211

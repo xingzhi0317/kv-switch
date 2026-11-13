@@ -1,0 +1,53 @@
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7255.29it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6025.49it/s]
+[      7s] unit {'incremental_vs_oneshot_maxabs': 2.0, 'free_as_you_go_vs_baseline_maxabs': 0.0, 'overlap_vs_serial_logits_maxabs': 0.0}
+[     14s] P1 2048 native {'total': 97.52, 'new_input': 16.08, 'decode1': 27.34, 'prefill': 54.09, 'peak_GB': 12.35, 'peak_over_start_GB': 0.37}
+[     20s] P1 2048 native_freeA {'total': 98.3, 'new_input': 15.79, 'decode1': 27.47, 'prefill': 55.09, 'peak_GB': 11.98, 'peak_over_start_GB': 0.0}
+[     26s] P1 2048 B2 {'total': 79.19, 'new_input': 33.06, 'decode1': 26.77, 'translate': 18.95, 'peak_GB': 12.26, 'peak_over_start_GB': 0.28}
+[     32s] P1 2048 B1 {'total': 80.04, 'new_input': 33.09, 'decode1': 26.89, 'translate': 19.29, 'peak_GB': 12.26, 'peak_over_start_GB': 0.28}
+[     39s] P1 2048 B3 {'total': 109.98, 'new_input': 31.99, 'decode1': 27.43, 'translate': 18.98, 'recompute30': 31.55, 'peak_GB': 12.3, 'peak_over_start_GB': 0.31}
+[     45s] P1 2048 C5 {'total': 83.54, 'new_input': 33.53, 'decode1': 27.25, 'translate': 21.49, 'peak_GB': 12.04, 'peak_over_start_GB': 0.06}
+[     51s] P1 2048 C5+C6 {'total': 87.38, 'decode1': 27.15, 'translate+new_input(overlapped)': 61.07, 'peak_GB': 12.16, 'peak_over_start_GB': 0.06}
+[     57s] P1 2048 C1_aot {'total': 60.66, 'new_input': 32.99, 'decode1': 27.3, 'translate': 0.0, 'peak_GB': 12.44, 'peak_over_start_GB': 0.02}
+[     70s] P1 4096 native {'total': 164.58, 'new_input': 16.74, 'decode1': 27.17, 'prefill': 120.13, 'peak_GB': 13.17, 'peak_over_start_GB': 0.71}
+[     83s] P1 4096 native_freeA {'total': 164.74, 'new_input': 16.83, 'decode1': 26.9, 'prefill': 120.96, 'peak_GB': 12.53, 'peak_over_start_GB': 0.07}
+[     94s] P1 4096 B2 {'total': 81.66, 'new_input': 26.98, 'decode1': 28.17, 'translate': 26.32, 'peak_GB': 12.99, 'peak_over_start_GB': 0.53}
+[    104s] P1 4096 B1 {'total': 80.88, 'new_input': 27.13, 'decode1': 27.52, 'translate': 26.31, 'peak_GB': 12.99, 'peak_over_start_GB': 0.53}
+[    116s] P1 4096 B3 {'total': 126.03, 'new_input': 16.56, 'decode1': 27.97, 'translate': 26.41, 'recompute30': 54.75, 'peak_GB': 13.06, 'peak_over_start_GB': 0.6}
+[    128s] P1 4096 C5 {'total': 82.04, 'new_input': 28.38, 'decode1': 27.02, 'translate': 26.31, 'peak_GB': 12.57, 'peak_over_start_GB': 0.11}
+[    140s] P1 4096 C5+C6 {'total': 96.45, 'decode1': 27.73, 'translate+new_input(overlapped)': 69.39, 'peak_GB': 12.62, 'peak_over_start_GB': 0.11}
+[    150s] P1 4096 C1_aot {'total': 60.67, 'new_input': 33.24, 'decode1': 26.87, 'translate': 0.0, 'peak_GB': 13.0, 'peak_over_start_GB': 0.04}
+[    183s] P1 8192 native {'total': 375.56, 'new_input': 23.91, 'decode1': 18.47, 'prefill': 332.81, 'peak_GB': 14.31, 'peak_over_start_GB': 1.18}
+[    215s] P1 8192 native_freeA {'total': 372.58, 'new_input': 23.97, 'decode1': 18.78, 'prefill': 329.94, 'peak_GB': 13.13, 'peak_over_start_GB': 0.0}
+[    241s] P1 8192 B2 {'total': 118.14, 'new_input': 23.82, 'decode1': 18.89, 'translate': 75.33, 'peak_GB': 14.18, 'peak_over_start_GB': 1.05}
+[    266s] P1 8192 B1 {'total': 115.93, 'new_input': 23.8, 'decode1': 18.63, 'translate': 73.32, 'peak_GB': 14.18, 'peak_over_start_GB': 1.05}
+[    296s] P1 8192 B3 {'total': 248.27, 'new_input': 23.92, 'decode1': 19.62, 'translate': 73.98, 'recompute30': 130.25, 'peak_GB': 14.33, 'peak_over_start_GB': 1.2}
+[    321s] P1 8192 C5 {'total': 111.19, 'new_input': 23.89, 'decode1': 18.3, 'translate': 68.99, 'peak_GB': 13.35, 'peak_over_start_GB': 0.22}
+[    347s] P1 8192 C5+C6 {'total': 111.37, 'decode1': 17.36, 'translate+new_input(overlapped)': 91.1, 'peak_GB': 13.35, 'peak_over_start_GB': 0.22}
+[    374s] P1 8192 C1_aot {'total': 61.38, 'new_input': 33.82, 'decode1': 27.56, 'translate': 0.0, 'peak_GB': 14.09, 'peak_over_start_GB': 0.07}
+[    458s] P1 16384 native {'total': 946.95, 'new_input': 38.63, 'decode1': 12.02, 'prefill': 896.07, 'peak_GB': 16.45, 'peak_over_start_GB': 2.19}
+[    540s] P1 16384 native_freeA {'total': 942.63, 'new_input': 38.5, 'decode1': 12.54, 'prefill': 891.75, 'peak_GB': 14.26, 'peak_over_start_GB': 0.0}
+[    605s] P1 16384 B2 {'total': 195.11, 'new_input': 38.29, 'decode1': 12.35, 'translate': 144.53, 'peak_GB': 16.21, 'peak_over_start_GB': 1.95}
+[    670s] P1 16384 B1 {'total': 194.39, 'new_input': 38.26, 'decode1': 12.37, 'translate': 144.02, 'peak_GB': 16.21, 'peak_over_start_GB': 1.95}
+[    745s] P1 16384 B3 {'total': 582.5, 'new_input': 38.19, 'decode1': 12.22, 'translate': 143.45, 'recompute30': 388.38, 'peak_GB': 16.7, 'peak_over_start_GB': 2.44}
+[    809s] P1 16384 C5 {'total': 188.43, 'new_input': 38.27, 'decode1': 12.58, 'translate': 137.48, 'peak_GB': 14.57, 'peak_over_start_GB': 0.31}
+[    875s] P1 16384 C5+C6 {'total': 177.62, 'decode1': 12.33, 'translate+new_input(overlapped)': 165.25, 'peak_GB': 14.57, 'peak_over_start_GB': 0.31}
+[    940s] P1 16384 C1_aot {'total': 62.93, 'new_input': 40.42, 'decode1': 22.28, 'translate': 0.0, 'peak_GB': 16.16, 'peak_over_start_GB': 0.14}
+[   1179s] P1 32768 native {'total': 2702.28, 'new_input': 67.99, 'decode1': 12.32, 'prefill': 2622.14, 'peak_GB': 20.76, 'peak_over_start_GB': 4.26}
+[   1418s] P1 32768 native_freeA {'total': 2698.26, 'new_input': 68.0, 'decode1': 12.26, 'prefill': 2617.98, 'peak_GB': 16.51, 'peak_over_start_GB': 0.0}
+[   1598s] P1 32768 B2 {'total': 359.27, 'new_input': 68.02, 'decode1': 12.33, 'translate': 279.02, 'peak_GB': 20.29, 'peak_over_start_GB': 3.78}
+[   1778s] P1 32768 B1 {'total': 359.3, 'new_input': 67.9, 'decode1': 12.27, 'translate': 279.09, 'peak_GB': 20.29, 'peak_over_start_GB': 3.78}
+[   1991s] P1 32768 B3 {'total': 1625.26, 'new_input': 67.86, 'decode1': 12.26, 'translate': 278.86, 'recompute30': 1265.42, 'peak_GB': 21.26, 'peak_over_start_GB': 4.75}
+[   2170s] P1 32768 C5 {'total': 354.58, 'new_input': 67.9, 'decode1': 12.15, 'translate': 274.4, 'peak_GB': 16.95, 'peak_over_start_GB': 0.44}
+[   2351s] P1 32768 C5+C6 {'total': 454.56, 'decode1': 11.91, 'translate+new_input(overlapped)': 442.86, 'peak_GB': 16.95, 'peak_over_start_GB': 0.44}
+[   2532s] P1 32768 C1_aot {'total': 82.18, 'new_input': 69.92, 'decode1': 11.97, 'translate': 0.0, 'peak_GB': 20.29, 'peak_over_start_GB': 0.27}
+[   2545s] bg 2048 {'C1_translate_turn_gpu_ms': 18.44603157043457, 'B6_shadow_prefill_turn_gpu_ms': 29.55606460571289, 'A_decode_ms_alone': 35.6177921295166, 'C1_translate_turn_A_decode_ms_during': 36.20863914489746, 'C1_translate_turn_A_extra_ms_total': 2.8353599548339616, 'B6_shadow_prefill_turn_A_decode_ms_during': 35.943424224853516, 'B6_shadow_prefill_turn_A_extra_ms_total': 6.2685714721679915, 'extra_mem_GB_both': 0.2734375}
+[   2559s] bg 4096 {'C1_translate_turn_gpu_ms': 18.501999855041504, 'B6_shadow_prefill_turn_gpu_ms': 29.923855781555176, 'A_decode_ms_alone': 35.37356758117676, 'C1_translate_turn_A_decode_ms_during': 38.450063705444336, 'C1_translate_turn_A_extra_ms_total': 84.03609161376949, 'B6_shadow_prefill_turn_A_decode_ms_during': 35.396095275878906, 'B6_shadow_prefill_turn_A_extra_ms_total': -0.1528831481933821, 'extra_mem_GB_both': 0.4921875}
+[   2573s] bg 8192 {'C1_translate_turn_gpu_ms': 18.23747158050537, 'B6_shadow_prefill_turn_gpu_ms': 31.317503929138184, 'A_decode_ms_alone': 34.065406799316406, 'C1_translate_turn_A_decode_ms_during': 34.11712074279785, 'C1_translate_turn_A_extra_ms_total': 14.656531524658249, 'B6_shadow_prefill_turn_A_decode_ms_during': 36.222463607788086, 'B6_shadow_prefill_turn_A_extra_ms_total': 62.148091125488236, 'extra_mem_GB_both': 0.9296875}
+[   2590s] bg 16384 {'C1_translate_turn_gpu_ms': 17.690672874450684, 'B6_shadow_prefill_turn_gpu_ms': 46.823936462402344, 'A_decode_ms_alone': 39.13369560241699, 'C1_translate_turn_A_decode_ms_during': 34.89792060852051, 'C1_translate_turn_A_extra_ms_total': -50.86415100097656, 'B6_shadow_prefill_turn_A_decode_ms_during': 39.52179145812988, 'B6_shadow_prefill_turn_A_extra_ms_total': 16.578369140625, 'extra_mem_GB_both': 1.8046875}
+[   2595s] c3 2048 {'reprefill_alone_ms': 53.94432067871094, 'reprefill_concurrent_ms': 58.95475387573242, 'B_decode_ms_alone': 26.230799674987793, 'B_decode_ms_during': 26.21183967590332, 'B_decode_128tok_ms_during': 3431.665699005127, 'B_decode_128tok_ms_alone': 3357.5423583984375}
+[   2600s] c3 4096 {'reprefill_alone_ms': 118.43062591552734, 'reprefill_concurrent_ms': 130.2794189453125, 'B_decode_ms_alone': 26.36851215362549, 'B_decode_ms_during': 27.291647911071777, 'B_decode_128tok_ms_during': 3589.7907161712646, 'B_decode_128tok_ms_alone': 3375.1695556640625}
+[   2606s] c3 8192 {'reprefill_alone_ms': 322.0068359375, 'reprefill_concurrent_ms': 339.254150390625, 'B_decode_ms_alone': 26.4335355758667, 'B_decode_ms_during': 27.400192260742188, 'B_decode_128tok_ms_during': 3450.9876251220703, 'B_decode_128tok_ms_alone': 3383.4925537109375}
+[   2615s] c3 16384 {'reprefill_alone_ms': 879.1633911132812, 'reprefill_concurrent_ms': 915.478515625, 'B_decode_ms_alone': 26.64857578277588, 'B_decode_ms_during': 27.47391986846924, 'B_decode_128tok_ms_during': 3607.809274673462, 'B_decode_128tok_ms_alone': 3411.0177001953125}
+[   2632s] c3 32768 {'reprefill_alone_ms': 2593.1787109375, 'reprefill_concurrent_ms': 2713.9716796875, 'B_decode_ms_alone': 26.687999725341797, 'B_decode_ms_during': 27.000831604003906, 'B_decode_128tok_ms_during': 3495.549976348877, 'B_decode_128tok_ms_alone': 3416.06396484375}
+[   2632s] TIMINGDONE

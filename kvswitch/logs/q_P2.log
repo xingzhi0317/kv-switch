@@ -1,0 +1,178 @@
+=== PAIR=P2 TASK=uc N=200 METHODS=native,none,B2,B1,B1k1,B3 Fri Nov 13 04:36:54 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6588.69it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6693.07it/s]
+[     14s] uc P2 n=10 N~941 {'native': 0.0, 'none': -0.753, 'B2': -0.465, 'B1': -0.455, 'B1k1': -0.529, 'B3': -0.181}
+[     20s] uc P2 n=20 N~396 {'native': 0.0, 'none': -0.544, 'B2': -0.363, 'B1': -0.355, 'B1k1': -0.418, 'B3': -0.133}
+[     27s] uc P2 n=30 N~1584 {'native': 0.0, 'none': -0.808, 'B2': -0.503, 'B1': -0.504, 'B1k1': -0.648, 'B3': -0.235}
+[     33s] uc P2 n=40 N~956 {'native': 0.0, 'none': -0.769, 'B2': -0.492, 'B1': -0.492, 'B1k1': -0.637, 'B3': -0.236}
+[     39s] uc P2 n=50 N~394 {'native': 0.0, 'none': -0.734, 'B2': -0.485, 'B1': -0.481, 'B1k1': -0.625, 'B3': -0.219}
+[     45s] uc P2 n=60 N~869 {'native': 0.0, 'none': -0.78, 'B2': -0.499, 'B1': -0.498, 'B1k1': -0.658, 'B3': -0.225}
+[     51s] uc P2 n=70 N~762 {'native': 0.0, 'none': -0.786, 'B2': -0.499, 'B1': -0.497, 'B1k1': -0.651, 'B3': -0.215}
+[     58s] uc P2 n=80 N~453 {'native': 0.0, 'none': -0.722, 'B2': -0.452, 'B1': -0.449, 'B1k1': -0.59, 'B3': -0.193}
+[     64s] uc P2 n=90 N~823 {'native': 0.0, 'none': -0.75, 'B2': -0.466, 'B1': -0.463, 'B1k1': -0.615, 'B3': -0.197}
+[     70s] uc P2 n=100 N~666 {'native': 0.0, 'none': -0.702, 'B2': -0.432, 'B1': -0.43, 'B1k1': -0.571, 'B3': -0.182}
+[     77s] uc P2 n=110 N~1141 {'native': 0.0, 'none': -0.725, 'B2': -0.453, 'B1': -0.45, 'B1k1': -0.591, 'B3': -0.187}
+[     83s] uc P2 n=120 N~1317 {'native': 0.0, 'none': -0.726, 'B2': -0.454, 'B1': -0.451, 'B1k1': -0.588, 'B3': -0.193}
+[     89s] uc P2 n=130 N~799 {'native': 0.0, 'none': -0.717, 'B2': -0.442, 'B1': -0.439, 'B1k1': -0.572, 'B3': -0.191}
+[     95s] uc P2 n=140 N~1414 {'native': 0.0, 'none': -0.718, 'B2': -0.448, 'B1': -0.445, 'B1k1': -0.574, 'B3': -0.195}
+[    102s] uc P2 n=150 N~741 {'native': 0.0, 'none': -0.703, 'B2': -0.441, 'B1': -0.438, 'B1k1': -0.564, 'B3': -0.19}
+[    108s] uc P2 n=160 N~1470 {'native': 0.0, 'none': -0.691, 'B2': -0.436, 'B1': -0.433, 'B1k1': -0.556, 'B3': -0.184}
+[    115s] uc P2 n=170 N~486 {'native': 0.0, 'none': -0.708, 'B2': -0.448, 'B1': -0.444, 'B1k1': -0.576, 'B3': -0.189}
+[    121s] uc P2 n=180 N~978 {'native': 0.0, 'none': -0.698, 'B2': -0.44, 'B1': -0.435, 'B1k1': -0.568, 'B3': -0.186}
+[    127s] uc P2 n=190 N~1470 {'native': 0.0, 'none': -0.676, 'B2': -0.426, 'B1': -0.422, 'B1k1': -0.55, 'B3': -0.181}
+[    134s] uc P2 n=200 N~1995 {'native': 0.0, 'none': -0.671, 'B2': -0.417, 'B1': -0.412, 'B1k1': -0.541, 'B3': -0.176}
+[    134s] EVALDONE
+=== PAIR=P2 TASK=coqa1 N=100 METHODS=native,none,B2,B1,B3 Fri Nov 13 04:39:11 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6200.58it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6864.91it/s]
+[    113s] coqa1 P2 n=10 N~318 {'native': 0.725, 'none': 0.009, 'B2': 0.116, 'B1': 0.194, 'B3': 0.387}
+[    221s] coqa1 P2 n=20 N~242 {'native': 0.77, 'none': 0.005, 'B2': 0.116, 'B1': 0.168, 'B3': 0.396}
+[    329s] coqa1 P2 n=30 N~365 {'native': 0.685, 'none': 0.007, 'B2': 0.106, 'B1': 0.143, 'B3': 0.359}
+[    448s] coqa1 P2 n=40 N~228 {'native': 0.681, 'none': 0.008, 'B2': 0.095, 'B1': 0.128, 'B3': 0.342}
+[    549s] coqa1 P2 n=50 N~458 {'native': 0.712, 'none': 0.015, 'B2': 0.11, 'B1': 0.137, 'B3': 0.375}
+[    659s] coqa1 P2 n=60 N~337 {'native': 0.702, 'none': 0.012, 'B2': 0.105, 'B1': 0.132, 'B3': 0.393}
+[    764s] coqa1 P2 n=70 N~491 {'native': 0.736, 'none': 0.015, 'B2': 0.113, 'B1': 0.137, 'B3': 0.437}
+[    867s] coqa1 P2 n=80 N~536 {'native': 0.747, 'none': 0.016, 'B2': 0.125, 'B1': 0.148, 'B3': 0.446}
+Traceback (most recent call last):
+  File "/home/wxz/kvswitch/src/eval.py", line 139, in <module>
+    e0 = torch.cuda.Event(enable_timing=True); e1 = torch.cuda.Event(enable_timing=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wxz/kvmap/.venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wxz/kvswitch/src/ks.py", line 98, in forward
+    cache.k[l][:, n0:n0 + T] = kp[0]
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+RuntimeError: The expanded size of the tensor (25) must match the existing size (26) at non-singleton dimension 1.  Target sizes: [8, 25, 128].  Tensor sizes: [8, 26, 128]
+=== PAIR=P2 TASK=coqa5 N=100 METHODS=native,B2,B1,B3 Fri Nov 13 04:54:15 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6754.74it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5324.88it/s]
+[     85s] coqa5 P2 n=10 N~387 {'native': 0.857, 'B2': 0.085, 'B1': 0.123, 'B3': 0.263}
+[    163s] coqa5 P2 n=20 N~312 {'native': 0.691, 'B2': 0.068, 'B1': 0.106, 'B3': 0.291}
+[    239s] coqa5 P2 n=30 N~435 {'native': 0.645, 'B2': 0.064, 'B1': 0.093, 'B3': 0.31}
+[    325s] coqa5 P2 n=40 N~302 {'native': 0.632, 'B2': 0.069, 'B1': 0.087, 'B3': 0.301}
+[    408s] coqa5 P2 n=50 N~535 {'native': 0.614, 'B2': 0.072, 'B1': 0.083, 'B3': 0.327}
+Traceback (most recent call last):
+  File "/home/wxz/kvswitch/src/eval.py", line 176, in <module>
+    lg0 = B.forward(torch.tensor([new0], device="cuda"), c0, want="all")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wxz/kvmap/.venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wxz/kvswitch/src/ks.py", line 98, in forward
+    cache.k[l][:, n0:n0 + T] = kp[0]
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+RuntimeError: The expanded size of the tensor (24) must match the existing size (29) at non-singleton dimension 1.  Target sizes: [8, 24, 128].  Tensor sizes: [8, 29, 128]
+=== PAIR=P2 TASK=coqa10 N=100 METHODS=native,B2,B1,B3 Fri Nov 13 05:02:03 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7110.07it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 4452.71it/s]
+[     91s] coqa10 P2 n=10 N~546 {'native': 0.557, 'B2': 0.11, 'B1': 0.092, 'B3': 0.465}
+[    166s] coqa10 P2 n=20 N~676 {'native': 0.667, 'B2': 0.141, 'B1': 0.129, 'B3': 0.473}
+[    246s] coqa10 P2 n=30 N~703 {'native': 0.607, 'B2': 0.124, 'B1': 0.112, 'B3': 0.404}
+[    323s] coqa10 P2 n=40 N~623 {'native': 0.647, 'B2': 0.111, 'B1': 0.1, 'B3': 0.389}
+[    405s] coqa10 P2 n=50 N~609 {'native': 0.655, 'B2': 0.111, 'B1': 0.105, 'B3': 0.394}
+[    487s] coqa10 P2 n=60 N~550 {'native': 0.672, 'B2': 0.111, 'B1': 0.11, 'B3': 0.391}
+[    571s] coqa10 P2 n=70 N~659 {'native': 0.68, 'B2': 0.107, 'B1': 0.108, 'B3': 0.389}
+[    646s] coqa10 P2 n=80 N~571 {'native': 0.691, 'B2': 0.111, 'B1': 0.113, 'B3': 0.391}
+[    729s] coqa10 P2 n=90 N~472 {'native': 0.679, 'B2': 0.109, 'B1': 0.109, 'B3': 0.39}
+[    815s] coqa10 P2 n=100 N~521 {'native': 0.681, 'B2': 0.104, 'B1': 0.107, 'B3': 0.389}
+[    815s] EVALDONE
+=== PAIR=P2 TASK=lb8k N=200 METHODS=native,none,B2,B1,B3 Fri Nov 13 05:15:42 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7005.56it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7079.71it/s]
+[     42s] lb8k P2 n=10 N~8249 {'native': 0.407, 'none': 0.24, 'B2': 0.474, 'B1': 0.474, 'B3': 0.19}
+[     75s] lb8k P2 n=20 N~8249 {'native': 0.503, 'none': 0.231, 'B2': 0.404, 'B1': 0.354, 'B3': 0.345}
+[    106s] lb8k P2 n=30 N~8250 {'native': 0.483, 'none': 0.217, 'B2': 0.319, 'B1': 0.294, 'B3': 0.338}
+[    138s] lb8k P2 n=40 N~8249 {'native': 0.46, 'none': 0.243, 'B2': 0.291, 'B1': 0.278, 'B3': 0.331}
+[    184s] lb8k P2 n=50 N~8250 {'native': 0.468, 'none': 0.232, 'B2': 0.263, 'B1': 0.242, 'B3': 0.327}
+[    220s] lb8k P2 n=60 N~8250 {'native': 0.431, 'none': 0.199, 'B2': 0.242, 'B1': 0.224, 'B3': 0.319}
+[    253s] lb8k P2 n=70 N~8249 {'native': 0.434, 'none': 0.192, 'B2': 0.207, 'B1': 0.2, 'B3': 0.301}
+[    277s] lb8k P2 n=80 N~8250 {'native': 0.438, 'none': 0.212, 'B2': 0.241, 'B1': 0.236, 'B3': 0.319}
+[    302s] lb8k P2 n=90 N~5680 {'native': 0.437, 'none': 0.233, 'B2': 0.241, 'B1': 0.224, 'B3': 0.332}
+[    338s] lb8k P2 n=100 N~6669 {'native': 0.422, 'none': 0.243, 'B2': 0.23, 'B1': 0.214, 'B3': 0.324}
+[    397s] lb8k P2 n=110 N~8247 {'native': 0.435, 'none': 0.25, 'B2': 0.247, 'B1': 0.233, 'B3': 0.338}
+[    451s] lb8k P2 n=120 N~2553 {'native': 0.454, 'none': 0.253, 'B2': 0.253, 'B1': 0.241, 'B3': 0.345}
+[    504s] lb8k P2 n=130 N~4148 {'native': 0.463, 'none': 0.253, 'B2': 0.251, 'B1': 0.246, 'B3': 0.349}
+[    560s] lb8k P2 n=140 N~8251 {'native': 0.465, 'none': 0.245, 'B2': 0.249, 'B1': 0.244, 'B3': 0.348}
+[    612s] lb8k P2 n=150 N~8251 {'native': 0.477, 'none': 0.259, 'B2': 0.263, 'B1': 0.258, 'B3': 0.364}
+[    645s] lb8k P2 n=160 N~5937 {'native': 0.477, 'none': 0.255, 'B2': 0.253, 'B1': 0.248, 'B3': 0.363}
+[    676s] lb8k P2 n=170 N~5706 {'native': 0.483, 'none': 0.258, 'B2': 0.251, 'B1': 0.246, 'B3': 0.372}
+[    713s] lb8k P2 n=180 N~3658 {'native': 0.485, 'none': 0.255, 'B2': 0.251, 'B1': 0.245, 'B3': 0.378}
+[    739s] lb8k P2 n=190 N~5912 {'native': 0.474, 'none': 0.252, 'B2': 0.243, 'B1': 0.237, 'B3': 0.371}
+[    768s] lb8k P2 n=200 N~3169 {'native': 0.463, 'none': 0.242, 'B2': 0.232, 'B1': 0.227, 'B3': 0.362}
+[    768s] EVALDONE
+=== PAIR=P2 TASK=niah4k N=50 METHODS=native,B2,B1,B3 Fri Nov 13 05:28:33 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5890.93it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5817.95it/s]
+[     32s] niah4k P2 n=10 N~3941 {'native': 1.0, 'B2': 0.0, 'B1': 0.0, 'B3': 0.2}
+[     56s] niah4k P2 n=20 N~3940 {'native': 1.0, 'B2': 0.0, 'B1': 0.0, 'B3': 0.15}
+[     79s] niah4k P2 n=30 N~3939 {'native': 1.0, 'B2': 0.0, 'B1': 0.0, 'B3': 0.2}
+[    104s] niah4k P2 n=40 N~3939 {'native': 1.0, 'B2': 0.0, 'B1': 0.0, 'B3': 0.2}
+[    128s] niah4k P2 n=50 N~3940 {'native': 1.0, 'B2': 0.0, 'B1': 0.0, 'B3': 0.2}
+[    128s] EVALDONE
+=== PAIR=P2 TASK=niah8k N=50 METHODS=native,B2,B1,B3 Fri Nov 13 05:30:45 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7223.91it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9092.28it/s]
+[     44s] niah8k P2 n=10 N~8035 {'native': 1.0, 'B2': 0.0, 'B1': 0.0, 'B3': 0.2}
+[     82s] niah8k P2 n=20 N~8036 {'native': 0.95, 'B2': 0.0, 'B1': 0.0, 'B3': 0.15}
+[    119s] niah8k P2 n=30 N~8036 {'native': 0.967, 'B2': 0.0, 'B1': 0.0, 'B3': 0.267}
+[    155s] niah8k P2 n=40 N~8036 {'native': 0.975, 'B2': 0.0, 'B1': 0.0, 'B3': 0.25}
+[    191s] niah8k P2 n=50 N~8036 {'native': 0.98, 'B2': 0.0, 'B1': 0.0, 'B3': 0.26}
+[    191s] EVALDONE
+=== PAIR=P2 TASK=niah16k N=50 METHODS=native,B2,B1,B3 Fri Nov 13 05:34:00 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6739.46it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6179.40it/s]
+[     77s] niah16k P2 n=10 N~16228 {'native': 0.2, 'B2': 0.0, 'B1': 0.0, 'B3': 0.1}
+[    143s] niah16k P2 n=20 N~16228 {'native': 0.3, 'B2': 0.0, 'B1': 0.0, 'B3': 0.05}
+[    211s] niah16k P2 n=30 N~16228 {'native': 0.3, 'B2': 0.0, 'B1': 0.0, 'B3': 0.067}
+[    279s] niah16k P2 n=40 N~16227 {'native': 0.3, 'B2': 0.0, 'B1': 0.0, 'B3': 0.1}
+[    344s] niah16k P2 n=50 N~16228 {'native': 0.28, 'B2': 0.0, 'B1': 0.0, 'B3': 0.08}
+[    344s] EVALDONE
+=== PAIR=P2 TASK=gsm N=200 METHODS=native,B2,B1,B3 Fri Nov 13 05:39:49 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7184.04it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5753.05it/s]
+[    261s] gsm P2 n=10 N~619 {'native': 1.0, 'B2': 0.9, 'B1': 0.9, 'B3': 0.9}
+[    540s] gsm P2 n=20 N~495 {'native': 0.9, 'B2': 0.8, 'B1': 0.8, 'B3': 0.8}
+[    752s] gsm P2 n=30 N~445 {'native': 0.933, 'B2': 0.867, 'B1': 0.867, 'B3': 0.867}
+[   1002s] gsm P2 n=40 N~459 {'native': 0.925, 'B2': 0.875, 'B1': 0.9, 'B3': 0.9}
+[   1254s] gsm P2 n=50 N~843 {'native': 0.94, 'B2': 0.88, 'B1': 0.92, 'B3': 0.92}
+[   1471s] gsm P2 n=60 N~920 {'native': 0.95, 'B2': 0.9, 'B1': 0.933, 'B3': 0.917}
+[   1700s] gsm P2 n=70 N~529 {'native': 0.943, 'B2': 0.9, 'B1': 0.929, 'B3': 0.914}
+[   1944s] gsm P2 n=80 N~793 {'native': 0.95, 'B2': 0.9, 'B1': 0.912, 'B3': 0.912}
+[   2159s] gsm P2 n=90 N~817 {'native': 0.933, 'B2': 0.889, 'B1': 0.911, 'B3': 0.9}
+[   2426s] gsm P2 n=100 N~588 {'native': 0.94, 'B2': 0.9, 'B1': 0.92, 'B3': 0.91}
+[   2669s] gsm P2 n=110 N~725 {'native': 0.945, 'B2': 0.909, 'B1': 0.918, 'B3': 0.918}
+[   2956s] gsm P2 n=120 N~680 {'native': 0.925, 'B2': 0.892, 'B1': 0.908, 'B3': 0.9}
+[   3197s] gsm P2 n=130 N~827 {'native': 0.923, 'B2': 0.892, 'B1': 0.908, 'B3': 0.9}
+[   3398s] gsm P2 n=140 N~615 {'native': 0.921, 'B2': 0.9, 'B1': 0.914, 'B3': 0.907}
+[   3635s] gsm P2 n=150 N~721 {'native': 0.92, 'B2': 0.9, 'B1': 0.913, 'B3': 0.907}
+[   3914s] gsm P2 n=160 N~577 {'native': 0.912, 'B2': 0.887, 'B1': 0.912, 'B3': 0.9}
+[   4152s] gsm P2 n=170 N~578 {'native': 0.912, 'B2': 0.888, 'B1': 0.912, 'B3': 0.894}
+[   4412s] gsm P2 n=180 N~527 {'native': 0.917, 'B2': 0.889, 'B1': 0.917, 'B3': 0.9}
+[   4703s] gsm P2 n=190 N~773 {'native': 0.905, 'B2': 0.884, 'B1': 0.911, 'B3': 0.9}
+[   4919s] gsm P2 n=200 N~567 {'native': 0.91, 'B2': 0.89, 'B1': 0.915, 'B3': 0.905}
+[   4919s] EVALDONE
+=== PAIR=P2 TASK=niah32k N=50 METHODS=native,B2,B1,B3 Fri Nov 13 07:01:51 PM UTC 2026
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6047.59it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6180.01it/s]
+Traceback (most recent call last):
+  File "/home/wxz/kvswitch/src/eval.py", line 142, in <module>
+    cB = prep_cache(m, ids_t, N, cA, extra)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wxz/kvswitch/src/eval.py", line 86, in prep_cache
+    selective_recompute(B, cB, ids_t, N, 0.3)
+  File "/home/wxz/kvmap/.venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wxz/kvswitch/src/translate.py", line 100, in selective_recompute
+    forward_at(B, ids[:, pos], pos, cB, N)
+  File "/home/wxz/kvmap/.venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wxz/kvswitch/src/translate.py", line 109, in forward_at
+    _forward_at(M, ids[:, s:s + chunk], p, cache, N)
+  File "/home/wxz/kvswitch/src/translate.py", line 128, in _forward_at
+    o = F.scaled_dot_product_attention(qp, K.repeat_interleave(G, 1), V.repeat_interleave(G, 1), attn_mask=mask)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 256.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 243.81 MiB is free. Including non-PyTorch memory, this process has 23.27 GiB memory in use. Of the allocated memory 22.13 GiB is allocated by PyTorch, and 704.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+QUEUEDONE

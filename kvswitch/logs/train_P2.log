@@ -1,0 +1,70 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7294.52it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6988.78it/s]
+[     20s] step 0 val KL {2048: 0.25383228063583374, 8192: 0.39200716465711594}
+[     59s] step 10 kl(ema) 0.2576 mem 16.0G
+[     98s] step 20 kl(ema) 0.2633 mem 16.0G
+[    137s] step 30 kl(ema) 0.2801 mem 16.0G
+[    176s] step 40 kl(ema) 0.2950 mem 16.0G
+[    217s] step 50 kl(ema) 0.3363 mem 16.0G
+[    256s] step 60 kl(ema) 0.3585 mem 16.0G
+[    298s] step 70 kl(ema) 0.3783 mem 16.0G
+[    337s] step 80 kl(ema) 0.3777 mem 16.0G
+[    374s] step 90 kl(ema) 0.3810 mem 16.0G
+[    415s] step 100 kl(ema) 0.3908 mem 16.0G
+[    428s] val 100 {2048: 0.32264471985399723, 8192: 0.451221177354455}
+[    467s] step 110 kl(ema) 0.3795 mem 16.0G
+[    509s] step 120 kl(ema) 0.3940 mem 16.0G
+[    546s] step 130 kl(ema) 0.3659 mem 16.0G
+[    590s] step 140 kl(ema) 0.3768 mem 16.0G
+[    630s] step 150 kl(ema) 0.3846 mem 16.0G
+[    674s] step 160 kl(ema) 0.3664 mem 16.0G
+[    714s] step 170 kl(ema) 0.3670 mem 16.0G
+[    755s] step 180 kl(ema) 0.3789 mem 16.0G
+[    793s] step 190 kl(ema) 0.3628 mem 16.0G
+[    834s] step 200 kl(ema) 0.3652 mem 16.0G
+[    847s] val 200 {2048: 0.35651415027678013, 8192: 0.44355411641299725}
+[    886s] step 210 kl(ema) 0.3752 mem 16.0G
+[    926s] step 220 kl(ema) 0.3508 mem 16.0G
+[    968s] step 230 kl(ema) 0.3449 mem 16.0G
+[   1008s] step 240 kl(ema) 0.3313 mem 16.0G
+[   1048s] step 250 kl(ema) 0.3455 mem 16.0G
+[   1090s] step 260 kl(ema) 0.3391 mem 16.0G
+[   1131s] step 270 kl(ema) 0.3255 mem 16.0G
+[   1170s] step 280 kl(ema) 0.3240 mem 16.0G
+[   1214s] step 290 kl(ema) 0.3175 mem 16.0G
+[   1254s] step 300 kl(ema) 0.3045 mem 16.0G
+[   1267s] val 300 {2048: 0.3174834754317999, 8192: 0.398632125928998}
+[   1307s] step 310 kl(ema) 0.3080 mem 16.0G
+[   1347s] step 320 kl(ema) 0.3152 mem 16.0G
+[   1388s] step 330 kl(ema) 0.3263 mem 16.0G
+[   1426s] step 340 kl(ema) 0.3053 mem 16.0G
+[   1467s] step 350 kl(ema) 0.2985 mem 16.0G
+[   1506s] step 360 kl(ema) 0.2868 mem 16.0G
+[   1549s] step 370 kl(ema) 0.3037 mem 16.0G
+[   1588s] step 380 kl(ema) 0.2979 mem 16.0G
+[   1629s] step 390 kl(ema) 0.3115 mem 16.0G
+[   1670s] step 400 kl(ema) 0.3032 mem 16.0G
+[   1683s] val 400 {2048: 0.2650451511144638, 8192: 0.3743582023307681}
+[   1726s] step 410 kl(ema) 0.3173 mem 16.0G
+[   1770s] step 420 kl(ema) 0.2972 mem 16.0G
+[   1807s] step 430 kl(ema) 0.2684 mem 16.0G
+[   1846s] step 440 kl(ema) 0.2665 mem 16.0G
+[   1884s] step 450 kl(ema) 0.2511 mem 16.0G
+[   1920s] step 460 kl(ema) 0.2432 mem 16.0G
+[   1963s] step 470 kl(ema) 0.2370 mem 16.0G
+[   2004s] step 480 kl(ema) 0.2506 mem 16.0G
+[   2047s] step 490 kl(ema) 0.2457 mem 16.0G
+[   2088s] step 500 kl(ema) 0.2430 mem 16.0G
+[   2101s] val 500 {2048: 0.2084043463692069, 8192: 0.2836329536512494}
+[   2141s] step 510 kl(ema) 0.2272 mem 16.0G
+[   2183s] step 520 kl(ema) 0.2224 mem 16.0G
+[   2225s] step 530 kl(ema) 0.2248 mem 16.0G
+[   2263s] step 540 kl(ema) 0.2091 mem 16.0G
+[   2304s] step 550 kl(ema) 0.2054 mem 16.0G
+[   2341s] step 560 kl(ema) 0.2058 mem 16.0G
+[   2380s] step 570 kl(ema) 0.1983 mem 16.0G
+[   2419s] step 580 kl(ema) 0.2006 mem 16.0G
+[   2461s] step 590 kl(ema) 0.2130 mem 16.0G
+[   2499s] step 600 kl(ema) 0.2080 mem 16.0G
+[   2512s] val 600 {2048: 0.2010273076593876, 8192: 0.2502324990928173}
+[   2513s] TRAINDONE

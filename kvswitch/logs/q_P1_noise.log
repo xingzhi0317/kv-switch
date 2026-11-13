@@ -1,0 +1,59 @@
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6143.24it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5416.05it/s]
+[     51s] coqa1 P1 n=10 N~318 {'noise0.5': 0.04, 'noise2': 0.013}
+[     95s] coqa1 P1 n=20 N~242 {'noise0.5': 0.02, 'noise2': 0.006}
+[    139s] coqa1 P1 n=30 N~365 {'noise0.5': 0.021, 'noise2': 0.013}
+[    183s] coqa1 P1 n=40 N~228 {'noise0.5': 0.016, 'noise2': 0.009}
+[    226s] coqa1 P1 n=50 N~458 {'noise0.5': 0.013, 'noise2': 0.007}
+[    270s] coqa1 P1 n=60 N~337 {'noise0.5': 0.01, 'noise2': 0.006}
+[    313s] coqa1 P1 n=70 N~491 {'noise0.5': 0.011, 'noise2': 0.005}
+[    355s] coqa1 P1 n=80 N~536 {'noise0.5': 0.01, 'noise2': 0.005}
+[    398s] coqa1 P1 n=90 N~321 {'noise0.5': 0.015, 'noise2': 0.004}
+[    441s] coqa1 P1 n=100 N~228 {'noise0.5': 0.013, 'noise2': 0.005}
+[    441s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5783.68it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5723.44it/s]
+[     38s] lb8k P1 n=10 N~8249 {'noise0.5': 0.0, 'noise2': 0.0}
+[     66s] lb8k P1 n=20 N~8249 {'noise0.5': 0.006, 'noise2': 0.0}
+[     95s] lb8k P1 n=30 N~8250 {'noise0.5': 0.016, 'noise2': 0.003}
+[    123s] lb8k P1 n=40 N~8249 {'noise0.5': 0.012, 'noise2': 0.006}
+[    151s] lb8k P1 n=50 N~8250 {'noise0.5': 0.01, 'noise2': 0.005}
+[    176s] lb8k P1 n=60 N~8250 {'noise0.5': 0.008, 'noise2': 0.004}
+[    202s] lb8k P1 n=70 N~8249 {'noise0.5': 0.013, 'noise2': 0.003}
+[    227s] lb8k P1 n=80 N~8250 {'noise0.5': 0.017, 'noise2': 0.003}
+[    253s] lb8k P1 n=90 N~5680 {'noise0.5': 0.02, 'noise2': 0.003}
+[    280s] lb8k P1 n=100 N~6669 {'noise0.5': 0.021, 'noise2': 0.002}
+[    321s] lb8k P1 n=110 N~8247 {'noise0.5': 0.025, 'noise2': 0.002}
+[    364s] lb8k P1 n=120 N~2553 {'noise0.5': 0.03, 'noise2': 0.004}
+[    404s] lb8k P1 n=130 N~4148 {'noise0.5': 0.032, 'noise2': 0.004}
+[    446s] lb8k P1 n=140 N~8251 {'noise0.5': 0.033, 'noise2': 0.005}
+[    489s] lb8k P1 n=150 N~8251 {'noise0.5': 0.036, 'noise2': 0.005}
+[    530s] lb8k P1 n=160 N~5937 {'noise0.5': 0.037, 'noise2': 0.006}
+[    570s] lb8k P1 n=170 N~5706 {'noise0.5': 0.038, 'noise2': 0.006}
+[    610s] lb8k P1 n=180 N~3658 {'noise0.5': 0.039, 'noise2': 0.007}
+[    649s] lb8k P1 n=190 N~5912 {'noise0.5': 0.037, 'noise2': 0.007}
+[    686s] lb8k P1 n=200 N~3169 {'noise0.5': 0.039, 'noise2': 0.007}
+[    686s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5077.39it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6315.47it/s]
+[    156s] gsm P1 n=10 N~619 {'noise0.5': 0.0, 'noise2': 0.0}
+[    309s] gsm P1 n=20 N~495 {'noise0.5': 0.0, 'noise2': 0.0}
+[    459s] gsm P1 n=30 N~445 {'noise0.5': 0.0, 'noise2': 0.0}
+[    612s] gsm P1 n=40 N~459 {'noise0.5': 0.0, 'noise2': 0.0}
+[    770s] gsm P1 n=50 N~843 {'noise0.5': 0.0, 'noise2': 0.0}
+[    903s] gsm P1 n=60 N~920 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1074s] gsm P1 n=70 N~529 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1226s] gsm P1 n=80 N~793 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1398s] gsm P1 n=90 N~817 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1549s] gsm P1 n=100 N~588 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1549s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6526.16it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6260.46it/s]
+[      7s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6516.40it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6281.68it/s]
+[     12s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6293.81it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6133.55it/s]
+[      8s] EVALDONE
+G0DONE

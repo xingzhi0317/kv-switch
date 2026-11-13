@@ -1,0 +1,67 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7024.54it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6973.77it/s]
+[      6s] pass plain
+[      7s]   seq 0 mem 15.2G
+[     11s]   seq 16 mem 15.3G
+[     16s]   seq 32 mem 15.3G
+[     20s]   seq 48 mem 15.3G
+[     25s]   seq 0 mem 18.6G
+[     27s] k=1 K lam=1e-05 val_rel_err=0.1143
+[     27s] k=1 K lam=0.0001 val_rel_err=0.1147
+[     27s] k=1 K lam=0.001 val_rel_err=0.1159
+[     27s] k=1 K lam=0.01 val_rel_err=0.1212
+[     27s] k=1 K lam=0.1 val_rel_err=0.1378
+[     28s] k=1 V lam=1e-05 val_rel_err=0.4339
+[     28s] k=1 V lam=0.0001 val_rel_err=0.4339
+[     28s] k=1 V lam=0.001 val_rel_err=0.4337
+[     28s] k=1 V lam=0.01 val_rel_err=0.4339
+[     28s] k=1 V lam=0.1 val_rel_err=0.4471
+[     28s] k=3 K lam=1e-05 val_rel_err=0.0949
+[     29s] k=3 K lam=0.0001 val_rel_err=0.0949
+[     29s] k=3 K lam=0.001 val_rel_err=0.0953
+[     29s] k=3 K lam=0.01 val_rel_err=0.0985
+[     30s] k=3 K lam=0.1 val_rel_err=0.1104
+[     31s] k=3 V lam=1e-05 val_rel_err=0.3605
+[     31s] k=3 V lam=0.0001 val_rel_err=0.3604
+[     31s] k=3 V lam=0.001 val_rel_err=0.3594
+[     32s] k=3 V lam=0.01 val_rel_err=0.3588
+[     32s] k=3 V lam=0.1 val_rel_err=0.3704
+[     33s] pass vattn [0, 1, 2, 3, 4, 5, 6]
+[     33s]   seq 0 mem 18.6G
+[     38s]   seq 16 mem 18.6G
+[     42s]   seq 32 mem 18.6G
+[     46s]   seq 48 mem 18.6G
+[     51s]   seq 0 mem 18.6G
+[     56s] pass vattn [7, 8, 9, 10, 11, 12, 13]
+[     56s]   seq 0 mem 18.6G
+[     61s]   seq 16 mem 18.6G
+[     65s]   seq 32 mem 18.6G
+[     70s]   seq 48 mem 18.6G
+[     74s]   seq 0 mem 18.6G
+[     79s] pass vattn [14, 15, 16, 17, 18, 19, 20]
+[     79s]   seq 0 mem 18.6G
+[     84s]   seq 16 mem 18.6G
+[     88s]   seq 32 mem 18.6G
+[     93s]   seq 48 mem 18.6G
+[     97s]   seq 0 mem 18.6G
+[    102s] pass vattn [21, 22, 23, 24, 25, 26, 27]
+[    103s]   seq 0 mem 18.6G
+[    107s]   seq 16 mem 18.6G
+[    112s]   seq 32 mem 18.6G
+[    116s]   seq 48 mem 18.6G
+[    121s]   seq 0 mem 18.6G
+[    126s] pass vattn [28, 29, 30, 31, 32, 33, 34]
+[    126s]   seq 0 mem 18.6G
+[    130s]   seq 16 mem 18.6G
+[    135s]   seq 32 mem 18.6G
+[    139s]   seq 48 mem 18.6G
+[    144s]   seq 0 mem 18.6G
+[    149s] pass vattn [35]
+[    149s]   seq 0 mem 18.6G
+[    152s]   seq 16 mem 18.6G
+[    156s]   seq 32 mem 18.6G
+[    159s]   seq 48 mem 18.6G
+[    162s]   seq 0 mem 18.6G
+[    165s] k=1 mean val rel err K 0.1143 V 0.4337 Va(attn-out) 0.3597
+[    165s] k=3 mean val rel err K 0.0949 V 0.3588 Va(attn-out) 0.3050
+[    167s] FITDONE

@@ -1,0 +1,83 @@
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 5905.11it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6054.75it/s]
+[      9s] uc P3 n=10 N~941 {'native': 0.0, 'none': -0.757, 'B4': -0.95, 'B4k1': -0.526}
+[     12s] uc P3 n=20 N~396 {'native': 0.0, 'none': -0.544, 'B4': -0.78, 'B4k1': -0.403}
+[     15s] uc P3 n=30 N~1584 {'native': 0.0, 'none': -0.864, 'B4': -0.94, 'B4k1': -0.701}
+[     18s] uc P3 n=40 N~956 {'native': 0.0, 'none': -0.863, 'B4': -0.992, 'B4k1': -0.715}
+[     21s] uc P3 n=50 N~394 {'native': 0.0, 'none': -0.803, 'B4': -0.947, 'B4k1': -0.667}
+[     24s] uc P3 n=60 N~869 {'native': 0.0, 'none': -0.828, 'B4': -1.009, 'B4k1': -0.682}
+[     28s] uc P3 n=70 N~762 {'native': 0.0, 'none': -0.833, 'B4': -1.004, 'B4k1': -0.674}
+[     31s] uc P3 n=80 N~453 {'native': 0.0, 'none': -0.766, 'B4': -0.935, 'B4k1': -0.615}
+[     34s] uc P3 n=90 N~823 {'native': 0.0, 'none': -0.788, 'B4': -0.955, 'B4k1': -0.64}
+[     37s] uc P3 n=100 N~666 {'native': 0.0, 'none': -0.733, 'B4': -0.91, 'B4k1': -0.593}
+[     41s] uc P3 n=110 N~1141 {'native': 0.0, 'none': -0.753, 'B4': -0.925, 'B4k1': -0.608}
+[     44s] uc P3 n=120 N~1317 {'native': 0.0, 'none': -0.757, 'B4': -0.95, 'B4k1': -0.606}
+[     47s] uc P3 n=130 N~799 {'native': 0.0, 'none': -0.743, 'B4': -0.944, 'B4k1': -0.591}
+[     50s] uc P3 n=140 N~1414 {'native': 0.0, 'none': -0.735, 'B4': -0.939, 'B4k1': -0.592}
+[     53s] uc P3 n=150 N~741 {'native': 0.0, 'none': -0.72, 'B4': -0.932, 'B4k1': -0.581}
+[     57s] uc P3 n=160 N~1470 {'native': 0.0, 'none': -0.709, 'B4': -0.92, 'B4k1': -0.573}
+[     60s] uc P3 n=170 N~486 {'native': 0.0, 'none': -0.729, 'B4': -0.947, 'B4k1': -0.597}
+[     63s] uc P3 n=180 N~978 {'native': 0.0, 'none': -0.719, 'B4': -0.934, 'B4k1': -0.587}
+[     66s] uc P3 n=190 N~1470 {'native': 0.0, 'none': -0.699, 'B4': -0.914, 'B4k1': -0.568}
+[     70s] uc P3 n=200 N~1995 {'native': 0.0, 'none': -0.693, 'B4': -0.907, 'B4k1': -0.558}
+[     70s] EVALDONE
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 8223.55it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5275.34it/s]
+[     67s] coqa1 P3 n=10 N~318 {'native': 0.52, 'none': 0.01, 'B4': 0.137, 'B4k1': 0.145}
+[    128s] coqa1 P3 n=20 N~242 {'native': 0.544, 'none': 0.005, 'B4': 0.107, 'B4k1': 0.13}
+[    185s] coqa1 P3 n=30 N~365 {'native': 0.519, 'none': 0.007, 'B4': 0.1, 'B4k1': 0.095}
+[    249s] coqa1 P3 n=40 N~228 {'native': 0.493, 'none': 0.008, 'B4': 0.112, 'B4k1': 0.094}
+[    312s] coqa1 P3 n=50 N~458 {'native': 0.505, 'none': 0.014, 'B4': 0.132, 'B4k1': 0.117}
+[    373s] coqa1 P3 n=60 N~337 {'native': 0.511, 'none': 0.017, 'B4': 0.122, 'B4k1': 0.104}
+[    434s] coqa1 P3 n=70 N~491 {'native': 0.558, 'none': 0.017, 'B4': 0.144, 'B4k1': 0.111}
+[    494s] coqa1 P3 n=80 N~536 {'native': 0.567, 'none': 0.019, 'B4': 0.144, 'B4k1': 0.108}
+[    558s] coqa1 P3 n=90 N~321 {'native': 0.581, 'none': 0.023, 'B4': 0.142, 'B4k1': 0.103}
+[    618s] coqa1 P3 n=100 N~228 {'native': 0.584, 'none': 0.022, 'B4': 0.138, 'B4k1': 0.102}
+[    618s] EVALDONE
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 7034.31it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5252.42it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+[     30s] lb8k P3 n=10 N~8496 {'native': 0.217, 'none': 0.412, 'B4': 0.152, 'B4k1': 0.314}
+[     57s] lb8k P3 n=20 N~8078 {'native': 0.244, 'none': 0.294, 'B4': 0.093, 'B4k1': 0.218}
+[     85s] lb8k P3 n=30 N~8514 {'native': 0.241, 'none': 0.213, 'B4': 0.084, 'B4k1': 0.174}
+[    110s] lb8k P3 n=40 N~8826 {'native': 0.238, 'none': 0.228, 'B4': 0.099, 'B4k1': 0.187}
+[    138s] lb8k P3 n=50 N~8493 {'native': 0.302, 'none': 0.187, 'B4': 0.087, 'B4k1': 0.17}
+[    165s] lb8k P3 n=60 N~8483 {'native': 0.301, 'none': 0.196, 'B4': 0.088, 'B4k1': 0.154}
+[    187s] lb8k P3 n=70 N~8681 {'native': 0.285, 'none': 0.176, 'B4': 0.095, 'B4k1': 0.157}
+[    209s] lb8k P3 n=80 N~8623 {'native': 0.309, 'none': 0.17, 'B4': 0.127, 'B4k1': 0.181}
+[    230s] lb8k P3 n=90 N~5680 {'native': 0.289, 'none': 0.177, 'B4': 0.154, 'B4k1': 0.194}
+[    254s] lb8k P3 n=100 N~6669 {'native': 0.282, 'none': 0.177, 'B4': 0.17, 'B4k1': 0.176}
+[    291s] lb8k P3 n=110 N~8247 {'native': 0.305, 'none': 0.19, 'B4': 0.19, 'B4k1': 0.187}
+[    326s] lb8k P3 n=120 N~2553 {'native': 0.332, 'none': 0.193, 'B4': 0.196, 'B4k1': 0.19}
+[    363s] lb8k P3 n=130 N~4148 {'native': 0.342, 'none': 0.197, 'B4': 0.195, 'B4k1': 0.19}
+[    400s] lb8k P3 n=140 N~8289 {'native': 0.346, 'none': 0.193, 'B4': 0.19, 'B4k1': 0.187}
+[    432s] lb8k P3 n=150 N~9086 {'native': 0.364, 'none': 0.205, 'B4': 0.205, 'B4k1': 0.199}
+[    450s] lb8k P3 n=160 N~5937 {'native': 0.369, 'none': 0.199, 'B4': 0.205, 'B4k1': 0.193}
+[    469s] lb8k P3 n=170 N~5706 {'native': 0.363, 'none': 0.197, 'B4': 0.202, 'B4k1': 0.194}
+[    486s] lb8k P3 n=180 N~3658 {'native': 0.367, 'none': 0.2, 'B4': 0.201, 'B4k1': 0.194}
+[    502s] lb8k P3 n=190 N~5912 {'native': 0.369, 'none': 0.189, 'B4': 0.194, 'B4k1': 0.189}
+[    517s] lb8k P3 n=200 N~3169 {'native': 0.36, 'none': 0.182, 'B4': 0.191, 'B4k1': 0.18}
+[    517s] EVALDONE
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 5152.66it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5013.06it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+[     28s] niah8k P3 n=10 N~8302 {'native': 1.0, 'none': 0.0, 'B4': 0.0, 'B4k1': 0.0}
+[     48s] niah8k P3 n=20 N~8286 {'native': 1.0, 'none': 0.0, 'B4': 0.0, 'B4k1': 0.0}
+[     70s] niah8k P3 n=30 N~8276 {'native': 1.0, 'none': 0.0, 'B4': 0.0, 'B4k1': 0.0}
+[     92s] niah8k P3 n=40 N~8279 {'native': 1.0, 'none': 0.0, 'B4': 0.0, 'B4k1': 0.0}
+[    112s] niah8k P3 n=50 N~8219 {'native': 1.0, 'none': 0.0, 'B4': 0.0, 'B4k1': 0.0}
+[    112s] EVALDONE
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 5199.86it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6441.56it/s]
+[    227s] gsm P3 n=10 N~619 {'native': 0.3, 'none': 0.5, 'B4': 0.5, 'B4k1': 0.6}
+[    471s] gsm P3 n=20 N~495 {'native': 0.5, 'none': 0.6, 'B4': 0.5, 'B4k1': 0.6}
+[    674s] gsm P3 n=30 N~445 {'native': 0.6, 'none': 0.6, 'B4': 0.567, 'B4k1': 0.667}
+[    901s] gsm P3 n=40 N~459 {'native': 0.675, 'none': 0.6, 'B4': 0.6, 'B4k1': 0.7}
+[   1126s] gsm P3 n=50 N~843 {'native': 0.68, 'none': 0.62, 'B4': 0.56, 'B4k1': 0.7}
+[   1314s] gsm P3 n=60 N~920 {'native': 0.717, 'none': 0.65, 'B4': 0.583, 'B4k1': 0.717}
+[   1537s] gsm P3 n=70 N~529 {'native': 0.729, 'none': 0.686, 'B4': 0.571, 'B4k1': 0.714}
+[   1751s] gsm P3 n=80 N~793 {'native': 0.725, 'none': 0.675, 'B4': 0.575, 'B4k1': 0.725}
+[   1945s] gsm P3 n=90 N~817 {'native': 0.744, 'none': 0.678, 'B4': 0.556, 'B4k1': 0.722}
+[   2163s] gsm P3 n=100 N~588 {'native': 0.75, 'none': 0.67, 'B4': 0.55, 'B4k1': 0.74}
+[   2163s] EVALDONE
+CHAIN3DONE

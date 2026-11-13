@@ -1,0 +1,57 @@
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 6820.40it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 6190.34it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[     12s] uc 10 {'native': 0.0, 'none': 0.496, 'B5': 0.29, 'B5noreplay': 0.396}
+[     16s] uc 20 {'native': 0.0, 'none': 0.35, 'B5': 0.208, 'B5noreplay': 0.28}
+[     20s] uc 30 {'native': 0.0, 'none': 0.52, 'B5': 0.278, 'B5noreplay': 0.423}
+[     23s] uc 40 {'native': 0.0, 'none': 0.505, 'B5': 0.269, 'B5noreplay': 0.398}
+[     27s] uc 50 {'native': 0.0, 'none': 0.473, 'B5': 0.259, 'B5noreplay': 0.379}
+[     31s] uc 60 {'native': 0.0, 'none': 0.476, 'B5': 0.257, 'B5noreplay': 0.383}
+[     35s] uc 70 {'native': 0.0, 'none': 0.479, 'B5': 0.256, 'B5noreplay': 0.386}
+[     38s] uc 80 {'native': 0.0, 'none': 0.443, 'B5': 0.234, 'B5noreplay': 0.356}
+[     42s] uc 90 {'native': 0.0, 'none': 0.463, 'B5': 0.239, 'B5noreplay': 0.368}
+[     46s] uc 100 {'native': 0.0, 'none': 0.429, 'B5': 0.221, 'B5noreplay': 0.341}
+[     46s] EVALDONE
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 6046.96it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 6030.06it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[     29s] lb8k 10 {'native': 0.235, 'none': 0.4, 'B5': 0.311, 'B5noreplay': 0.21}
+[     50s] lb8k 20 {'native': 0.384, 'none': 0.264, 'B5': 0.237, 'B5noreplay': 0.221}
+[     73s] lb8k 30 {'native': 0.356, 'none': 0.193, 'B5': 0.196, 'B5noreplay': 0.206}
+[     95s] lb8k 40 {'native': 0.336, 'none': 0.173, 'B5': 0.171, 'B5noreplay': 0.165}
+[    114s] lb8k 50 {'native': 0.332, 'none': 0.192, 'B5': 0.193, 'B5noreplay': 0.202}
+[    150s] lb8k 60 {'native': 0.359, 'none': 0.203, 'B5': 0.22, 'B5noreplay': 0.198}
+[    185s] lb8k 70 {'native': 0.412, 'none': 0.201, 'B5': 0.25, 'B5noreplay': 0.209}
+[    217s] lb8k 80 {'native': 0.431, 'none': 0.19, 'B5': 0.248, 'B5noreplay': 0.202}
+[    232s] lb8k 90 {'native': 0.42, 'none': 0.18, 'B5': 0.25, 'B5noreplay': 0.191}
+[    255s] lb8k 100 {'native': 0.431, 'none': 0.21, 'B5': 0.259, 'B5noreplay': 0.185}
+[    255s] EVALDONE
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 5172.37it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 5479.06it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[     31s] coqa1 10 {'native': 0.706, 'none': 0.0, 'B5': 0.288, 'B5noreplay': 0.0}
+[     53s] coqa1 20 {'native': 0.683, 'none': 0.004, 'B5': 0.283, 'B5noreplay': 0.0}
+[     77s] coqa1 30 {'native': 0.632, 'none': 0.006, 'B5': 0.268, 'B5noreplay': 0.003}
+[    101s] coqa1 40 {'native': 0.636, 'none': 0.005, 'B5': 0.247, 'B5noreplay': 0.005}
+[    122s] coqa1 50 {'native': 0.689, 'none': 0.012, 'B5': 0.28, 'B5noreplay': 0.011}
+[    142s] coqa1 60 {'native': 0.7, 'none': 0.015, 'B5': 0.282, 'B5noreplay': 0.011}
+[    163s] coqa1 70 {'native': 0.733, 'none': 0.018, 'B5': 0.297, 'B5noreplay': 0.014}
+[    185s] coqa1 80 {'native': 0.732, 'none': 0.016, 'B5': 0.306, 'B5noreplay': 0.015}
+[    206s] coqa1 90 {'native': 0.713, 'none': 0.019, 'B5': 0.305, 'B5noreplay': 0.018}
+[    228s] coqa1 100 {'native': 0.708, 'none': 0.018, 'B5': 0.295, 'B5noreplay': 0.017}
+[    228s] EVALDONE
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 6433.84it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 4601.16it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[     26s] niah8k 10 {'native': 1.0, 'none': 0.0, 'B5': 0.0, 'B5noreplay': 0.0}
+[     46s] niah8k 20 {'native': 1.0, 'none': 0.0, 'B5': 0.0, 'B5noreplay': 0.0}
+[     64s] niah8k 30 {'native': 1.0, 'none': 0.0, 'B5': 0.0, 'B5noreplay': 0.0}
+[     83s] niah8k 40 {'native': 1.0, 'none': 0.0, 'B5': 0.0, 'B5noreplay': 0.0}
+[    102s] niah8k 50 {'native': 1.0, 'none': 0.0, 'B5': 0.0, 'B5noreplay': 0.0}
+[    102s] EVALDONE
+CHAIN4DONE

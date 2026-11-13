@@ -1,0 +1,14 @@
+Generating train split:   0%|          | 0/7199 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7199/7199 [00:00<00:00, 108765.39 examples/s]
+Generating validation split:   0%|          | 0/500 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 500/500 [00:00<00:00, 77002.09 examples/s]
+coqa 500
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 324818.74 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 195052.96 examples/s]
+gsm8k 1319
+gsm8k_train 2000
+longbench 4
+ultrachat files ['/data2/datasets/ultrachat_200k/data/test_sft-00000-of-00001-f7dfac4afe5b93f4.parquet']
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 1000 examples [00:00, 9034.02 examples/s]Generating train split: 7000 examples [00:00, 31431.95 examples/s]Generating train split: 12000 examples [00:00, 32605.45 examples/s]Generating train split: 18000 examples [00:00, 36333.42 examples/s]Generating train split: 23110 examples [00:00, 36311.15 examples/s]
+ultrachat 3000
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 1000 examples [00:00, 8368.29 examples/s]Generating train split: 7000 examples [00:00, 32745.10 examples/s]Generating train split: 12000 examples [00:00, 34310.09 examples/s]Generating train split: 18000 examples [00:00, 36456.78 examples/s]Generating train split: 24000 examples [00:00, 41611.53 examples/s]Generating train split: 30000 examples [00:00, 42313.88 examples/s]Generating train split: 35000 examples [00:00, 43441.33 examples/s]Generating train split: 40000 examples [00:01, 42090.02 examples/s]Generating train split: 45000 examples [00:01, 37388.82 examples/s]Generating train split: 51000 examples [00:01, 40823.27 examples/s]Generating train split: 57000 examples [00:01, 39799.10 examples/s]Generating train split: 63000 examples [00:01, 42496.31 examples/s]Generating train split: 69289 examples [00:01, 44823.06 examples/s]Generating train split: 69289 examples [00:01, 40464.05 examples/s]
+ultrachat_train 20000
+DATADONE

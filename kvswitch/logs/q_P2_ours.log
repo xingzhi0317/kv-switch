@@ -1,0 +1,133 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6875.80it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 4764.57it/s]
+[      9s] uc P2 n=10 N~941 {'ours_r64': -0.197}
+[     12s] uc P2 n=20 N~396 {'ours_r64': -0.172}
+[     14s] uc P2 n=30 N~1584 {'ours_r64': -0.168}
+[     16s] uc P2 n=40 N~956 {'ours_r64': -0.186}
+[     18s] uc P2 n=50 N~394 {'ours_r64': -0.186}
+[     20s] uc P2 n=60 N~869 {'ours_r64': -0.202}
+[     23s] uc P2 n=70 N~762 {'ours_r64': -0.198}
+[     25s] uc P2 n=80 N~453 {'ours_r64': -0.185}
+[     27s] uc P2 n=90 N~823 {'ours_r64': -0.187}
+[     30s] uc P2 n=100 N~666 {'ours_r64': -0.178}
+[     32s] uc P2 n=110 N~1141 {'ours_r64': -0.178}
+[     34s] uc P2 n=120 N~1317 {'ours_r64': -0.178}
+[     36s] uc P2 n=130 N~799 {'ours_r64': -0.182}
+[     38s] uc P2 n=140 N~1414 {'ours_r64': -0.185}
+[     40s] uc P2 n=150 N~741 {'ours_r64': -0.181}
+[     42s] uc P2 n=160 N~1470 {'ours_r64': -0.179}
+[     45s] uc P2 n=170 N~486 {'ours_r64': -0.178}
+[     47s] uc P2 n=180 N~978 {'ours_r64': -0.177}
+[     49s] uc P2 n=190 N~1470 {'ours_r64': -0.174}
+[     51s] uc P2 n=200 N~1995 {'ours_r64': -0.171}
+[     51s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6540.26it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5758.31it/s]
+[     19s] lb8k P2 n=10 N~8249 {'ours_r64': 0.3}
+[     26s] lb8k P2 n=20 N~8249 {'ours_r64': 0.333}
+[     34s] lb8k P2 n=30 N~8250 {'ours_r64': 0.296}
+[     41s] lb8k P2 n=40 N~8249 {'ours_r64': 0.279}
+[     51s] lb8k P2 n=50 N~8250 {'ours_r64': 0.243}
+[     57s] lb8k P2 n=60 N~8250 {'ours_r64': 0.224}
+[     64s] lb8k P2 n=70 N~8249 {'ours_r64': 0.202}
+[     69s] lb8k P2 n=80 N~8250 {'ours_r64': 0.225}
+[     75s] lb8k P2 n=90 N~5680 {'ours_r64': 0.226}
+[     82s] lb8k P2 n=100 N~6669 {'ours_r64': 0.24}
+[     95s] lb8k P2 n=110 N~8247 {'ours_r64': 0.265}
+[    107s] lb8k P2 n=120 N~2553 {'ours_r64': 0.273}
+[    118s] lb8k P2 n=130 N~4148 {'ours_r64': 0.279}
+[    129s] lb8k P2 n=140 N~8251 {'ours_r64': 0.284}
+[    141s] lb8k P2 n=150 N~8251 {'ours_r64': 0.306}
+[    150s] lb8k P2 n=160 N~5937 {'ours_r64': 0.299}
+[    160s] lb8k P2 n=170 N~5706 {'ours_r64': 0.304}
+[    168s] lb8k P2 n=180 N~3658 {'ours_r64': 0.31}
+[    175s] lb8k P2 n=190 N~5912 {'ours_r64': 0.306}
+[    186s] lb8k P2 n=200 N~3169 {'ours_r64': 0.303}
+[    186s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6543.77it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6288.88it/s]
+[     62s] coqa1 P2 n=10 N~318 {'ours_r64': 0.196, 'ours_r64_c3': 0.196, 'B1_c3': 0.194}
+[    119s] coqa1 P2 n=20 N~242 {'ours_r64': 0.215, 'ours_r64_c3': 0.215, 'B1_c3': 0.168}
+[    171s] coqa1 P2 n=30 N~365 {'ours_r64': 0.207, 'ours_r64_c3': 0.207, 'B1_c3': 0.143}
+[    237s] coqa1 P2 n=40 N~228 {'ours_r64': 0.188, 'ours_r64_c3': 0.188, 'B1_c3': 0.128}
+[    292s] coqa1 P2 n=50 N~458 {'ours_r64': 0.201, 'ours_r64_c3': 0.201, 'B1_c3': 0.137}
+[    344s] coqa1 P2 n=60 N~337 {'ours_r64': 0.209, 'ours_r64_c3': 0.209, 'B1_c3': 0.132}
+[    395s] coqa1 P2 n=70 N~491 {'ours_r64': 0.233, 'ours_r64_c3': 0.233, 'B1_c3': 0.137}
+[    442s] coqa1 P2 n=80 N~536 {'ours_r64': 0.253, 'ours_r64_c3': 0.253, 'B1_c3': 0.148}
+[    501s] coqa1 P2 n=90 N~321 {'ours_r64': 0.255, 'ours_r64_c3': 0.255, 'B1_c3': 0.145}
+[    552s] coqa1 P2 n=100 N~228 {'ours_r64': 0.252, 'ours_r64_c3': 0.252, 'B1_c3': 0.145}
+[    552s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6822.18it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6395.86it/s]
+[     63s] coqa5 P2 n=10 N~387 {'ours_r64': 0.199, 'ours_r64_c3': 0.199, 'B1_c3': 0.123}
+[    119s] coqa5 P2 n=20 N~312 {'ours_r64': 0.179, 'ours_r64_c3': 0.179, 'B1_c3': 0.106}
+[    170s] coqa5 P2 n=30 N~435 {'ours_r64': 0.187, 'ours_r64_c3': 0.187, 'B1_c3': 0.093}
+[    233s] coqa5 P2 n=40 N~302 {'ours_r64': 0.177, 'ours_r64_c3': 0.177, 'B1_c3': 0.087}
+[    289s] coqa5 P2 n=50 N~535 {'ours_r64': 0.185, 'ours_r64_c3': 0.185, 'B1_c3': 0.083}
+[    340s] coqa5 P2 n=60 N~419 {'ours_r64': 0.18, 'ours_r64_c3': 0.18, 'B1_c3': 0.084}
+[    394s] coqa5 P2 n=70 N~569 {'ours_r64': 0.199, 'ours_r64_c3': 0.199, 'B1_c3': 0.083}
+[    449s] coqa5 P2 n=80 N~623 {'ours_r64': 0.213, 'ours_r64_c3': 0.213, 'B1_c3': 0.088}
+[    504s] coqa5 P2 n=90 N~401 {'ours_r64': 0.211, 'ours_r64_c3': 0.211, 'B1_c3': 0.091}
+[    565s] coqa5 P2 n=100 N~300 {'ours_r64': 0.207, 'ours_r64_c3': 0.207, 'B1_c3': 0.088}
+[    565s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5170.13it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5363.11it/s]
+[     66s] coqa10 P2 n=10 N~546 {'ours_r64': 0.252, 'ours_r64_c3': 0.252, 'B1_c3': 0.092}
+[    118s] coqa10 P2 n=20 N~676 {'ours_r64': 0.265, 'ours_r64_c3': 0.265, 'B1_c3': 0.129}
+[    170s] coqa10 P2 n=30 N~703 {'ours_r64': 0.246, 'ours_r64_c3': 0.246, 'B1_c3': 0.112}
+[    224s] coqa10 P2 n=40 N~623 {'ours_r64': 0.252, 'ours_r64_c3': 0.252, 'B1_c3': 0.1}
+[    283s] coqa10 P2 n=50 N~609 {'ours_r64': 0.257, 'ours_r64_c3': 0.257, 'B1_c3': 0.105}
+[    343s] coqa10 P2 n=60 N~550 {'ours_r64': 0.244, 'ours_r64_c3': 0.244, 'B1_c3': 0.11}
+[    400s] coqa10 P2 n=70 N~659 {'ours_r64': 0.234, 'ours_r64_c3': 0.234, 'B1_c3': 0.108}
+[    454s] coqa10 P2 n=80 N~571 {'ours_r64': 0.223, 'ours_r64_c3': 0.223, 'B1_c3': 0.113}
+[    511s] coqa10 P2 n=90 N~472 {'ours_r64': 0.223, 'ours_r64_c3': 0.223, 'B1_c3': 0.109}
+[    563s] coqa10 P2 n=100 N~521 {'ours_r64': 0.225, 'ours_r64_c3': 0.225, 'B1_c3': 0.107}
+[    563s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6019.65it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5774.18it/s]
+[     15s] niah4k P2 n=10 N~3941 {'ours_r64': 0.1}
+[     20s] niah4k P2 n=20 N~3940 {'ours_r64': 0.1}
+[     25s] niah4k P2 n=30 N~3939 {'ours_r64': 0.067}
+[     29s] niah4k P2 n=40 N~3939 {'ours_r64': 0.1}
+[     34s] niah4k P2 n=50 N~3940 {'ours_r64': 0.08}
+[     34s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6287.98it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5543.14it/s]
+[     19s] niah8k P2 n=10 N~8035 {'ours_r64': 0.0}
+[     29s] niah8k P2 n=20 N~8036 {'ours_r64': 0.0}
+[     39s] niah8k P2 n=30 N~8036 {'ours_r64': 0.0}
+[     49s] niah8k P2 n=40 N~8036 {'ours_r64': 0.0}
+[     60s] niah8k P2 n=50 N~8036 {'ours_r64': 0.0}
+[     60s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 4885.79it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6647.18it/s]
+[     27s] niah16k P2 n=10 N~16228 {'ours_r64': 0.0}
+[     45s] niah16k P2 n=20 N~16228 {'ours_r64': 0.0}
+[     62s] niah16k P2 n=30 N~16228 {'ours_r64': 0.0}
+[     80s] niah16k P2 n=40 N~16227 {'ours_r64': 0.0}
+[     98s] niah16k P2 n=50 N~16228 {'ours_r64': 0.0}
+[     98s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6233.50it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 8117.15it/s]
+[     67s] gsm P2 n=10 N~619 {'ours_r64': 0.8}
+[    132s] gsm P2 n=20 N~495 {'ours_r64': 0.7}
+[    186s] gsm P2 n=30 N~445 {'ours_r64': 0.8}
+[    256s] gsm P2 n=40 N~459 {'ours_r64': 0.85}
+[    330s] gsm P2 n=50 N~843 {'ours_r64': 0.88}
+[    390s] gsm P2 n=60 N~920 {'ours_r64': 0.9}
+[    449s] gsm P2 n=70 N~529 {'ours_r64': 0.9}
+[    513s] gsm P2 n=80 N~793 {'ours_r64': 0.912}
+[    565s] gsm P2 n=90 N~817 {'ours_r64': 0.9}
+[    625s] gsm P2 n=100 N~588 {'ours_r64': 0.91}
+[    687s] gsm P2 n=110 N~725 {'ours_r64': 0.909}
+[    762s] gsm P2 n=120 N~680 {'ours_r64': 0.892}
+[    827s] gsm P2 n=130 N~827 {'ours_r64': 0.892}
+[    878s] gsm P2 n=140 N~615 {'ours_r64': 0.9}
+[    942s] gsm P2 n=150 N~721 {'ours_r64': 0.9}
+[   1018s] gsm P2 n=160 N~577 {'ours_r64': 0.9}
+[   1085s] gsm P2 n=170 N~578 {'ours_r64': 0.894}
+[   1152s] gsm P2 n=180 N~527 {'ours_r64': 0.9}
+[   1239s] gsm P2 n=190 N~773 {'ours_r64': 0.889}
+[   1295s] gsm P2 n=200 N~567 {'ours_r64': 0.895}
+[   1295s] EVALDONE
+G2DONE

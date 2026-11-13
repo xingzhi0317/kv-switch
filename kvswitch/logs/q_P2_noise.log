@@ -1,0 +1,49 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7855.16it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7999.83it/s]
+[     65s] coqa1 P2 n=10 N~318 {'noise0.5': 0.0, 'noise2': 0.0}
+[    122s] coqa1 P2 n=20 N~242 {'noise0.5': 0.0, 'noise2': 0.0}
+[    179s] coqa1 P2 n=30 N~365 {'noise0.5': 0.018, 'noise2': 0.0}
+[    236s] coqa1 P2 n=40 N~228 {'noise0.5': 0.013, 'noise2': 0.0}
+[    293s] coqa1 P2 n=50 N~458 {'noise0.5': 0.011, 'noise2': 0.0}
+[    349s] coqa1 P2 n=60 N~337 {'noise0.5': 0.009, 'noise2': 0.0}
+[    405s] coqa1 P2 n=70 N~491 {'noise0.5': 0.008, 'noise2': 0.0}
+[    462s] coqa1 P2 n=80 N~536 {'noise0.5': 0.007, 'noise2': 0.0}
+[    519s] coqa1 P2 n=90 N~321 {'noise0.5': 0.01, 'noise2': 0.0}
+[    576s] coqa1 P2 n=100 N~228 {'noise0.5': 0.009, 'noise2': 0.0}
+[    576s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6767.01it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 4971.06it/s]
+[     41s] lb8k P2 n=10 N~8249 {'noise0.5': 0.0, 'noise2': 0.0}
+[     70s] lb8k P2 n=20 N~8249 {'noise0.5': 0.0, 'noise2': 0.0}
+[    100s] lb8k P2 n=30 N~8250 {'noise0.5': 0.0, 'noise2': 0.0}
+[    129s] lb8k P2 n=40 N~8249 {'noise0.5': 0.0, 'noise2': 0.0}
+[    158s] lb8k P2 n=50 N~8250 {'noise0.5': 0.0, 'noise2': 0.0}
+[    185s] lb8k P2 n=60 N~8250 {'noise0.5': 0.0, 'noise2': 0.0}
+[    214s] lb8k P2 n=70 N~8249 {'noise0.5': 0.002, 'noise2': 0.0}
+[    240s] lb8k P2 n=80 N~8250 {'noise0.5': 0.003, 'noise2': 0.0}
+[    267s] lb8k P2 n=90 N~5680 {'noise0.5': 0.003, 'noise2': 0.0}
+[    296s] lb8k P2 n=100 N~6669 {'noise0.5': 0.004, 'noise2': 0.0}
+[    346s] lb8k P2 n=110 N~8247 {'noise0.5': 0.007, 'noise2': 0.0}
+[    396s] lb8k P2 n=120 N~2553 {'noise0.5': 0.011, 'noise2': 0.0}
+[    447s] lb8k P2 n=130 N~4148 {'noise0.5': 0.013, 'noise2': 0.0}
+[    500s] lb8k P2 n=140 N~8251 {'noise0.5': 0.015, 'noise2': 0.0}
+[    550s] lb8k P2 n=150 N~8251 {'noise0.5': 0.015, 'noise2': 0.0}
+[    600s] lb8k P2 n=160 N~5937 {'noise0.5': 0.015, 'noise2': 0.0}
+[    650s] lb8k P2 n=170 N~5706 {'noise0.5': 0.016, 'noise2': 0.0}
+[    699s] lb8k P2 n=180 N~3658 {'noise0.5': 0.016, 'noise2': 0.0}
+[    748s] lb8k P2 n=190 N~5912 {'noise0.5': 0.015, 'noise2': 0.0}
+[    797s] lb8k P2 n=200 N~3169 {'noise0.5': 0.017, 'noise2': 0.0}
+[    797s] EVALDONE
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6628.33it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5841.65it/s]
+[    239s] gsm P2 n=10 N~619 {'noise0.5': 0.0, 'noise2': 0.0}
+[    477s] gsm P2 n=20 N~495 {'noise0.5': 0.0, 'noise2': 0.0}
+[    729s] gsm P2 n=30 N~445 {'noise0.5': 0.0, 'noise2': 0.0}
+[    977s] gsm P2 n=40 N~459 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1228s] gsm P2 n=50 N~843 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1472s] gsm P2 n=60 N~920 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1715s] gsm P2 n=70 N~529 {'noise0.5': 0.0, 'noise2': 0.0}
+[   1953s] gsm P2 n=80 N~793 {'noise0.5': 0.0, 'noise2': 0.0}
+[   2186s] gsm P2 n=90 N~817 {'noise0.5': 0.0, 'noise2': 0.0}
+[   2428s] gsm P2 n=100 N~588 {'noise0.5': 0.0, 'noise2': 0.0}
+[   2428s] EVALDONE

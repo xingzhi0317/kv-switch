@@ -1,0 +1,29 @@
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 7161.99it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 5585.68it/s]
+[      9s] aligned data ready
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[     61s] 0 {'type': 'linear_attention', 'val_rel_err': 0.20547150448950657, 'lam': 0.001}
+[     61s] 1 {'type': 'linear_attention', 'val_rel_err': 0.14073795616781293, 'lam': 0.001}
+[     61s] 2 {'type': 'linear_attention', 'val_rel_err': 0.1785307800505664, 'lam': 0.001}
+[     61s] 3 {'type': 'full_attention', 'val_rel_err': 0.11615999988723336, 'lam': 0.001}
+[     61s] 4 {'type': 'linear_attention', 'val_rel_err': 0.22517297047791626, 'lam': 0.001}
+[     61s] 5 {'type': 'linear_attention', 'val_rel_err': 0.21651747274626718, 'lam': 0.001}
+[     61s] 6 {'type': 'linear_attention', 'val_rel_err': 0.21531081544710862, 'lam': 0.001}
+[     61s] 7 {'type': 'full_attention', 'val_rel_err': 0.1691435270464819, 'lam': 0.001}
+[     61s] 8 {'type': 'linear_attention', 'val_rel_err': 0.21179626353545317, 'lam': 0.001}
+[     61s] 9 {'type': 'linear_attention', 'val_rel_err': 0.22551064879364935, 'lam': 0.001}
+[     61s] 10 {'type': 'linear_attention', 'val_rel_err': 0.21560675467483592, 'lam': 0.001}
+[     61s] 11 {'type': 'full_attention', 'val_rel_err': 0.1927998167833266, 'lam': 0.01}
+[     61s] 12 {'type': 'linear_attention', 'val_rel_err': 0.22990355608359958, 'lam': 0.001}
+[     61s] 13 {'type': 'linear_attention', 'val_rel_err': 0.22928654978981072, 'lam': 0.001}
+[     61s] 14 {'type': 'linear_attention', 'val_rel_err': 0.22455714310587774, 'lam': 0.001}
+[     61s] 15 {'type': 'full_attention', 'val_rel_err': 0.201679931094554, 'lam': 0.001}
+[     61s] 16 {'type': 'linear_attention', 'val_rel_err': 0.2544789903290146, 'lam': 0.001}
+[     61s] 17 {'type': 'linear_attention', 'val_rel_err': 0.25892381466344966, 'lam': 0.001}
+[     61s] 18 {'type': 'linear_attention', 'val_rel_err': 0.2643948167130945, 'lam': 0.001}
+[     61s] 19 {'type': 'full_attention', 'val_rel_err': 0.19742212058471548, 'lam': 0.01}
+[     61s] 20 {'type': 'linear_attention', 'val_rel_err': 0.28212390013123145, 'lam': 0.001}
+[     61s] 21 {'type': 'linear_attention', 'val_rel_err': 0.2724580006807075, 'lam': 0.001}
+[     61s] 22 {'type': 'linear_attention', 'val_rel_err': 0.26213387015965783, 'lam': 0.001}
+[     61s] 23 {'type': 'full_attention', 'val_rel_err': 0.04402016716549689, 'lam': 0.001}
+[     62s] FITDONE

@@ -1,0 +1,60 @@
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7286.51it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 8576.12it/s]
+[     11s] uc P1 n=10 N~941 {'ours_r16': -0.112, 'ours_r64_fix2k': -0.113}
+[     14s] uc P1 n=20 N~396 {'ours_r16': -0.102, 'ours_r64_fix2k': -0.104}
+[     16s] uc P1 n=30 N~1584 {'ours_r16': -0.101, 'ours_r64_fix2k': -0.101}
+[     19s] uc P1 n=40 N~956 {'ours_r16': -0.124, 'ours_r64_fix2k': -0.121}
+[     21s] uc P1 n=50 N~394 {'ours_r16': -0.117, 'ours_r64_fix2k': -0.117}
+[     24s] uc P1 n=60 N~869 {'ours_r16': -0.119, 'ours_r64_fix2k': -0.127}
+[     26s] uc P1 n=70 N~762 {'ours_r16': -0.118, 'ours_r64_fix2k': -0.126}
+[     29s] uc P1 n=80 N~453 {'ours_r16': -0.111, 'ours_r64_fix2k': -0.117}
+[     32s] uc P1 n=90 N~823 {'ours_r16': -0.112, 'ours_r64_fix2k': -0.117}
+[     34s] uc P1 n=100 N~666 {'ours_r16': -0.106, 'ours_r64_fix2k': -0.11}
+[     36s] uc P1 n=110 N~1141 {'ours_r16': -0.107, 'ours_r64_fix2k': -0.111}
+[     39s] uc P1 n=120 N~1317 {'ours_r16': -0.107, 'ours_r64_fix2k': -0.111}
+[     41s] uc P1 n=130 N~799 {'ours_r16': -0.109, 'ours_r64_fix2k': -0.113}
+[     44s] uc P1 n=140 N~1414 {'ours_r16': -0.113, 'ours_r64_fix2k': -0.116}
+[     46s] uc P1 n=150 N~741 {'ours_r16': -0.111, 'ours_r64_fix2k': -0.114}
+[     49s] uc P1 n=160 N~1470 {'ours_r16': -0.11, 'ours_r64_fix2k': -0.112}
+[     52s] uc P1 n=170 N~486 {'ours_r16': -0.114, 'ours_r64_fix2k': -0.116}
+[     54s] uc P1 n=180 N~978 {'ours_r16': -0.113, 'ours_r64_fix2k': -0.115}
+[     57s] uc P1 n=190 N~1470 {'ours_r16': -0.11, 'ours_r64_fix2k': -0.113}
+[     59s] uc P1 n=200 N~1995 {'ours_r16': -0.109, 'ours_r64_fix2k': -0.111}
+[     59s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7810.99it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 8617.26it/s]
+[     28s] lb8k P1 n=10 N~8249 {'ours_r16': 0.11, 'ours_r64_fix2k': 0.149}
+[     48s] lb8k P1 n=20 N~8249 {'ours_r16': 0.187, 'ours_r64_fix2k': 0.194}
+[     66s] lb8k P1 n=30 N~8250 {'ours_r16': 0.198, 'ours_r64_fix2k': 0.212}
+[     81s] lb8k P1 n=40 N~8249 {'ours_r16': 0.188, 'ours_r64_fix2k': 0.198}
+[     99s] lb8k P1 n=50 N~8250 {'ours_r16': 0.217, 'ours_r64_fix2k': 0.188}
+[    115s] lb8k P1 n=60 N~8250 {'ours_r16': 0.225, 'ours_r64_fix2k': 0.206}
+[    131s] lb8k P1 n=70 N~8249 {'ours_r16': 0.227, 'ours_r64_fix2k': 0.21}
+[    142s] lb8k P1 n=80 N~8250 {'ours_r16': 0.249, 'ours_r64_fix2k': 0.216}
+[    156s] lb8k P1 n=90 N~5680 {'ours_r16': 0.243, 'ours_r64_fix2k': 0.207}
+[    170s] lb8k P1 n=100 N~6669 {'ours_r16': 0.236, 'ours_r64_fix2k': 0.203}
+[    193s] lb8k P1 n=110 N~8247 {'ours_r16': 0.257, 'ours_r64_fix2k': 0.229}
+[    216s] lb8k P1 n=120 N~2553 {'ours_r16': 0.271, 'ours_r64_fix2k': 0.248}
+[    235s] lb8k P1 n=130 N~4148 {'ours_r16': 0.277, 'ours_r64_fix2k': 0.261}
+[    257s] lb8k P1 n=140 N~8251 {'ours_r16': 0.279, 'ours_r64_fix2k': 0.262}
+[    276s] lb8k P1 n=150 N~8251 {'ours_r16': 0.293, 'ours_r64_fix2k': 0.278}
+[    293s] lb8k P1 n=160 N~5937 {'ours_r16': 0.297, 'ours_r64_fix2k': 0.284}
+[    308s] lb8k P1 n=170 N~5706 {'ours_r16': 0.3, 'ours_r64_fix2k': 0.288}
+[    327s] lb8k P1 n=180 N~3658 {'ours_r16': 0.307, 'ours_r64_fix2k': 0.299}
+[    343s] lb8k P1 n=190 N~5912 {'ours_r16': 0.316, 'ours_r64_fix2k': 0.309}
+[    358s] lb8k P1 n=200 N~3169 {'ours_r16': 0.311, 'ours_r64_fix2k': 0.306}
+[    358s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6197.38it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7810.15it/s]
+[     39s] coqa1 P1 n=10 N~318 {'ours_r16': 0.342, 'ours_r64_fix2k': 0.245}
+[     69s] coqa1 P1 n=20 N~242 {'ours_r16': 0.292, 'ours_r64_fix2k': 0.254}
+[     99s] coqa1 P1 n=30 N~365 {'ours_r16': 0.263, 'ours_r64_fix2k': 0.238}
+[    137s] coqa1 P1 n=40 N~228 {'ours_r16': 0.247, 'ours_r64_fix2k': 0.23}
+[    162s] coqa1 P1 n=50 N~458 {'ours_r16': 0.288, 'ours_r64_fix2k': 0.274}
+[    193s] coqa1 P1 n=60 N~337 {'ours_r16': 0.278, 'ours_r64_fix2k': 0.273}
+[    222s] coqa1 P1 n=70 N~491 {'ours_r16': 0.277, 'ours_r64_fix2k': 0.288}
+[    249s] coqa1 P1 n=80 N~536 {'ours_r16': 0.285, 'ours_r64_fix2k': 0.295}
+[    282s] coqa1 P1 n=90 N~321 {'ours_r16': 0.278, 'ours_r64_fix2k': 0.303}
+[    316s] coqa1 P1 n=100 N~228 {'ours_r16': 0.275, 'ours_r64_fix2k': 0.303}
+[    316s] EVALDONE
+G3DONE

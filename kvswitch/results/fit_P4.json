@@ -1,0 +1,122 @@
+{
+ "0": {
+  "type": "linear_attention",
+  "val_rel_err": 0.20547150448950657,
+  "lam": 0.001
+ },
+ "1": {
+  "type": "linear_attention",
+  "val_rel_err": 0.14073795616781293,
+  "lam": 0.001
+ },
+ "2": {
+  "type": "linear_attention",
+  "val_rel_err": 0.1785307800505664,
+  "lam": 0.001
+ },
+ "3": {
+  "type": "full_attention",
+  "val_rel_err": 0.11615999988723336,
+  "lam": 0.001
+ },
+ "4": {
+  "type": "linear_attention",
+  "val_rel_err": 0.22517297047791626,
+  "lam": 0.001
+ },
+ "5": {
+  "type": "linear_attention",
+  "val_rel_err": 0.21651747274626718,
+  "lam": 0.001
+ },
+ "6": {
+  "type": "linear_attention",
+  "val_rel_err": 0.21531081544710862,
+  "lam": 0.001
+ },
+ "7": {
+  "type": "full_attention",
+  "val_rel_err": 0.1691435270464819,
+  "lam": 0.001
+ },
+ "8": {
+  "type": "linear_attention",
+  "val_rel_err": 0.21179626353545317,
+  "lam": 0.001
+ },
+ "9": {
+  "type": "linear_attention",
+  "val_rel_err": 0.22551064879364935,
+  "lam": 0.001
+ },
+ "10": {
+  "type": "linear_attention",
+  "val_rel_err": 0.21560675467483592,
+  "lam": 0.001
+ },
+ "11": {
+  "type": "full_attention",
+  "val_rel_err": 0.1927998167833266,
+  "lam": 0.01
+ },
+ "12": {
+  "type": "linear_attention",
+  "val_rel_err": 0.22990355608359958,
+  "lam": 0.001
+ },
+ "13": {
+  "type": "linear_attention",
+  "val_rel_err": 0.22928654978981072,
+  "lam": 0.001
+ },
+ "14": {
+  "type": "linear_attention",
+  "val_rel_err": 0.22455714310587774,
+  "lam": 0.001
+ },
+ "15": {
+  "type": "full_attention",
+  "val_rel_err": 0.201679931094554,
+  "lam": 0.001
+ },
+ "16": {
+  "type": "linear_attention",
+  "val_rel_err": 0.2544789903290146,
+  "lam": 0.001
+ },
+ "17": {
+  "type": "linear_attention",
+  "val_rel_err": 0.25892381466344966,
+  "lam": 0.001
+ },
+ "18": {
+  "type": "linear_attention",
+  "val_rel_err": 0.2643948167130945,
+  "lam": 0.001
+ },
+ "19": {
+  "type": "full_attention",
+  "val_rel_err": 0.19742212058471548,
+  "lam": 0.01
+ },
+ "20": {
+  "type": "linear_attention",
+  "val_rel_err": 0.28212390013123145,
+  "lam": 0.001
+ },
+ "21": {
+  "type": "linear_attention",
+  "val_rel_err": 0.2724580006807075,
+  "lam": 0.001
+ },
+ "22": {
+  "type": "linear_attention",
+  "val_rel_err": 0.26213387015965783,
+  "lam": 0.001
+ },
+ "23": {
+  "type": "full_attention",
+  "val_rel_err": 0.04402016716549689,
+  "lam": 0.001
+ }
+}

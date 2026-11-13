@@ -1,0 +1,149 @@
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6944.18it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6624.49it/s]
+Traceback (most recent call last):
+  File "/home/wxz/kvswitch/src/eval.py", line 131, in <module>
+    r["kl"] = (ref.exp() * (ref - lp)).sum(-1).mean().item()
+               ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'exp'
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7520.16it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7796.06it/s]
+[     45s] coqa1 P1 n=10 N~318 {'ours_r64': 0.223, 'ours_r64_c3': 0.223, 'B1_c3': 0.145}
+[     85s] coqa1 P1 n=20 N~242 {'ours_r64': 0.239, 'ours_r64_c3': 0.239, 'B1_c3': 0.119}
+[    125s] coqa1 P1 n=30 N~365 {'ours_r64': 0.206, 'ours_r64_c3': 0.206, 'B1_c3': 0.107}
+[    171s] coqa1 P1 n=40 N~228 {'ours_r64': 0.205, 'ours_r64_c3': 0.205, 'B1_c3': 0.111}
+[    208s] coqa1 P1 n=50 N~458 {'ours_r64': 0.233, 'ours_r64_c3': 0.233, 'B1_c3': 0.132}
+[    246s] coqa1 P1 n=60 N~337 {'ours_r64': 0.235, 'ours_r64_c3': 0.235, 'B1_c3': 0.133}
+[    285s] coqa1 P1 n=70 N~491 {'ours_r64': 0.248, 'ours_r64_c3': 0.248, 'B1_c3': 0.136}
+[    322s] coqa1 P1 n=80 N~536 {'ours_r64': 0.262, 'ours_r64_c3': 0.262, 'B1_c3': 0.14}
+[    363s] coqa1 P1 n=90 N~321 {'ours_r64': 0.268, 'ours_r64_c3': 0.268, 'B1_c3': 0.136}
+[    405s] coqa1 P1 n=100 N~228 {'ours_r64': 0.267, 'ours_r64_c3': 0.267, 'B1_c3': 0.138}
+[    405s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6584.54it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6474.55it/s]
+[     45s] coqa5 P1 n=10 N~387 {'ours_r64': 0.245, 'ours_r64_c3': 0.245, 'B1_c3': 0.139}
+[     83s] coqa5 P1 n=20 N~312 {'ours_r64': 0.242, 'ours_r64_c3': 0.242, 'B1_c3': 0.136}
+[    116s] coqa5 P1 n=30 N~435 {'ours_r64': 0.252, 'ours_r64_c3': 0.252, 'B1_c3': 0.108}
+[    157s] coqa5 P1 n=40 N~302 {'ours_r64': 0.231, 'ours_r64_c3': 0.231, 'B1_c3': 0.112}
+[    192s] coqa5 P1 n=50 N~535 {'ours_r64': 0.25, 'ours_r64_c3': 0.25, 'B1_c3': 0.104}
+[    228s] coqa5 P1 n=60 N~419 {'ours_r64': 0.246, 'ours_r64_c3': 0.246, 'B1_c3': 0.107}
+[    262s] coqa5 P1 n=70 N~569 {'ours_r64': 0.244, 'ours_r64_c3': 0.244, 'B1_c3': 0.119}
+[    301s] coqa5 P1 n=80 N~623 {'ours_r64': 0.249, 'ours_r64_c3': 0.249, 'B1_c3': 0.118}
+[    343s] coqa5 P1 n=90 N~401 {'ours_r64': 0.241, 'ours_r64_c3': 0.241, 'B1_c3': 0.111}
+[    386s] coqa5 P1 n=100 N~300 {'ours_r64': 0.25, 'ours_r64_c3': 0.25, 'B1_c3': 0.108}
+[    386s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7538.13it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6904.84it/s]
+[     46s] coqa10 P1 n=10 N~546 {'ours_r64': 0.283, 'ours_r64_c3': 0.283, 'B1_c3': 0.215}
+[     80s] coqa10 P1 n=20 N~676 {'ours_r64': 0.313, 'ours_r64_c3': 0.313, 'B1_c3': 0.198}
+[    118s] coqa10 P1 n=30 N~703 {'ours_r64': 0.294, 'ours_r64_c3': 0.294, 'B1_c3': 0.163}
+[    152s] coqa10 P1 n=40 N~623 {'ours_r64': 0.318, 'ours_r64_c3': 0.318, 'B1_c3': 0.158}
+[    192s] coqa10 P1 n=50 N~609 {'ours_r64': 0.317, 'ours_r64_c3': 0.317, 'B1_c3': 0.183}
+[    228s] coqa10 P1 n=60 N~550 {'ours_r64': 0.318, 'ours_r64_c3': 0.318, 'B1_c3': 0.177}
+[    271s] coqa10 P1 n=70 N~659 {'ours_r64': 0.314, 'ours_r64_c3': 0.314, 'B1_c3': 0.163}
+[    304s] coqa10 P1 n=80 N~571 {'ours_r64': 0.304, 'ours_r64_c3': 0.304, 'B1_c3': 0.163}
+[    342s] coqa10 P1 n=90 N~472 {'ours_r64': 0.301, 'ours_r64_c3': 0.301, 'B1_c3': 0.164}
+[    377s] coqa10 P1 n=100 N~521 {'ours_r64': 0.316, 'ours_r64_c3': 0.316, 'B1_c3': 0.15}
+[    377s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6581.09it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5609.48it/s]
+[     22s] lb8k P1 n=10 N~8249 {'ours_r64': 0.082}
+[     35s] lb8k P1 n=20 N~8249 {'ours_r64': 0.19}
+[     48s] lb8k P1 n=30 N~8250 {'ours_r64': 0.194}
+[     60s] lb8k P1 n=40 N~8249 {'ours_r64': 0.21}
+[     73s] lb8k P1 n=50 N~8250 {'ours_r64': 0.205}
+[     82s] lb8k P1 n=60 N~8250 {'ours_r64': 0.22}
+[     92s] lb8k P1 n=70 N~8249 {'ours_r64': 0.237}
+[    100s] lb8k P1 n=80 N~8250 {'ours_r64': 0.266}
+[    109s] lb8k P1 n=90 N~5680 {'ours_r64': 0.251}
+[    119s] lb8k P1 n=100 N~6669 {'ours_r64': 0.25}
+[    133s] lb8k P1 n=110 N~8247 {'ours_r64': 0.274}
+[    147s] lb8k P1 n=120 N~2553 {'ours_r64': 0.29}
+[    161s] lb8k P1 n=130 N~4148 {'ours_r64': 0.3}
+[    176s] lb8k P1 n=140 N~8251 {'ours_r64': 0.3}
+[    187s] lb8k P1 n=150 N~8251 {'ours_r64': 0.312}
+[    198s] lb8k P1 n=160 N~5937 {'ours_r64': 0.316}
+[    206s] lb8k P1 n=170 N~5706 {'ours_r64': 0.317}
+[    217s] lb8k P1 n=180 N~3658 {'ours_r64': 0.324}
+[    224s] lb8k P1 n=190 N~5912 {'ours_r64': 0.322}
+[    234s] lb8k P1 n=200 N~3169 {'ours_r64': 0.319}
+[    234s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6080.05it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 7097.69it/s]
+[     19s] niah8k P1 n=10 N~8035 {'ours_r64': 0.0}
+[     30s] niah8k P1 n=20 N~8036 {'ours_r64': 0.0}
+[     41s] niah8k P1 n=30 N~8036 {'ours_r64': 0.0}
+[     53s] niah8k P1 n=40 N~8036 {'ours_r64': 0.0}
+[     64s] niah8k P1 n=50 N~8036 {'ours_r64': 0.0}
+[     64s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7125.38it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6557.06it/s]
+[     34s] niah16k P1 n=10 N~16228 {'ours_r64': 0.0}
+[     60s] niah16k P1 n=20 N~16228 {'ours_r64': 0.0}
+[     86s] niah16k P1 n=30 N~16228 {'ours_r64': 0.0}
+[    113s] niah16k P1 n=40 N~16227 {'ours_r64': 0.0}
+[    139s] niah16k P1 n=50 N~16228 {'ours_r64': 0.0}
+[    139s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7032.21it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6468.65it/s]
+[     83s] niah32k P1 n=10 N~32613 {'ours_r64': 0.0}
+[    159s] niah32k P1 n=20 N~32611 {'ours_r64': 0.0}
+[    235s] niah32k P1 n=30 N~32611 {'ours_r64': 0.0}
+[    311s] niah32k P1 n=40 N~32611 {'ours_r64': 0.0}
+[    387s] niah32k P1 n=50 N~32612 {'ours_r64': 0.0}
+[    387s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5761.33it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6486.37it/s]
+[     13s] niah4k P1 n=10 N~3941 {'ours_r64': 0.0}
+[     19s] niah4k P1 n=20 N~3940 {'ours_r64': 0.0}
+[     25s] niah4k P1 n=30 N~3939 {'ours_r64': 0.033}
+[     31s] niah4k P1 n=40 N~3939 {'ours_r64': 0.075}
+[     37s] niah4k P1 n=50 N~3940 {'ours_r64': 0.08}
+[     37s] EVALDONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5886.20it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6100.16it/s]
+[     57s] gsm P1 n=10 N~619 {'ours_r64': 0.6}
+[    107s] gsm P1 n=20 N~495 {'ours_r64': 0.7}
+[    148s] gsm P1 n=30 N~445 {'ours_r64': 0.7}
+[    190s] gsm P1 n=40 N~459 {'ours_r64': 0.725}
+[    228s] gsm P1 n=50 N~843 {'ours_r64': 0.72}
+[    271s] gsm P1 n=60 N~920 {'ours_r64': 0.75}
+[    310s] gsm P1 n=70 N~529 {'ours_r64': 0.729}
+[    350s] gsm P1 n=80 N~793 {'ours_r64': 0.725}
+[    391s] gsm P1 n=90 N~817 {'ours_r64': 0.744}
+[    433s] gsm P1 n=100 N~588 {'ours_r64': 0.77}
+[    481s] gsm P1 n=110 N~725 {'ours_r64': 0.764}
+[    537s] gsm P1 n=120 N~680 {'ours_r64': 0.767}
+[    581s] gsm P1 n=130 N~827 {'ours_r64': 0.762}
+[    620s] gsm P1 n=140 N~615 {'ours_r64': 0.771}
+[    664s] gsm P1 n=150 N~721 {'ours_r64': 0.773}
+[    715s] gsm P1 n=160 N~577 {'ours_r64': 0.756}
+[    759s] gsm P1 n=170 N~578 {'ours_r64': 0.765}
+[    803s] gsm P1 n=180 N~527 {'ours_r64': 0.761}
+[    850s] gsm P1 n=190 N~773 {'ours_r64': 0.763}
+[    889s] gsm P1 n=200 N~567 {'ours_r64': 0.76}
+[    889s] EVALDONE
+CHAIN2DONE
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5589.93it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5923.57it/s]
+[     10s] uc P1 n=10 N~941 {'ours_r64': -0.123}
+[     12s] uc P1 n=20 N~396 {'ours_r64': -0.107}
+[     15s] uc P1 n=30 N~1584 {'ours_r64': -0.107}
+[     16s] uc P1 n=40 N~956 {'ours_r64': -0.135}
+[     18s] uc P1 n=50 N~394 {'ours_r64': -0.127}
+[     20s] uc P1 n=60 N~869 {'ours_r64': -0.126}
+[     22s] uc P1 n=70 N~762 {'ours_r64': -0.126}
+[     24s] uc P1 n=80 N~453 {'ours_r64': -0.118}
+[     26s] uc P1 n=90 N~823 {'ours_r64': -0.118}
+[     28s] uc P1 n=100 N~666 {'ours_r64': -0.112}
+[     30s] uc P1 n=110 N~1141 {'ours_r64': -0.115}
+[     32s] uc P1 n=120 N~1317 {'ours_r64': -0.116}
+[     34s] uc P1 n=130 N~799 {'ours_r64': -0.119}
+[     35s] uc P1 n=140 N~1414 {'ours_r64': -0.122}
+[     37s] uc P1 n=150 N~741 {'ours_r64': -0.12}
+[     39s] uc P1 n=160 N~1470 {'ours_r64': -0.119}
+[     41s] uc P1 n=170 N~486 {'ours_r64': -0.121}
+[     43s] uc P1 n=180 N~978 {'ours_r64': -0.12}
+[     45s] uc P1 n=190 N~1470 {'ours_r64': -0.118}
+[     47s] uc P1 n=200 N~1995 {'ours_r64': -0.116}
+[     47s] EVALDONE
+CHAIN5DONE
