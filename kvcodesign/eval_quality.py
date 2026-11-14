@@ -69,18 +69,21 @@ class LowRank:
         return torch.cat([-x[..., D // 2:], x[..., :D // 2]], -1)
 
     @torch.no_grad()
-    def __call__(self, sk, sv):  # sk, sv: [LS, n, H, D] (keys rotated) -> [2, LT, n, H, D] bf16
+    def __call__(self, sk, sv, chunk=2048):  # sk, sv: [LS, n, H, D] (keys rotated) -> [2, LT, n, H, D] bf16
         n = sk.shape[1]
+        out = torch.empty(2, LT, n, H, D, device=dev, dtype=torch.bfloat16)
         cos, sin = self.cs(n)
-        c, s_ = cos[None, :, None], sin[None, :, None]
-        k = sk.float()
-        k = k * c - self.rot(k) * s_                                       # strip source RoPE
-        xk = k.permute(1, 0, 2, 3).reshape(n, -1).to(self.dt) - self.mxk
-        xv = sv.permute(1, 0, 2, 3).reshape(n, -1).to(self.dt) - self.mxv
-        yk = ((xk @ self.Pk) @ self.Dk + self.myk).float().view(n, LT, H, D).permute(1, 0, 2, 3)
-        yv = ((xv @ self.Pv) @ self.Dv + self.myv).float().view(n, LT, H, D).permute(1, 0, 2, 3)
-        yk = yk * c + self.rot(yk) * s_                                   # apply target RoPE
-        return torch.stack([yk, yv]).to(torch.bfloat16)
+        for p in range(0, n, chunk):
+            q = min(n, p + chunk); m = q - p
+            c, s_ = cos[None, p:q, None], sin[None, p:q, None]
+            k = sk[:, p:q].float()
+            k = k * c - self.rot(k) * s_                                       # strip source RoPE
+            xk = k.permute(1, 0, 2, 3).reshape(m, -1).to(self.dt) - self.mxk
+            xv = sv[:, p:q].permute(1, 0, 2, 3).reshape(m, -1).to(self.dt) - self.mxv
+            yk = ((xk @ self.Pk) @ self.Dk + self.myk).float().view(m, LT, H, D).permute(1, 0, 2, 3)
+            out[1, :, p:q] = ((xv @ self.Pv) @ self.Dv + self.myv).view(m, LT, H, D).permute(1, 0, 2, 3).to(torch.bfloat16)
+            out[0, :, p:q] = (yk * c + self.rot(yk) * s_).to(torch.bfloat16)  # apply target RoPE
+        return out
 
 
 for m in METHODS:

@@ -25,6 +25,10 @@ JOBS = [  # name, deps, command, log
     ("cb_hotpot", ["fit_cb"], ev("hotpotqa_e", "cb_official", "cbfull", extra=f"MAPPER_CB={CB}"), "q_hotpot_cbfull.log"),
     ("cb_gsm", ["fit_cb"], ev("gsm8k", "cb_official", "cbfull", extra=f"MAPPER_CB={CB}"), "q_gsm_cbfull.log"),
 ]
+SEL = os.environ.get("JOBS")
+if SEL:
+    JOBS = [j for j in JOBS if j[0] in SEL.split(",")]
+    JOBS = [(n, [("log:fit_cb2.log:FITCBDONE" if d == "fit_cb" else d) for d in deps], c, lg) for n, deps, c, lg in JOBS]
 log = lambda *a: print(time.strftime("%m-%d %H:%M:%S"), *a, flush=True)
 
 
@@ -58,14 +62,16 @@ while pending or running:
         name, deps, cmd, lg = job
         if any(d in failed for d in deps):
             pending.remove(job); failed.add(name); log("skip (dep failed)", name); continue
-        if not all(d in done for d in deps):
+        ok = lambda d: (d in done) or (d.startswith("log:") and os.path.exists(f"{L}/{d.split(':')[1]}")
+                                         and d.split(":")[2] in open(f"{L}/{d.split(':')[1]}").read())
+        if not all(ok(d) for d in deps):
             continue
         free = [g for g in GPUS if streak[g] >= 3 and g not in {x for _, x in running.values()}]
         if not free:
             break
         g = free[0]
-        env = dict(os.environ, CUDA_VISIBLE_DEVICES=str(g), HF_ENDPOINT="https://hf-mirror.com")
-        p = subprocess.Popen(cmd, shell=True, env=env, stdout=open(f"{L}/{lg}", "a"), stderr=subprocess.STDOUT)
+        env = dict(os.environ, CUDA_VISIBLE_DEVICES=str(g), HF_ENDPOINT="https://hf-mirror.com", PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True")
+        p = subprocess.Popen(cmd, shell=True, env=env, stdout=open(f"{L}/{lg}", "w"), stderr=subprocess.STDOUT)
         running[name] = (p, g); pending.remove(job); streak[g] = 0
         log("launched", name, "on gpu", g)
     time.sleep(60)
