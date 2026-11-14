@@ -27,6 +27,9 @@ if {"cb_official"} & set(METHODS):
 if {"cb_fused"} & set(METHODS):
     from fastmap import FastHeadLocal
     TR["cb_fused"] = FastHeadLocal(CB)
+if {"cb_cublas32"} & set(METHODS):
+    from fastmap import CublasHeadLocalF32
+    TR["cb_cublas32"] = CublasHeadLocalF32(CB)
 if {"cb_tf32x3"} & set(METHODS):
     from fastmap import FastHeadLocalF32
     TR["cb_tf32x3"] = FastHeadLocalF32(CB, prec="tf32x3", BM=16, num_warps=4)
