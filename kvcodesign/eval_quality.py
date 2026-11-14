@@ -87,6 +87,11 @@ class LowRank:
 
 
 for m in METHODS:
+    if m in ("lrf_bf16", "lrf_fp8"):   # fused Triton kernels (fastlr.py), K 768 + V 1536
+        sys.path.insert(0, os.path.expanduser("~/kvcodesign"))
+        from fastlr import FastLowRank
+        sc = json.load(open(os.path.expanduser("~/kvcodesign/data/fp8_scales_k768_v1536.json")))
+        TR[m] = FastLowRank(768, 1536, fp8=(m == "lrf_fp8"), scales=sc)
     if m.startswith("rrr_"):
         parts = m.split("_")
         rk, rv = int(parts[1][1:]), int(parts[2][1:])

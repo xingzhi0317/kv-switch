@@ -4,7 +4,7 @@
 import os, json, numpy as np
 H = os.path.expanduser("~")
 TASKS = ["quality", "hotpotqa_e", "gsm8k"]
-FILES = [f"{H}/kvcodesign/results/quality_{{t}}_{x}.json" for x in ("rrr", "rrr_a", "rrr_b", "cbfull")] + \
+FILES = [f"{H}/kvcodesign/results/quality_{{t}}_{x}.json" for x in ("rrr", "rrr_a", "rrr_b", "cbfull", "lrf")] + \
         [f"{H}/kvbase/results/quality_{{t}}_{x}.json" for x in ("dense", "cbinit")]
 REF = "kvbridge"
 out = {}
