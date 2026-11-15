@@ -1,12 +1,15 @@
 == quality
   native_new               n=200 mean=0.7100  vs kvbridge +0.210 [+0.140, +0.285] (n=200)
-  native_prev              n=200 mean=0.7100  vs kvbridge +0.210 [+0.140, +0.285] (n=200)
+  native_prev              n=200 mean=0.7100  vs kvbridge +0.210 [+0.135, +0.280] (n=200)
+  src_native               n=200 mean=0.5600  vs kvbridge +0.060 [-0.015, +0.135] (n=200)
   rrr_k2048_v2048          n=200 mean=0.5250  vs kvbridge +0.025 [-0.025, +0.075] (n=200)
   kvbridge                 n=200 mean=0.5000
   dense_fused              n=200 mean=0.4950  vs kvbridge -0.005 [-0.020, +0.010] (n=200)
   dense_fp8                n=200 mean=0.4800  vs kvbridge -0.020 [-0.045, +0.000] (n=200)
   rrr_k768_v1536           n=200 mean=0.4750  vs kvbridge -0.025 [-0.075, +0.025] (n=200)
   rrr_k768_v1536_bf16      n=200 mean=0.4700  vs kvbridge -0.030 [-0.080, +0.020] (n=200)
+  lrf_bf16                 n=200 mean=0.4700  vs kvbridge -0.030 [-0.080, +0.020] (n=200)
+  lrf_fp8                  n=200 mean=0.4450  vs kvbridge -0.055 [-0.110, +0.000] (n=200)
   rrr_k256_v1024           n=200 mean=0.3900  vs kvbridge -0.110 [-0.180, -0.040] (n=200)
   cb_full_official         n=200 mean=0.3500  vs kvbridge -0.150 [-0.230, -0.075] (n=200)
   cb_init_official         n=100 mean=0.3200  vs kvbridge -0.130 [-0.250, -0.010] (n=100)
@@ -14,47 +17,40 @@
 == hotpotqa_e
   native_new               n=200 mean=0.6161  vs kvbridge +0.292 [+0.223, +0.363] (n=200)
   native_prev              n=200 mean=0.6161  vs kvbridge +0.292 [+0.222, +0.360] (n=200)
+  src_native               n=200 mean=0.4649  vs kvbridge +0.141 [+0.061, +0.219] (n=200)
   rrr_k768_v1536           n=200 mean=0.3423  vs kvbridge +0.018 [-0.025, +0.062] (n=200)
+  lrf_bf16                 n=200 mean=0.3392  vs kvbridge +0.015 [-0.028, +0.061] (n=200)
   rrr_k768_v1536_bf16      n=200 mean=0.3381  vs kvbridge +0.014 [-0.030, +0.058] (n=200)
   rrr_k2048_v2048          n=200 mean=0.3320  vs kvbridge +0.008 [-0.039, +0.054] (n=200)
-  dense_fp8                n=200 mean=0.3295  vs kvbridge +0.005 [-0.016, +0.027] (n=200)
+  dense_fp8                n=200 mean=0.3295  vs kvbridge +0.005 [-0.017, +0.028] (n=200)
   kvbridge                 n=200 mean=0.3241
   dense_fused              n=200 mean=0.3201  vs kvbridge -0.004 [-0.023, +0.015] (n=200)
+  lrf_fp8                  n=200 mean=0.3059  vs kvbridge -0.018 [-0.064, +0.028] (n=200)
   rrr_k256_v1024           n=200 mean=0.2433  vs kvbridge -0.081 [-0.134, -0.030] (n=200)
-  cb_init_official         n=100 mean=0.0782  vs kvbridge -0.261 [-0.346, -0.177] (n=100)
-  cb_fused                 n=100 mean=0.0778  vs kvbridge -0.261 [-0.348, -0.180] (n=100)
+  cb_init_official         n=100 mean=0.0782  vs kvbridge -0.261 [-0.347, -0.177] (n=100)
+  cb_fused                 n=100 mean=0.0778  vs kvbridge -0.261 [-0.348, -0.176] (n=100)
   cb_full_official         n=200 mean=0.0677  vs kvbridge -0.256 [-0.313, -0.202] (n=200)
 == gsm8k
-  rrr_k256_v1024           n=200 mean=0.7150  vs kvbridge +0.065 [+0.010, +0.120] (n=200)
-  rrr_k2048_v2048          n=200 mean=0.7050  vs kvbridge +0.055 [+0.010, +0.100] (n=200)
-  rrr_k768_v1536           n=200 mean=0.6750  vs kvbridge +0.025 [-0.025, +0.075] (n=200)
-  dense_fp8                n=200 mean=0.6750  vs kvbridge +0.025 [-0.010, +0.060] (n=200)
-  dense_fused              n=200 mean=0.6700  vs kvbridge +0.020 [-0.010, +0.055] (n=200)
-  rrr_k768_v1536_bf16      n=200 mean=0.6600  vs kvbridge +0.010 [-0.035, +0.055] (n=200)
-  kvbridge                 n=200 mean=0.6500
-  native_new               n=200 mean=0.5950  vs kvbridge -0.055 [-0.130, +0.015] (n=200)
-  native_prev              n=200 mean=0.5950  vs kvbridge -0.055 [-0.125, +0.020] (n=200)
-  cb_full_official         n=200 mean=0.5900  vs kvbridge -0.060 [-0.120, +0.000] (n=200)
-  cb_init_official         n=100 mean=0.4700  vs kvbridge -0.190 [-0.290, -0.090] (n=100)
-  cb_fused                 n=100 mean=0.4300  vs kvbridge -0.230 [-0.330, -0.130] (n=100)
+  native_new               n=200 mean=0.8650  vs kvbridge +0.175 [+0.120, +0.235] (n=200)
+  native_prev              n=200 mean=0.8650  vs kvbridge +0.175 [+0.115, +0.235] (n=200)
+  rrr_k256_v1024           n=200 mean=0.7600  vs kvbridge +0.070 [+0.015, +0.125] (n=200)
+  rrr_k2048_v2048          n=200 mean=0.7350  vs kvbridge +0.045 [+0.000, +0.090] (n=200)
+  src_native               n=200 mean=0.7350  vs kvbridge +0.045 [-0.025, +0.115] (n=200)
+  rrr_k768_v1536           n=200 mean=0.7200  vs kvbridge +0.030 [-0.020, +0.080] (n=200)
+  dense_fp8                n=200 mean=0.7150  vs kvbridge +0.025 [-0.010, +0.065] (n=200)
+  dense_fused              n=200 mean=0.7100  vs kvbridge +0.020 [-0.015, +0.055] (n=200)
+  lrf_fp8                  n=200 mean=0.7050  vs kvbridge +0.015 [-0.030, +0.060] (n=200)
+  lrf_bf16                 n=200 mean=0.7000  vs kvbridge +0.010 [-0.035, +0.055] (n=200)
+  kvbridge                 n=200 mean=0.6900
+  rrr_k768_v1536_bf16      n=200 mean=0.6850  vs kvbridge -0.005 [-0.050, +0.040] (n=200)
+  cb_full_official         n=200 mean=0.6400  vs kvbridge -0.050 [-0.110, +0.010] (n=200)
+  cb_init_official         n=100 mean=0.4700  vs kvbridge -0.230 [-0.330, -0.130] (n=100)
+  cb_fused                 n=100 mean=0.4400  vs kvbridge -0.260 [-0.360, -0.160] (n=100)
+== gsm8k_h
+  native_new               n=200 mean=0.9250  vs kvbridge +0.480 [+0.405, +0.555] (n=200)
+  src_native               n=200 mean=0.7800  vs kvbridge +0.335 [+0.255, +0.415] (n=200)
+  kvbridge                 n=200 mean=0.4450
+  lrf_bf16                 n=200 mean=0.2950  vs kvbridge -0.150 [-0.220, -0.080] (n=200)
 noise band quality fp32-bf16 = 0.005
 noise band hotpotqa_e fp32-bf16 = 0.0042
-noise band gsm8k fp32-bf16 = 0.015
-
-== queue
-11-14 07:44:45 queue start ['q_quality', 'q_hotpot', 'cb_quality', 'cb_hotpot', 'cb_gsm'] gpus [0, 1, 2, 3, 4, 5, 6, 7]
-11-14 07:46:46 launched q_quality on gpu 6
-11-14 07:49:47 launched q_hotpot on gpu 0
-11-14 07:55:48 finished q_quality gpu 6 rc 0
-11-14 08:06:51 finished q_hotpot gpu 0 rc 0
-11-14 08:12:53 launched cb_quality on gpu 0
-11-14 08:12:53 launched cb_hotpot on gpu 6
-11-14 08:15:54 finished cb_quality gpu 0 rc 0
-11-14 08:15:54 launched cb_gsm on gpu 4
-11-14 08:18:54 finished cb_hotpot gpu 6 rc 0
-11-14 08:42:00 finished cb_gsm gpu 4 rc 0
-11-14 08:43:01 QUEUEDONE done ['cb_gsm', 'cb_hotpot', 'cb_quality', 'q_hotpot', 'q_quality'] failed []
-== fit_cb2
-calibrated layer 35 residual energy 18693.0324 mem GB 10.9 14.02
-FITCBDONE
-FINALIZED
+noise band gsm8k fp32-bf16 = 0.035
