@@ -2,13 +2,17 @@
 # Quality under the CacheBridge handoff protocol: source (Qwen3-1.7B) prefills history H; target (Qwen3-4B) gets
 # H's KV via a translator, processes the query Q and answers.  Thinking disabled.
 # methods: native | src_native (1.7B reads and answers) | cb_official | cb_fused | kvbridge | dense_fused | dense_fp8
-# tasks  : quality (A-D logits, 0-shot) | hotpotqa_e (F1) | gsm8k (8-shot CoT, exact match) | gsm8k_h (question inside the translated history)
-# env: TASK N METHODS MAPPER_CB OUT
-import os, sys, json, re, string, random, collections, zipfile, glob, numpy as np, torch
+#          rrr_k{rk}_v{rv}[_bf16] low-rank | lrf_bf16 / lrf_fp8 fused kernels | tid_k{rk}_v{rv} low-rank with token
+#          identity (fit_tid.py) | <kvbridge or rrr_...>_l0 = same translator with target layer 0 computed exactly
+# tasks  : see tasks.py (quality | hotpotqa_e | gsm8k | gsm8k_h | squad | kvret | passkey_{2k,8k,16k})
+# every generated answer records n_out (tokens generated) and trunc (hit the cap); gsm8k_h also records score_256
+# env: TASK N METHODS MAPPER_CB OUT [MX]
+import os, sys, json, numpy as np
+os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")   # before importing transformers / huggingface_hub
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, DynamicCache
 
 E = os.environ.get
-os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
 ROOT = os.path.expanduser("~/kvbase")
 sys.path.insert(0, ROOT)
 MODELS = os.path.expanduser("~/kvswitch/models")
@@ -35,7 +39,7 @@ if {"cb_cublas32"} & set(METHODS):
 if {"cb_tf32x3"} & set(METHODS):
     from fastmap import FastHeadLocalF32
     TR["cb_tf32x3"] = FastHeadLocalF32(CB, prec="tf32x3", BM=16, num_warps=4)
-if {"kvbridge", "dense_fused", "dense_fp8"} & set(METHODS):
+if {"kvbridge", "kvbridge_l0", "dense_fused", "dense_fp8"} & set(METHODS):
     from kvbridge import Mapper as KBMapper, transfer as kb_transfer
     kb = KBMapper.load(f"{ROOT}/mappers/kvbridge_17to4", device=dev)
     from fastmap import FastDense
@@ -86,7 +90,70 @@ class LowRank:
         return out
 
 
+def rope_keys(k, n):   # k [n, H, D] content space -> rotated (target RoPE, positions 0..n-1), fp32
+    inv = 1.0 / (1e6 ** (torch.arange(0, D, 2, device=dev, dtype=torch.float32) / D))
+    ang = torch.arange(n, device=dev, dtype=torch.float32)[:, None] * inv[None]
+    c, s_ = torch.cat([ang.cos(), ang.cos()], -1)[:, None], torch.cat([ang.sin(), ang.sin()], -1)[:, None]
+    return k * c + torch.cat([-k[..., D // 2:], k[..., :D // 2]], -1) * s_
+
+
+@torch.no_grad()
+def tgt_l0(hist):
+    """Token identity in the target model: its layer-0 K (content space) and V depend only on the token ids
+    (shared tokenizer), so they are computed exactly, without reading the history.  -> k0, v0 [n, H, D] fp32"""
+    lay = T.model.layers[0]; a = lay.self_attn
+    x = lay.input_layernorm(T.model.embed_tokens(torch.tensor([hist], device=dev)))
+    n = len(hist)
+    return a.k_norm(a.k_proj(x).view(1, n, H, D))[0].float(), a.v_proj(x).view(n, H, D).float()
+
+
+class LowRankTID:
+    """Low-rank map with token identity (fit_tid.py): target layer 0 exact; layers 1..35 from
+    y = ([x - mx, s (e - me)] P) D + my  with e = exact target layer-0 K,V of the same token."""
+    def __init__(self, rk, rv, dtype=torch.float32):
+        a = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/tid_r{rk}.pt"))
+        b = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/tid_r{rv}.pt"))
+        PK, QK, HD = LS * H * D, LT * H * D, H * D
+        g = lambda t: t.to(dev, dtype)
+        self.Pk, self.Dk, self.Pv, self.Dv = g(a["Pk"]), g(a["Dk"]), g(b["Pv"]), g(b["Dv"])
+        self.mxk, self.mxv, self.me = g(a["mx"][:PK]), g(a["mx"][PK:]), g(a["me"])
+        self.myk, self.myv = g(a["my"][HD:QK]), g(a["my"][QK + HD:])
+        self.sk_, self.sv_, self.dt = a["s_k"], b["s_v"], dtype
+        # The first token is the attention sink; identity features wreck its V (relative error 0.44 -> 1.99 offline,
+        # diag_tid.py), so position 0 is translated by the plain low-rank map of the same ranks.
+        self.lr = LowRank(rk, rv, dtype)
+
+    @torch.no_grad()
+    def __call__(self, sk, sv, k0, v0, chunk=2048):
+        n = sk.shape[1]
+        out = torch.empty(2, LT, n, H, D, device=dev, dtype=torch.bfloat16)
+        cos, sin = self.lr.cs(n)
+        e = torch.cat([k0.reshape(n, -1), v0.reshape(n, -1)], 1).to(self.dt) - self.me
+        out[0, 0], out[1, 0] = rope_keys(k0, n).to(torch.bfloat16), v0.to(torch.bfloat16)
+        for p in range(0, n, chunk):
+            q = min(n, p + chunk); m = q - p
+            c, s_ = cos[None, p:q, None], sin[None, p:q, None]
+            k = sk[:, p:q].float()
+            k = k * c - LowRank.rot(k) * s_
+            xk = torch.cat([k.permute(1, 0, 2, 3).reshape(m, -1).to(self.dt) - self.mxk, e[p:q] * self.sk_], 1)
+            xv = torch.cat([sv[:, p:q].permute(1, 0, 2, 3).reshape(m, -1).to(self.dt) - self.mxv, e[p:q] * self.sv_], 1)
+            yk = ((xk @ self.Pk) @ self.Dk + self.myk).float().view(m, LT - 1, H, D).permute(1, 0, 2, 3)
+            out[1, 1:, p:q] = ((xv @ self.Pv) @ self.Dv + self.myv).view(m, LT - 1, H, D).permute(1, 0, 2, 3).to(torch.bfloat16)
+            out[0, 1:, p:q] = (yk * c + LowRank.rot(yk) * s_).to(torch.bfloat16)
+        out[:, 1:, :1] = self.lr(sk[:, :1], sv[:, :1])[:, 1:]
+        return out
+
+
+# method suffix "_l0": any translator, with target layer 0 replaced by the exact token-identity K,V
 for m in METHODS:
+    if m.startswith("tid_"):   # tid_k{rk}_v{rv}[_bf16]
+        parts = m.split("_")
+        TR[m] = LowRankTID(int(parts[1][1:]), int(parts[2][1:]), torch.bfloat16 if m.endswith("_bf16") else torch.float32)
+        continue
+    if m.endswith("_l0") and m.startswith("rrr_"):
+        parts = m.split("_")
+        TR[m] = LowRank(int(parts[1][1:]), int(parts[2][1:]), torch.bfloat16 if "_bf16" in m else torch.float32)
+        continue
     if m in ("lrf_bf16", "lrf_fp8"):   # fused Triton kernels (fastlr.py), K 768 + V 1536
         sys.path.insert(0, os.path.expanduser("~/kvcodesign"))
         from fastlr import FastLowRank
@@ -98,71 +165,14 @@ for m in METHODS:
         TR[m] = LowRank(rk, rv, torch.bfloat16 if m.endswith("_bf16") else torch.float32)
 
 
-def chat_split(user_hist, user_query):
-    h = f"<|im_start|>user\n{user_hist}"
-    q = f"{user_query}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
-    return tok(h, add_special_tokens=False).input_ids, tok(q, add_special_tokens=False).input_ids
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from tasks import build_samples, score   # task construction and format-insensitive scoring (tasks.py)
 
-
-# ---------------------------------------------------------------- tasks
-def norm(s):
-    s = "".join(ch for ch in s.lower() if ch not in set(string.punctuation))
-    return " ".join(re.sub(r"\b(a|an|the)\b", " ", s).split())
-
-
-def f1(p, golds):
-    best = 0.0
-    for g in golds:
-        a, b = norm(p).split(), norm(g).split()
-        c = sum((collections.Counter(a) & collections.Counter(b)).values())
-        if c:
-            pr, rc = c / len(a), c / len(b); best = max(best, 2 * pr * rc / (pr + rc))
-    return best
-
-
-samples = []
-if TASK == "quality":
-    from datasets import load_dataset
-    q = load_dataset("emozilla/quality", split="validation")
-    arts = {}
-    for r in q:
-        arts.setdefault(r["article"], []).append(r)
-    docs = [v for v in arts.values() if len(v) >= 4]
-    random.Random(0).shuffle(docs)
-    docs = docs[24:]  # the first 24 (same shuffle) are CacheBridge V-calibration documents
-    for d in docs:
-        for r in d:
-            opts = "\n".join(f"{c}. {o}" for c, o in zip("ABCD", r["options"]))
-            hi, qi = chat_split(f"Read the following article.\n\n{d[0]['article']}",
-                                f"\n\nQuestion: {r['question']}\n{opts}\nAnswer with the letter of the correct option.")
-            samples.append(dict(h=hi[:12000], q=qi, gold=int(r["answer"]), kind="mc"))
-    samples = samples[:NS]
-elif TASK == "hotpotqa_e":
-    from huggingface_hub import hf_hub_download
-    z = zipfile.ZipFile(hf_hub_download("THUDM/LongBench", "data.zip", repo_type="dataset"))
-    rows = [json.loads(l) for l in z.open("data/hotpotqa_e.jsonl")]
-    random.Random(0).shuffle(rows)
-    inst = "Answer the question based on the given passages. Only give me the answer and do not output any other words."
-    for r in rows[:NS]:
-        hi, qi = chat_split(f"{inst}\n\nThe following are given passages.\n{r['context']}",
-                            f"\n\n{inst}\n\nQuestion: {r['input']}\nAnswer:")
-        samples.append(dict(h=hi[:12000], q=qi, gold=r["answers"], kind="gen", mx=32))
-elif TASK == "gsm8k":
-    from datasets import load_dataset
-    tr = load_dataset("openai/gsm8k", "main", split="train")
-    te = load_dataset("openai/gsm8k", "main", split="test")
-    shots = "".join(f"Question: {tr[i]['question']}\nAnswer: {tr[i]['answer'].replace('####', 'The answer is')}\n\n" for i in range(8))
-    for r in list(te)[:NS]:
-        hi, qi = chat_split(f"Solve the math problems.\n\n{shots}", f"Question: {r['question']}\nAnswer:")
-        samples.append(dict(h=hi, q=qi, gold=r["answer"].split("####")[-1].strip().replace(",", ""), kind="gsm", mx=256))
-elif TASK == "gsm8k_h":   # same as gsm8k, but the question is part of the (translated) history
-    from datasets import load_dataset
-    tr = load_dataset("openai/gsm8k", "main", split="train")
-    te = load_dataset("openai/gsm8k", "main", split="test")
-    shots = "".join(f"Question: {tr[i]['question']}\nAnswer: {tr[i]['answer'].replace('####', 'The answer is')}\n\n" for i in range(8))
-    for r in list(te)[:NS]:
-        hi, qi = chat_split(f"Solve the math problems.\n\n{shots}Question: {r['question']}\n", "Answer:")
-        samples.append(dict(h=hi, q=qi, gold=r["answer"].split("####")[-1].strip().replace(",", ""), kind="gsm", mx=512))
+samples = build_samples(TASK, NS, lambda t: tok(t, add_special_tokens=False).input_ids)
+if E("MX"):   # optional override of the generation cap
+    for s_ in samples:
+        if "mx" in s_:
+            s_["mx"] = int(E("MX"))
 
 
 # ---------------------------------------------------------------- handoff
@@ -173,19 +183,51 @@ def target_cache(method, hist):
     if method == "src_native":   # source model (1.7B) reads the history and answers itself
         c = DynamicCache(); S(torch.tensor([hist], device=dev), past_key_values=c, use_cache=True); return c
     sc = S(torch.tensor([hist], device=dev), use_cache=True).past_key_values
+    if method == "kvbridge_l0":   # official dense translation, layer 0 replaced by the exact token-identity K,V
+        c = target_cache("kvbridge", hist)
+        k0, v0 = tgt_l0(hist)
+        c.layers[0].keys = rope_keys(k0, len(hist)).transpose(0, 1)[None].to(c.layers[0].keys.dtype)
+        c.layers[0].values = v0.transpose(0, 1)[None].to(c.layers[0].values.dtype)
+        return c
     if method == "kvbridge":
-        return kb_transfer(sc, kb)
+        n = sc.layers[0].keys.shape[2]
+        if n <= 8192:
+            return kb_transfer(sc, kb)
+        # long histories: the official transfer() run on 4096-token slices with explicit positions, then concatenated
+        # (identical arithmetic per token; avoids the out-of-memory failure at 16K tokens on a 24 GB card)
+        parts = []
+        for p in range(0, n, 4096):
+            cc = DynamicCache()
+            for l in range(LS):
+                cc.update(sc.layers[l].keys[:, :, p:p + 4096], sc.layers[l].values[:, :, p:p + 4096], l)
+            parts.append(kb_transfer(cc, kb, positions=torch.arange(p, min(n, p + 4096), device=dev)))
+            del cc
+        del sc
+        c = DynamicCache()
+        for l in range(LT):
+            c.update(torch.cat([x.layers[l].keys for x in parts], 2), torch.cat([x.layers[l].values for x in parts], 2), l)
+        return c
     sk = torch.stack([sc.layers[l].keys[0].transpose(0, 1) for l in range(LS)]).contiguous()  # [L,T,H,D]
     sv = torch.stack([sc.layers[l].values[0].transpose(0, 1) for l in range(LS)]).contiguous()
     n = sk.shape[1]
+    del sc   # free the source cache before translating (matters at 16K tokens on a 24 GB card)
     if method == "cb_official":
         out = torch.cat([TR[method].map_page(torch.stack([sk[:, p:p + 2048], sv[:, p:p + 2048]]), position_start=p, output_device=dev)
                          for p in range(0, n, 2048)], 2)
+    elif method.startswith("tid_"):
+        out = TR[method](sk, sv, *tgt_l0(hist))
     else:
         out = TR[method](sk, sv)
+        if method.endswith("_l0"):
+            k0, v0 = tgt_l0(hist)
+            out[0, 0], out[1, 0] = rope_keys(k0, n).to(out.dtype), v0.to(out.dtype)
+    del sk, sv
     c = DynamicCache()
     for l in range(LT):
-        c.update(out[0, l].transpose(0, 1)[None].contiguous(), out[1, l].transpose(0, 1)[None].contiguous(), l)
+        k, v = out[0, l].transpose(0, 1)[None], out[1, l].transpose(0, 1)[None]
+        if n <= 8192:   # long histories keep views of `out` instead of a second 2.4 GB copy (same values)
+            k, v = k.contiguous(), v.contiguous()
+        c.update(k, v, l)
     return c
 
 
@@ -194,43 +236,21 @@ STOP = {tok.convert_tokens_to_ids("<|im_end|>"), tok.eos_token_id}
 
 
 @torch.no_grad()
-def answer(c, s, M=None):
+def answer(c, s, M=None):   # -> (prediction, generated token ids or None, truncated at the cap?)
     M = M or T
     lg = M(torch.tensor([s["q"]], device=dev), past_key_values=c, use_cache=True).logits[0, -1]
     if s["kind"] == "mc":
-        return int(lg[LETTERS].argmax())
-    outt, nxt = [], int(lg.argmax())
+        return int(lg[LETTERS].argmax()), None, False
+    outt, nxt, trunc = [], int(lg.argmax()), True
     for _ in range(s["mx"]):
         if nxt in STOP:
+            trunc = False
             break
         outt.append(nxt)
         nxt = int(M(torch.tensor([[nxt]], device=dev), past_key_values=c, use_cache=True).logits[0, -1].argmax())
-    return tok.decode(outt, skip_special_tokens=True).strip()
-
-
-def gsm_extract(pred):
-    t = pred.replace("**", "").replace("$", "").replace(",", "")
-    for pat in (r"answer is\s*:?\s*(-?\d+\.?\d*)", r"boxed\{\s*\\?(-?\d+\.?\d*)", r"[Aa]nswer\s*:?\s*(-?\d+\.?\d*)"):
-        m = re.findall(pat, t)
-        if m:
-            return m[-1]
-    m = re.findall(r"-?\d+\.?\d*", t)
-    return m[-1] if m else None
-
-
-def gsm_eq(a, gold):
-    try:
-        return a is not None and abs(float(a.rstrip(".")) - float(gold)) < 1e-6
-    except ValueError:
-        return False
-
-
-def score(s, pred):
-    if s["kind"] == "mc":
-        return float(pred == s["gold"])
-    if s["kind"] == "gen":
-        return f1(pred, s["gold"])
-    return float(gsm_eq(gsm_extract(pred), s["gold"]))
+    if trunc and nxt in STOP:   # the stop token arrived exactly at the cap
+        trunc = False
+    return tok.decode(outt, skip_special_tokens=True).strip(), outt, trunc
 
 
 res = json.load(open(OUT)) if os.path.exists(OUT) else dict(task=TASK, samples=[])
@@ -238,11 +258,16 @@ done = len(res["samples"])
 for i, s in enumerate(samples):
     if i < done:
         continue
-    rec = dict(n_hist=len(s["h"]), m={})
+    rec = dict(n_hist=len(s["h"]), m={}, **s.get("meta", {}))
     for m in METHODS:
         c = target_cache(m, s["h"])
-        p = answer(c, s, S if m == "src_native" else T)
-        rec["m"][m] = dict(pred=p if isinstance(p, (int, str)) else str(p), score=score(s, p))
+        p, ids, trunc = answer(c, s, S if m == "src_native" else T)
+        r = dict(pred=p, **score(s, p))
+        if ids is not None:
+            r.update(n_out=len(ids), trunc=trunc)
+            if s["kind"] == "gsm" and s["mx"] > 256:   # same greedy output cut at 256 tokens (truncation control)
+                r["score_256"] = score(s, tok.decode(ids[:256], skip_special_tokens=True).strip())["score"]
+        rec["m"][m] = r
         del c
     res["samples"].append(rec)
     if (i + 1) % 20 == 0 or i == len(samples) - 1:

@@ -1,12 +1,13 @@
-# Re-score saved GSM8K predictions with the fixed answer extractor (eval_quality.gsm_extract).
+# Re-score saved GSM8K predictions with the fixed answer extractor (tasks.gsm_extract).
 # The old scorer failed on "The answer is **18**." and fell back to the FIRST number in the output, which
 # penalised the native target (it follows the 8-shot "The answer is" format with markdown bold).
 # Originals are kept as *.orig.json. Gold answers: openai/gsm8k test[:N], same order as eval_quality.py.
 import os, re, json, glob, shutil
 os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
 from datasets import load_dataset
-src = open(os.path.expanduser("~/kvcodesign/eval_quality.py")).read()
-ns = {"re": re}; exec(src[src.index("def gsm_extract"):src.index("def score")], ns)
+import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import tasks
+ns = {"gsm_extract": tasks.gsm_extract, "gsm_eq": tasks.gsm_eq}
 te = load_dataset("openai/gsm8k", "main", split="test")
 gold = [r["answer"].split("####")[-1].strip().replace(",", "") for r in te]
 H = os.path.expanduser("~")
