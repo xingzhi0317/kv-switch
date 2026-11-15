@@ -1,8 +1,8 @@
 # [kvcodesign] copy of kvbase/eval_quality.py + low-rank shared-latent translators (method rrr_k{rk}_v{rv}[_bf16]).
 # Quality under the CacheBridge handoff protocol: source (Qwen3-1.7B) prefills history H; target (Qwen3-4B) gets
 # H's KV via a translator, processes the query Q and answers.  Thinking disabled.
-# methods: native | cb_official | cb_fused | kvbridge | dense_fused | dense_fp8
-# tasks  : quality (A-D logits, 0-shot) | hotpotqa_e (F1) | gsm8k (8-shot CoT, exact match)
+# methods: native | src_native (1.7B reads and answers) | cb_official | cb_fused | kvbridge | dense_fused | dense_fp8
+# tasks  : quality (A-D logits, 0-shot) | hotpotqa_e (F1) | gsm8k (8-shot CoT, exact match) | gsm8k_h (question inside the translated history)
 # env: TASK N METHODS MAPPER_CB OUT
 import os, sys, json, re, string, random, collections, zipfile, glob, numpy as np, torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, DynamicCache
@@ -155,6 +155,14 @@ elif TASK == "gsm8k":
     for r in list(te)[:NS]:
         hi, qi = chat_split(f"Solve the math problems.\n\n{shots}", f"Question: {r['question']}\nAnswer:")
         samples.append(dict(h=hi, q=qi, gold=r["answer"].split("####")[-1].strip().replace(",", ""), kind="gsm", mx=256))
+elif TASK == "gsm8k_h":   # same as gsm8k, but the question is part of the (translated) history
+    from datasets import load_dataset
+    tr = load_dataset("openai/gsm8k", "main", split="train")
+    te = load_dataset("openai/gsm8k", "main", split="test")
+    shots = "".join(f"Question: {tr[i]['question']}\nAnswer: {tr[i]['answer'].replace('####', 'The answer is')}\n\n" for i in range(8))
+    for r in list(te)[:NS]:
+        hi, qi = chat_split(f"Solve the math problems.\n\n{shots}Question: {r['question']}\n", "Answer:")
+        samples.append(dict(h=hi, q=qi, gold=r["answer"].split("####")[-1].strip().replace(",", ""), kind="gsm", mx=512))
 
 
 # ---------------------------------------------------------------- handoff
@@ -162,6 +170,8 @@ elif TASK == "gsm8k":
 def target_cache(method, hist):
     if method == "native":
         c = DynamicCache(); T(torch.tensor([hist], device=dev), past_key_values=c, use_cache=True); return c
+    if method == "src_native":   # source model (1.7B) reads the history and answers itself
+        c = DynamicCache(); S(torch.tensor([hist], device=dev), past_key_values=c, use_cache=True); return c
     sc = S(torch.tensor([hist], device=dev), use_cache=True).past_key_values
     if method == "kvbridge":
         return kb_transfer(sc, kb)
@@ -184,8 +194,9 @@ STOP = {tok.convert_tokens_to_ids("<|im_end|>"), tok.eos_token_id}
 
 
 @torch.no_grad()
-def answer(c, s):
-    lg = T(torch.tensor([s["q"]], device=dev), past_key_values=c, use_cache=True).logits[0, -1]
+def answer(c, s, M=None):
+    M = M or T
+    lg = M(torch.tensor([s["q"]], device=dev), past_key_values=c, use_cache=True).logits[0, -1]
     if s["kind"] == "mc":
         return int(lg[LETTERS].argmax())
     outt, nxt = [], int(lg.argmax())
@@ -193,8 +204,25 @@ def answer(c, s):
         if nxt in STOP:
             break
         outt.append(nxt)
-        nxt = int(T(torch.tensor([[nxt]], device=dev), past_key_values=c, use_cache=True).logits[0, -1].argmax())
+        nxt = int(M(torch.tensor([[nxt]], device=dev), past_key_values=c, use_cache=True).logits[0, -1].argmax())
     return tok.decode(outt, skip_special_tokens=True).strip()
+
+
+def gsm_extract(pred):
+    t = pred.replace("**", "").replace("$", "").replace(",", "")
+    for pat in (r"answer is\s*:?\s*(-?\d+\.?\d*)", r"boxed\{\s*\\?(-?\d+\.?\d*)", r"[Aa]nswer\s*:?\s*(-?\d+\.?\d*)"):
+        m = re.findall(pat, t)
+        if m:
+            return m[-1]
+    m = re.findall(r"-?\d+\.?\d*", t)
+    return m[-1] if m else None
+
+
+def gsm_eq(a, gold):
+    try:
+        return a is not None and abs(float(a.rstrip(".")) - float(gold)) < 1e-6
+    except ValueError:
+        return False
 
 
 def score(s, pred):
@@ -202,8 +230,7 @@ def score(s, pred):
         return float(pred == s["gold"])
     if s["kind"] == "gen":
         return f1(pred, s["gold"])
-    m = re.findall(r"answer is\s*\$?(-?[\d,]*\.?\d+)", pred) or re.findall(r"-?\d[\d,]*\.?\d*", pred)
-    return float(bool(m) and m[0 if "answer is" in pred else -1].replace(",", "").rstrip(".") == s["gold"])
+    return float(gsm_eq(gsm_extract(pred), s["gold"]))
 
 
 res = json.load(open(OUT)) if os.path.exists(OUT) else dict(task=TASK, samples=[])
@@ -214,7 +241,7 @@ for i, s in enumerate(samples):
     rec = dict(n_hist=len(s["h"]), m={})
     for m in METHODS:
         c = target_cache(m, s["h"])
-        p = answer(c, s)
+        p = answer(c, s, S if m == "src_native" else T)
         rec["m"][m] = dict(pred=p if isinstance(p, (int, str)) else str(p), score=score(s, p))
         del c
     res["samples"].append(rec)
