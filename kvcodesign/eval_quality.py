@@ -4,6 +4,7 @@
 # methods: native | src_native (1.7B reads and answers) | cb_official | cb_fused | kvbridge | dense_fused | dense_fp8
 #          rrr_k{rk}_v{rv}[_bf16] low-rank | lrf_bf16 / lrf_fp8 fused kernels | tid_k{rk}_v{rv} low-rank with token
 #          identity (fit_tid.py) | <kvbridge or rrr_...>_l0 = same translator with target layer 0 computed exactly
+#          kl_k{rk}_v{rv}_{tag}[_bf16] low-rank map fine-tuned by KL through the frozen target (train_kl.py)
 # tasks  : see tasks.py (quality | hotpotqa_e | gsm8k | gsm8k_h | squad | kvret | passkey_{2k,8k,16k})
 # every generated answer records n_out (tokens generated) and trunc (hit the cap); gsm8k_h also records score_256
 # env: TASK N METHODS MAPPER_CB OUT [MX]
@@ -52,9 +53,12 @@ if {"kvbridge", "kvbridge_l0", "dense_fused", "dense_fp8"} & set(METHODS):
 class LowRank:
     """Shared-latent reduced-rank ridge: strip source RoPE -> z = (x - mu_x) P -> y = z D + mu_y -> target RoPE.
     K and V use separate latents (ranks rk, rv). Weights from screen2.py (metric 'var', alpha 0.01)."""
-    def __init__(self, rk, rv, dtype=torch.float32):
-        a = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/rrr_var_r{rk}.pt"))
-        b = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/rrr_var_r{rv}.pt"))
+    def __init__(self, rk, rv, dtype=torch.float32, path=None):
+        if path:   # one file holding all four matrices (train_kl.py: behaviourally fine-tuned low-rank map)
+            a = b = torch.load(path)
+        else:
+            a = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/rrr_var_r{rk}.pt"))
+            b = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/rrr_var_r{rv}.pt"))
         PK = LS * H * D
         g = lambda t: t.to(dev, dtype)
         self.Pk, self.Dk, self.Pv, self.Dv = g(a["Pk"]), g(a["Dk"]), g(b["Pv"]), g(b["Dv"])
@@ -146,6 +150,10 @@ class LowRankTID:
 
 # method suffix "_l0": any translator, with target layer 0 replaced by the exact token-identity K,V
 for m in METHODS:
+    if m.startswith("kl_"):    # kl_k{rk}_v{rv}_{tag}[_bf16]: low-rank map fine-tuned by KL through the frozen target
+        base = m[:-5] if m.endswith("_bf16") else m
+        TR[m] = LowRank(0, 0, torch.bfloat16 if m.endswith("_bf16") else torch.float32, path=os.path.expanduser(f"~/kvcodesign/mappers/{base}.pt"))
+        continue
     if m.startswith("tid_"):   # tid_k{rk}_v{rv}[_bf16]
         parts = m.split("_")
         TR[m] = LowRankTID(int(parts[1][1:]), int(parts[2][1:]), torch.bfloat16 if m.endswith("_bf16") else torch.float32)
