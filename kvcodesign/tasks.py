@@ -10,9 +10,14 @@
 #   squad       SQuAD v1.1 dev, passage + question inside H, F1 / EM        (exact information: spans)
 #   passkey_{2k,8k,16k}  a 6-digit code hidden in real text (QuALITY articles), question inside H, EM
 #   kvret       40 "name: 6-digit number" pairs, ask for one, question inside H, EM
-import re, json, string, random, collections, zipfile
+#   klchat_{2k,8k}  continuation KL: a long single conversation from nvidia/Nemotron-SFT-Instruction-Following-Chat-v2
+#               (reasoning_off; the chat data arXiv 2611.12062 distils on), rendered in the Qwen3 chat format and cut
+#               at 2048 / 8192 tokens; H = the prefix, the next 128 tokens are the continuation (teacher-forced).
+#               The cut usually falls inside an assistant reply, so the continuation depends on the history.
+import os, re, json, string, random, collections, zipfile
 
-TASKS = ["quality", "hotpotqa_e", "gsm8k", "gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k"]
+TASKS = ["quality", "hotpotqa_e", "gsm8k", "gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k", "klchat_2k", "klchat_8k"]
+KL_TASKS = {"klchat_2k": 2048, "klchat_8k": 8192}   # continuation KL; history length in tokens
 EXACT_TASKS = ["gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k"]   # exact information must cross the translation
 PASSKEY_LEN = {"passkey_2k": 2000, "passkey_8k": 8000, "passkey_16k": 16000}
 DEPTHS = [0.1, 0.3, 0.5, 0.7, 0.9]
@@ -165,6 +170,34 @@ def kvret_samples(enc, n, pairs=40):
     return out
 
 
+KLCHAT_CACHE = os.path.expanduser("~/kvcodesign/data/klchat.json")
+
+
+def klchat_samples(enc, n, L, cont=128):
+    """Deterministic: scan reasoning_off.jsonl in file order, keep conversations with >= L + cont tokens, then take a
+    seeded random n of the first 4n candidates.  Cached (token ids) in data/klchat.json."""
+    cache = json.load(open(KLCHAT_CACHE)) if os.path.exists(KLCHAT_CACHE) else {}
+    key = f"{L}_{n}"
+    if key not in cache:
+        from huggingface_hub import hf_hub_download
+        p = hf_hub_download("nvidia/Nemotron-SFT-Instruction-Following-Chat-v2", "data/reasoning_off.jsonl", repo_type="dataset")
+        cand, minchars = [], int(2.5 * (L + cont))
+        for line in open(p):
+            d = json.loads(line)
+            m = [x for x in d["messages"] if x.get("content")]
+            if sum(len(x["content"]) for x in m) < minchars:
+                continue
+            ids = enc("".join(f"<|im_start|>{x['role']}\n{x['content']}<|im_end|>\n" for x in m))
+            if len(ids) >= L + cont:
+                cand.append(dict(uuid=d.get("uuid"), h=ids[:L], q=ids[L:L + cont]))
+                if len(cand) >= 4 * n:
+                    break
+        random.Random(7).shuffle(cand)
+        cache[key] = cand[:n]
+        json.dump(cache, open(KLCHAT_CACHE, "w"))
+    return [dict(h=x["h"], q=x["q"], kind="kl", meta=dict(uuid=x["uuid"])) for x in cache[key]]
+
+
 def build_samples(task, n, enc):
     samples = []
     if task == "quality":
@@ -209,6 +242,8 @@ def build_samples(task, n, enc):
         samples = passkey_samples(enc, n, PASSKEY_LEN[task], [d[0]["article"] for d in quality_docs()])
     elif task == "kvret":
         samples = kvret_samples(enc, n)
+    elif task in KL_TASKS:
+        samples = klchat_samples(enc, n, KL_TASKS[task])
     else:
         raise ValueError(f"unknown task {task}")
     return samples

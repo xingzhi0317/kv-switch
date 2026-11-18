@@ -2,11 +2,12 @@
 # Run ONE command on the first GPU that has been idle (< 1 GB used) on CHECKS consecutive checks, INTERVAL s apart
 # (default 12 x 30 s = 6 minutes).  The long window matters: other users run chains of short jobs with ~1 minute
 # gaps, and a 1-minute window twice put us on a card at the same moment as their next job.
-# Never touches other users' processes.   LOG=logs/x.log bash run_when_free.sh <command ...>   (launch with nohup)
+# GPUS="1 2" restricts the candidates (use disjoint sets for jobs waiting at the same time, so two of ours never pick
+# the same card).  Never touches other users' processes.   LOG=logs/x.log bash run_when_free.sh <command ...>   (launch with nohup)
 cd ~/kvcodesign
 while true; do
   g=""
-  for i in 0 1 2 3 4 5 6 7; do
+  for i in ${GPUS:-0 1 2 3 4 5 6 7}; do
     ok=1
     for k in $(seq 1 ${CHECKS:-12}); do
       m=$(nvidia-smi -i $i --query-gpu=memory.used --format=csv,noheader,nounits)

@@ -4,7 +4,7 @@
 # (previous stage, same deterministic question order).  Also reports truncation and the noise band.
 # Root directories can be overridden (KVC, KVB) so the script also runs on a local copy of the results.
 import os, json, glob, numpy as np
-from tasks import TASKS, EXACT_TASKS
+from tasks import TASKS, EXACT_TASKS, KL_TASKS   # KL tasks: "score" is KL to the native target (lower is better)
 H = os.path.expanduser("~")
 KVC = os.environ.get("KVC", f"{H}/kvcodesign/results")
 KVB = os.environ.get("KVB", f"{H}/kvbase/results")
