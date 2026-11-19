@@ -1,0 +1,153 @@
+== quality
+  src_native               n=200 mean=0.7100 | vs kvbridge +0.260 [+0.185, +0.335] | vs native +0.150 [+0.085, +0.215]
+  native                   n=200 mean=0.5600 | vs kvbridge +0.110 [+0.040, +0.175] | vs src_native -0.150 [-0.215, -0.085]
+  sum10                    n=200 mean=0.5300 | vs kvbridge +0.080 [+0.010, +0.150] | vs native -0.030 [-0.100, +0.045] | vs src_native -0.180 [-0.255, -0.105]
+  lingua50                 n=200 mean=0.4950 | vs kvbridge +0.045 [-0.010, +0.105] | vs native -0.065 [-0.125, -0.005] | vs src_native -0.215 [-0.290, -0.145]
+  rare50                   n=200 mean=0.4850 | vs kvbridge +0.035 [-0.025, +0.095] | vs native -0.075 [-0.130, -0.020] | vs src_native -0.225 [-0.300, -0.150]
+  rare30                   n=200 mean=0.4800 | vs kvbridge +0.030 [-0.020, +0.080] | vs native -0.080 [-0.140, -0.020] | vs src_native -0.230 [-0.305, -0.160]
+  lingua25                 n=200 mean=0.4600 | vs kvbridge +0.010 [-0.055, +0.075] | vs native -0.100 [-0.175, -0.025] | vs src_native -0.250 [-0.330, -0.165]
+  kvbridge                 n=200 mean=0.4500 | vs native -0.110 [-0.180, -0.040] | vs src_native -0.260 [-0.330, -0.185]
+  rare10                   n=200 mean=0.4450 | vs kvbridge -0.005 [-0.050, +0.040] | vs native -0.115 [-0.185, -0.045] | vs src_native -0.265 [-0.335, -0.195]
+  lrf_bf16                 n=200 mean=0.4050 | vs kvbridge -0.045 [-0.105, +0.015] | vs native -0.155 [-0.225, -0.085] | vs src_native -0.305 [-0.380, -0.230]
+  rrr_k2048_v2048          n=200 mean=0.4000 | vs kvbridge -0.050 [-0.115, +0.015] | vs native -0.160 [-0.230, -0.090] | vs src_native -0.310 [-0.390, -0.230]
+  none                     n=200 mean=0.3700 | vs kvbridge -0.080 [-0.160, +0.000] | vs native -0.190 [-0.280, -0.100] | vs src_native -0.340 [-0.425, -0.255]
+  kb3                      n=200 mean=0.3200 | vs kvbridge -0.130 [-0.215, -0.045] | vs native -0.240 [-0.320, -0.160] | vs src_native -0.390 [-0.475, -0.305]
+  cb_full_official         n=200 mean=0.3050 | vs kvbridge -0.145 [-0.235, -0.050] | vs native -0.255 [-0.345, -0.165] | vs src_native -0.405 [-0.490, -0.315]
+  kb3kl                    n=200 mean=0.2900 | vs kvbridge -0.160 [-0.255, -0.065] | vs native -0.270 [-0.350, -0.185] | vs src_native -0.420 [-0.510, -0.335]
+== hotpotqa_e
+  src_native               n=200 mean=0.6161 | vs kvbridge +0.351 [+0.277, +0.423] | vs native +0.151 [+0.090, +0.214]   em=0.470 trunc=0.005 n_out=4
+  native                   n=200 mean=0.4649 | vs kvbridge +0.200 [+0.134, +0.267] | vs src_native -0.151 [-0.214, -0.089]   em=0.370 trunc=0.040 n_out=5
+  rare50                   n=200 mean=0.4251 | vs kvbridge +0.160 [+0.099, +0.222] | vs native -0.040 [-0.089, +0.011] | vs src_native -0.191 [-0.256, -0.125]   em=0.305 trunc=0.040 n_out=6
+  lingua50                 n=200 mean=0.4229 | vs kvbridge +0.158 [+0.092, +0.223] | vs native -0.042 [-0.097, +0.011] | vs src_native -0.193 [-0.258, -0.128]   em=0.320 trunc=0.025 n_out=6
+  rare30                   n=200 mean=0.3767 | vs kvbridge +0.112 [+0.054, +0.171] | vs native -0.088 [-0.141, -0.035] | vs src_native -0.239 [-0.308, -0.168]   em=0.265 trunc=0.030 n_out=6
+  lingua25                 n=200 mean=0.3349 | vs kvbridge +0.070 [+0.009, +0.132] | vs native -0.130 [-0.196, -0.063] | vs src_native -0.281 [-0.352, -0.210]   em=0.240 trunc=0.020 n_out=5
+  rare10                   n=200 mean=0.3198 | vs kvbridge +0.055 [+0.014, +0.098] | vs native -0.145 [-0.213, -0.081] | vs src_native -0.296 [-0.370, -0.224]   em=0.215 trunc=0.035 n_out=7
+  sum10                    n=200 mean=0.3184 | vs kvbridge +0.054 [-0.004, +0.111] | vs native -0.147 [-0.215, -0.078] | vs src_native -0.298 [-0.369, -0.228]   em=0.245 trunc=0.035 n_out=8
+  rrr_k2048_v2048          n=200 mean=0.2715 | vs kvbridge +0.007 [-0.029, +0.044] | vs native -0.193 [-0.261, -0.125] | vs src_native -0.345 [-0.413, -0.275]   em=0.180 trunc=0.055 n_out=10
+  kvbridge                 n=200 mean=0.2648 | vs native -0.200 [-0.267, -0.134] | vs src_native -0.351 [-0.422, -0.281]   em=0.180 trunc=0.020 n_out=8
+  lrf_bf16                 n=200 mean=0.2489 | vs kvbridge -0.016 [-0.059, +0.027] | vs native -0.216 [-0.289, -0.144] | vs src_native -0.367 [-0.438, -0.296]   em=0.165 trunc=0.065 n_out=11
+  none                     n=200 mean=0.1753 | vs kvbridge -0.089 [-0.145, -0.034] | vs native -0.290 [-0.359, -0.218] | vs src_native -0.441 [-0.508, -0.375]   em=0.120 trunc=0.050 n_out=8
+  kb3                      n=200 mean=0.1579 | vs kvbridge -0.107 [-0.157, -0.057] | vs native -0.307 [-0.375, -0.236] | vs src_native -0.458 [-0.528, -0.387]   em=0.070 trunc=0.120 n_out=11
+  kb3kl                    n=200 mean=0.1577 | vs kvbridge -0.107 [-0.160, -0.055] | vs native -0.307 [-0.371, -0.243] | vs src_native -0.458 [-0.522, -0.394]   em=0.035 trunc=0.350 n_out=22
+  cb_full_official         n=200 mean=0.0006 | vs kvbridge -0.264 [-0.318, -0.210] | vs native -0.464 [-0.527, -0.400] | vs src_native -0.616 [-0.674, -0.556]   em=0.000 trunc=1.000 n_out=32
+== gsm8k_h   [exact-information task]
+  src_native               n=200 mean=0.9250 | vs kvbridge +0.580 [+0.510, +0.650] | vs native +0.145 [+0.095, +0.200]   score_256=0.870 trunc=0.010 n_out=154
+  native                   n=200 mean=0.7800 | vs kvbridge +0.435 [+0.365, +0.505] | vs src_native -0.145 [-0.195, -0.090]   score_256=0.750 trunc=0.015 n_out=165
+  rare50                   n=200 mean=0.6200 | vs kvbridge +0.275 [+0.205, +0.345] | vs native -0.160 [-0.230, -0.090] | vs src_native -0.305 [-0.370, -0.240]   score_256=0.580 trunc=0.015 n_out=208
+  sum10                    n=200 mean=0.5650 | vs kvbridge +0.220 [+0.130, +0.310] | vs native -0.215 [-0.290, -0.140] | vs src_native -0.360 [-0.430, -0.290]   score_256=0.440 trunc=0.035 n_out=256
+  rare30                   n=200 mean=0.5000 | vs kvbridge +0.155 [+0.090, +0.225] | vs native -0.280 [-0.355, -0.205] | vs src_native -0.425 [-0.495, -0.355]   score_256=0.455 trunc=0.035 n_out=208
+  kb3kl                    n=200 mean=0.5000 | vs kvbridge +0.155 [+0.080, +0.230] | vs native -0.280 [-0.350, -0.210] | vs src_native -0.425 [-0.495, -0.355]   score_256=0.415 trunc=0.260 n_out=291
+  rrr_k2048_v2048          n=200 mean=0.4300 | vs kvbridge +0.085 [+0.020, +0.150] | vs native -0.350 [-0.425, -0.275] | vs src_native -0.495 [-0.565, -0.425]   score_256=0.380 trunc=0.020 n_out=217
+  rare10                   n=200 mean=0.3900 | vs kvbridge +0.045 [-0.015, +0.105] | vs native -0.390 [-0.465, -0.315] | vs src_native -0.535 [-0.610, -0.460]   score_256=0.365 trunc=0.005 n_out=209
+  kvbridge                 n=200 mean=0.3450 | vs native -0.435 [-0.510, -0.365] | vs src_native -0.580 [-0.650, -0.510]   score_256=0.325 trunc=0.020 n_out=205
+  lingua50                 n=200 mean=0.3100 | vs kvbridge -0.035 [-0.110, +0.040] | vs native -0.470 [-0.545, -0.400] | vs src_native -0.615 [-0.685, -0.545]   score_256=0.265 trunc=0.025 n_out=269
+  lrf_bf16                 n=200 mean=0.2800 | vs kvbridge -0.065 [-0.135, +0.005] | vs native -0.500 [-0.575, -0.425] | vs src_native -0.645 [-0.710, -0.575]   score_256=0.235 trunc=0.020 n_out=205
+  kb3                      n=200 mean=0.0550 | vs kvbridge -0.290 [-0.355, -0.225] | vs native -0.725 [-0.785, -0.660] | vs src_native -0.870 [-0.915, -0.820]   score_256=0.055 trunc=0.230 n_out=231
+  lingua25                 n=200 mean=0.0150 | vs kvbridge -0.330 [-0.400, -0.265] | vs native -0.765 [-0.825, -0.705] | vs src_native -0.910 [-0.950, -0.865]   score_256=0.005 trunc=0.965 n_out=501
+  cb_full_official         n=200 mean=0.0000 | vs kvbridge -0.345 [-0.410, -0.280] | vs native -0.780 [-0.835, -0.720] | vs src_native -0.925 [-0.960, -0.885]   score_256=0.000 trunc=1.000 n_out=512
+  none                     n=200 mean=0.0000 | vs kvbridge -0.345 [-0.410, -0.280] | vs native -0.780 [-0.835, -0.720] | vs src_native -0.925 [-0.960, -0.885]   score_256=0.000 trunc=0.000 n_out=29
+== squad   [exact-information task]
+  src_native               n=200 mean=0.8261 | vs kvbridge +0.375 [+0.322, +0.428] | vs native +0.042 [-0.000, +0.086]   em=0.650 trunc=0.020 n_out=9
+  native                   n=200 mean=0.7840 | vs kvbridge +0.333 [+0.277, +0.389] | vs src_native -0.042 [-0.086, +0.003]   em=0.600 trunc=0.010 n_out=7
+  rare50                   n=200 mean=0.6476 | vs kvbridge +0.197 [+0.147, +0.246] | vs native -0.136 [-0.185, -0.089] | vs src_native -0.179 [-0.230, -0.128]   em=0.415 trunc=0.020 n_out=9
+  rare30                   n=200 mean=0.5599 | vs kvbridge +0.109 [+0.065, +0.154] | vs native -0.224 [-0.278, -0.171] | vs src_native -0.266 [-0.318, -0.214]   em=0.310 trunc=0.085 n_out=12
+  rare10                   n=200 mean=0.4843 | vs kvbridge +0.033 [-0.002, +0.071] | vs native -0.300 [-0.356, -0.243] | vs src_native -0.342 [-0.394, -0.290]   em=0.255 trunc=0.145 n_out=14
+  kvbridge                 n=200 mean=0.4508 | vs native -0.333 [-0.390, -0.276] | vs src_native -0.375 [-0.428, -0.323]   em=0.210 trunc=0.195 n_out=15
+  rrr_k2048_v2048          n=200 mean=0.4023 | vs kvbridge -0.048 [-0.091, -0.007] | vs native -0.382 [-0.433, -0.330] | vs src_native -0.424 [-0.473, -0.375]   em=0.125 trunc=0.165 n_out=17
+  lingua50                 n=200 mean=0.3350 | vs kvbridge -0.116 [-0.178, -0.053] | vs native -0.449 [-0.508, -0.387] | vs src_native -0.491 [-0.550, -0.431]   em=0.170 trunc=0.105 n_out=11
+  lrf_bf16                 n=200 mean=0.3203 | vs kvbridge -0.131 [-0.173, -0.088] | vs native -0.464 [-0.515, -0.413] | vs src_native -0.506 [-0.553, -0.457]   em=0.080 trunc=0.380 n_out=21
+  kb3                      n=200 mean=0.2288 | vs kvbridge -0.222 [-0.271, -0.175] | vs native -0.555 [-0.609, -0.498] | vs src_native -0.597 [-0.643, -0.549]   em=0.000 trunc=0.585 n_out=23
+  kb3kl                    n=200 mean=0.2250 | vs kvbridge -0.226 [-0.279, -0.175] | vs native -0.559 [-0.607, -0.511] | vs src_native -0.601 [-0.647, -0.554]   em=0.000 trunc=0.745 n_out=29
+  lingua25                 n=200 mean=0.0913 | vs kvbridge -0.360 [-0.412, -0.310] | vs native -0.693 [-0.739, -0.644] | vs src_native -0.735 [-0.778, -0.692]   em=0.000 trunc=0.950 n_out=31
+  sum10                    n=200 mean=0.0764 | vs kvbridge -0.374 [-0.427, -0.323] | vs native -0.708 [-0.755, -0.659] | vs src_native -0.750 [-0.792, -0.706]   em=0.000 trunc=0.965 n_out=32
+  none                     n=200 mean=0.0093 | vs kvbridge -0.442 [-0.491, -0.392] | vs native -0.775 [-0.819, -0.728] | vs src_native -0.817 [-0.857, -0.774]   em=0.000 trunc=0.000 n_out=29
+  cb_full_official         n=200 mean=0.0000 | vs kvbridge -0.451 [-0.502, -0.401] | vs native -0.784 [-0.828, -0.737] | vs src_native -0.826 [-0.866, -0.782]   em=0.000 trunc=1.000 n_out=32
+== kvret   [exact-information task]
+  src_native               n=200 mean=0.9850 | vs kvbridge +0.890 [+0.845, +0.930] | vs native +0.045 [+0.015, +0.080]   digit_acc=0.988 trunc=0.000 n_out=6
+  native                   n=200 mean=0.9400 | vs kvbridge +0.845 [+0.795, +0.895] | vs src_native -0.045 [-0.080, -0.010]   digit_acc=0.948 trunc=0.000 n_out=6
+  rrr_k2048_v2048          n=200 mean=0.3200 | vs kvbridge +0.225 [+0.160, +0.290] | vs native -0.620 [-0.690, -0.550] | vs src_native -0.665 [-0.730, -0.600]   digit_acc=0.554 trunc=0.040 n_out=20
+  lrf_bf16                 n=200 mean=0.1650 | vs kvbridge +0.070 [+0.020, +0.120] | vs native -0.775 [-0.835, -0.715] | vs src_native -0.820 [-0.870, -0.765]   digit_acc=0.444 trunc=0.025 n_out=20
+  kb3kl                    n=200 mean=0.1300 | vs kvbridge +0.035 [-0.015, +0.085] | vs native -0.810 [-0.865, -0.755] | vs src_native -0.855 [-0.905, -0.800]   digit_acc=0.411 trunc=0.905 n_out=60
+  rare50                   n=200 mean=0.1050 | vs kvbridge +0.010 [-0.045, +0.065] | vs native -0.835 [-0.885, -0.785] | vs src_native -0.880 [-0.925, -0.835]   digit_acc=0.522 trunc=0.015 n_out=10
+  kvbridge                 n=200 mean=0.0950 | vs native -0.845 [-0.895, -0.795] | vs src_native -0.890 [-0.930, -0.845]   digit_acc=0.426 trunc=0.035 n_out=22
+  lingua50                 n=200 mean=0.0750 | vs kvbridge -0.020 [-0.075, +0.035] | vs native -0.865 [-0.910, -0.815] | vs src_native -0.910 [-0.950, -0.870]   digit_acc=0.106 trunc=0.590 n_out=55
+  rare30                   n=200 mean=0.0700 | vs kvbridge -0.025 [-0.075, +0.025] | vs native -0.870 [-0.915, -0.820] | vs src_native -0.915 [-0.950, -0.875]   digit_acc=0.451 trunc=0.020 n_out=15
+  sum10                    n=200 mean=0.0350 | vs kvbridge -0.060 [-0.105, -0.015] | vs native -0.905 [-0.945, -0.865] | vs src_native -0.950 [-0.975, -0.915]   digit_acc=0.175 trunc=0.770 n_out=57
+  rare10                   n=200 mean=0.0300 | vs kvbridge -0.065 [-0.110, -0.025] | vs native -0.910 [-0.945, -0.870] | vs src_native -0.955 [-0.980, -0.925]   digit_acc=0.378 trunc=0.060 n_out=19
+  kb3                      n=200 mean=0.0000 | vs kvbridge -0.095 [-0.135, -0.055] | vs native -0.940 [-0.970, -0.905] | vs src_native -0.985 [-1.000, -0.965]   digit_acc=0.201 trunc=0.545 n_out=50
+  cb_full_official         n=200 mean=0.0000 | vs kvbridge -0.095 [-0.140, -0.055] | vs native -0.940 [-0.970, -0.905] | vs src_native -0.985 [-1.000, -0.965]   digit_acc=0.001 trunc=1.000 n_out=64
+  none                     n=200 mean=0.0000 | vs kvbridge -0.095 [-0.140, -0.055] | vs native -0.940 [-0.970, -0.905] | vs src_native -0.985 [-1.000, -0.965]   digit_acc=0.000 trunc=0.000 n_out=29
+  lingua25                 n=200 mean=0.0000 | vs kvbridge -0.095 [-0.135, -0.055] | vs native -0.940 [-0.970, -0.905] | vs src_native -0.985 [-1.000, -0.965]   digit_acc=0.004 trunc=0.935 n_out=62
+== passkey_2k   [exact-information task]
+  native                   n=200 mean=1.0000 | vs kvbridge +0.895 [+0.850, +0.935] | vs src_native +0.000 [+0.000, +0.000]   digit_acc=1.000 trunc=0.000 n_out=6
+  src_native               n=200 mean=1.0000 | vs kvbridge +0.895 [+0.850, +0.935] | vs native +0.000 [+0.000, +0.000]   digit_acc=1.000 trunc=0.000 n_out=6
+  lingua25                 n=200 mean=0.8600 | vs kvbridge +0.755 [+0.690, +0.815] | vs native -0.140 [-0.190, -0.095] | vs src_native -0.140 [-0.190, -0.095]   digit_acc=0.862 trunc=0.370 n_out=46
+  lingua50                 n=200 mean=0.6300 | vs kvbridge +0.525 [+0.445, +0.605] | vs native -0.370 [-0.435, -0.305] | vs src_native -0.370 [-0.435, -0.305]   digit_acc=0.654 trunc=0.000 n_out=5
+  rrr_k2048_v2048          n=200 mean=0.6200 | vs kvbridge +0.515 [+0.445, +0.585] | vs native -0.380 [-0.450, -0.315] | vs src_native -0.380 [-0.445, -0.315]   digit_acc=0.864 trunc=0.015 n_out=23
+  lrf_bf16                 n=200 mean=0.5000 | vs kvbridge +0.395 [+0.325, +0.465] | vs native -0.500 [-0.570, -0.430] | vs src_native -0.500 [-0.570, -0.430]   digit_acc=0.820 trunc=0.075 n_out=35
+  kb3kl                    n=200 mean=0.4750 | vs kvbridge +0.370 [+0.295, +0.445] | vs native -0.525 [-0.590, -0.455] | vs src_native -0.525 [-0.595, -0.455]   digit_acc=0.812 trunc=0.125 n_out=35
+  sum10                    n=200 mean=0.3300 | vs kvbridge +0.225 [+0.145, +0.305] | vs native -0.670 [-0.735, -0.605] | vs src_native -0.670 [-0.735, -0.605]   digit_acc=0.335 trunc=0.720 n_out=50
+  rare50                   n=200 mean=0.2650 | vs kvbridge +0.160 [+0.090, +0.230] | vs native -0.735 [-0.795, -0.670] | vs src_native -0.735 [-0.795, -0.675]   digit_acc=0.731 trunc=0.000 n_out=5
+  rare30                   n=200 mean=0.1250 | vs kvbridge +0.020 [-0.040, +0.075] | vs native -0.875 [-0.920, -0.830] | vs src_native -0.875 [-0.920, -0.830]   digit_acc=0.581 trunc=0.000 n_out=5
+  kvbridge                 n=200 mean=0.1050 | vs native -0.895 [-0.935, -0.850] | vs src_native -0.895 [-0.935, -0.850]   digit_acc=0.502 trunc=0.005 n_out=11
+  rare10                   n=200 mean=0.0550 | vs kvbridge -0.050 [-0.095, -0.005] | vs native -0.945 [-0.975, -0.910] | vs src_native -0.945 [-0.975, -0.910]   digit_acc=0.375 trunc=0.000 n_out=5
+  kb3                      n=200 mean=0.0000 | vs kvbridge -0.105 [-0.150, -0.065] | vs native -1.000 [-1.000, -1.000] | vs src_native -1.000 [-1.000, -1.000]   digit_acc=0.484 trunc=0.010 n_out=18
+  cb_full_official         n=200 mean=0.0000 | vs kvbridge -0.105 [-0.150, -0.065] | vs native -1.000 [-1.000, -1.000] | vs src_native -1.000 [-1.000, -1.000]   digit_acc=0.007 trunc=1.000 n_out=64
+  none                     n=200 mean=0.0000 | vs kvbridge -0.105 [-0.150, -0.065] | vs native -1.000 [-1.000, -1.000] | vs src_native -1.000 [-1.000, -1.000]   digit_acc=0.000 trunc=0.000 n_out=29
+== passkey_8k   [exact-information task]
+  src_native               n=100 mean=1.0000 | vs kvbridge +0.990 [+0.970, +1.000] | vs native +0.170 [+0.100, +0.250]   digit_acc=1.000 trunc=0.000 n_out=6
+  lingua25                 n=100 mean=0.9400 | vs kvbridge +0.930 [+0.880, +0.980] | vs native +0.110 [+0.020, +0.200] | vs src_native -0.060 [-0.110, -0.020]   digit_acc=0.942 trunc=0.200 n_out=33
+  native                   n=100 mean=0.8300 | vs kvbridge +0.820 [+0.740, +0.890] | vs src_native -0.170 [-0.250, -0.100]   digit_acc=0.857 trunc=0.000 n_out=6
+  lingua50                 n=100 mean=0.7600 | vs kvbridge +0.750 [+0.660, +0.830] | vs native -0.070 [-0.180, +0.040] | vs src_native -0.240 [-0.320, -0.160]   digit_acc=0.792 trunc=0.010 n_out=7
+  rrr_k2048_v2048          n=100 mean=0.5300 | vs kvbridge +0.520 [+0.420, +0.620] | vs native -0.300 [-0.420, -0.180] | vs src_native -0.470 [-0.570, -0.370]   digit_acc=0.822 trunc=0.020 n_out=20
+  kb3kl                    n=100 mean=0.3400 | vs kvbridge +0.330 [+0.240, +0.420] | vs native -0.490 [-0.610, -0.370] | vs src_native -0.660 [-0.750, -0.560]   digit_acc=0.745 trunc=0.200 n_out=36
+  lrf_bf16                 n=100 mean=0.2600 | vs kvbridge +0.250 [+0.170, +0.340] | vs native -0.570 [-0.670, -0.460] | vs src_native -0.740 [-0.820, -0.650]   digit_acc=0.692 trunc=0.310 n_out=45
+  sum10                    n=100 mean=0.2400 | vs kvbridge +0.230 [+0.150, +0.310] | vs native -0.590 [-0.700, -0.470] | vs src_native -0.760 [-0.840, -0.670]   digit_acc=0.263 trunc=0.820 n_out=57
+  rare50                   n=100 mean=0.1200 | vs kvbridge +0.110 [+0.040, +0.180] | vs native -0.710 [-0.800, -0.620] | vs src_native -0.880 [-0.940, -0.810]   digit_acc=0.618 trunc=0.000 n_out=4
+  rare30                   n=100 mean=0.0900 | vs kvbridge +0.080 [+0.020, +0.140] | vs native -0.740 [-0.830, -0.640] | vs src_native -0.910 [-0.960, -0.850]   digit_acc=0.458 trunc=0.000 n_out=5
+  kvbridge                 n=100 mean=0.0100 | vs native -0.820 [-0.890, -0.740] | vs src_native -0.990 [-1.000, -0.970]   digit_acc=0.165 trunc=0.010 n_out=11
+  rare10                   n=100 mean=0.0000 | vs kvbridge -0.010 [-0.030, +0.000] | vs native -0.830 [-0.900, -0.750] | vs src_native -1.000 [-1.000, -1.000]   digit_acc=0.203 trunc=0.000 n_out=6
+  kb3                      n=100 mean=0.0000 | vs kvbridge -0.010 [-0.030, +0.000] | vs native -0.830 [-0.900, -0.750] | vs src_native -1.000 [-1.000, -1.000]   digit_acc=0.457 trunc=0.040 n_out=21
+  cb_full_official         n=100 mean=0.0000 | vs kvbridge -0.010 [-0.030, +0.000] | vs native -0.830 [-0.900, -0.750] | vs src_native -1.000 [-1.000, -1.000]   digit_acc=0.000 trunc=1.000 n_out=64
+  none                     n=100 mean=0.0000 | vs kvbridge -0.010 [-0.030, +0.000] | vs native -0.830 [-0.900, -0.750] | vs src_native -1.000 [-1.000, -1.000]   digit_acc=0.000 trunc=0.000 n_out=29
+== klchat_2k
+  cb_full_official         n=200 mean=11.6938 | vs kvbridge +10.953 [+10.626, +11.280] | vs native +11.694 [+11.361, +12.028] | vs src_native +11.233 [+10.904, +11.560]
+  kb3                      n=200 mean=1.6777 | vs kvbridge +0.936 [+0.877, +0.999] | vs native +1.678 [+1.579, +1.777] | vs src_native +1.217 [+1.114, +1.322]
+  none                     n=200 mean=1.5159 | vs kvbridge +0.775 [+0.722, +0.829] | vs native +1.516 [+1.443, +1.589] | vs src_native +1.055 [+0.976, +1.136]
+  sum10                    n=200 mean=1.2182 | vs kvbridge +0.477 [+0.426, +0.532] | vs native +1.218 [+1.151, +1.291] | vs src_native +0.757 [+0.679, +0.839]
+  lingua25                 n=200 mean=1.0816 | vs kvbridge +0.340 [+0.293, +0.390] | vs native +1.082 [+1.020, +1.146] | vs src_native +0.621 [+0.553, +0.693]
+  lingua50                 n=200 mean=0.8047 | vs kvbridge +0.063 [+0.022, +0.104] | vs native +0.805 [+0.757, +0.855] | vs src_native +0.344 [+0.290, +0.399]
+  lrf_bf16                 n=200 mean=0.7453 | vs kvbridge +0.004 [-0.011, +0.019] | vs native +0.745 [+0.703, +0.789] | vs src_native +0.284 [+0.228, +0.340]
+  kvbridge                 n=200 mean=0.7413 | vs native +0.741 [+0.696, +0.787] | vs src_native +0.280 [+0.225, +0.341]
+  rrr_k2048_v2048          n=200 mean=0.6323 | vs kvbridge -0.109 [-0.127, -0.092] | vs native +0.632 [+0.597, +0.668] | vs src_native +0.171 [+0.122, +0.221]
+  rare10                   n=200 mean=0.6096 | vs kvbridge -0.132 [-0.149, -0.115] | vs native +0.610 [+0.573, +0.647] | vs src_native +0.149 [+0.099, +0.198]
+  src_native               n=200 mean=0.4609 | vs kvbridge -0.280 [-0.339, -0.223] | vs native +0.461 [+0.428, +0.495]
+  rare30                   n=200 mean=0.4285 | vs kvbridge -0.313 [-0.345, -0.283] | vs native +0.428 [+0.401, +0.457] | vs src_native -0.032 [-0.074, +0.009]
+  kb3kl                    n=200 mean=0.3660 | vs kvbridge -0.375 [-0.419, -0.334] | vs native +0.366 [+0.348, +0.384] | vs src_native -0.095 [-0.123, -0.067]
+  rare50                   n=200 mean=0.3060 | vs kvbridge -0.435 [-0.473, -0.400] | vs native +0.306 [+0.283, +0.330] | vs src_native -0.155 [-0.193, -0.116]
+  native                   n=200 mean=0.0000 | vs kvbridge -0.741 [-0.787, -0.697] | vs src_native -0.461 [-0.495, -0.427]
+== klchat_8k
+  cb_full_official         n=100 mean=12.3437 | vs kvbridge +11.411 [+10.995, +11.833] | vs native +12.344 [+11.917, +12.760] | vs src_native +11.982 [+11.556, +12.410]
+  kb3                      n=100 mean=1.9962 | vs kvbridge +1.064 [+0.985, +1.147] | vs native +1.996 [+1.855, +2.138] | vs src_native +1.634 [+1.478, +1.797]
+  none                     n=100 mean=1.6743 | vs kvbridge +0.742 [+0.666, +0.819] | vs native +1.674 [+1.569, +1.782] | vs src_native +1.312 [+1.202, +1.424]
+  sum10                    n=100 mean=1.4342 | vs kvbridge +0.502 [+0.430, +0.574] | vs native +1.434 [+1.334, +1.537] | vs src_native +1.072 [+0.964, +1.184]
+  lingua25                 n=100 mean=1.1474 | vs kvbridge +0.215 [+0.152, +0.277] | vs native +1.147 [+1.076, +1.224] | vs src_native +0.785 [+0.705, +0.871]
+  kvbridge                 n=100 mean=0.9323 | vs native +0.932 [+0.857, +1.011] | vs src_native +0.570 [+0.476, +0.667]
+  lrf_bf16                 n=100 mean=0.9058 | vs kvbridge -0.027 [-0.050, -0.004] | vs native +0.906 [+0.836, +0.978] | vs src_native +0.544 [+0.458, +0.635]
+  lingua50                 n=100 mean=0.8319 | vs kvbridge -0.100 [-0.168, -0.035] | vs native +0.832 [+0.774, +0.890] | vs src_native +0.470 [+0.406, +0.536]
+  rrr_k2048_v2048          n=100 mean=0.7786 | vs kvbridge -0.154 [-0.180, -0.128] | vs native +0.779 [+0.717, +0.841] | vs src_native +0.417 [+0.338, +0.497]
+  rare10                   n=100 mean=0.7440 | vs kvbridge -0.188 [-0.222, -0.158] | vs native +0.744 [+0.687, +0.805] | vs src_native +0.382 [+0.309, +0.458]
+  rare30                   n=100 mean=0.4870 | vs kvbridge -0.445 [-0.496, -0.395] | vs native +0.487 [+0.446, +0.527] | vs src_native +0.125 [+0.068, +0.184]
+  kb3kl                    n=100 mean=0.4767 | vs kvbridge -0.456 [-0.526, -0.389] | vs native +0.477 [+0.441, +0.515] | vs src_native +0.115 [+0.068, +0.164]
+  src_native               n=100 mean=0.3621 | vs kvbridge -0.570 [-0.672, -0.476] | vs native +0.362 [+0.323, +0.401]
+  rare50                   n=100 mean=0.3176 | vs kvbridge -0.615 [-0.680, -0.554] | vs native +0.318 [+0.289, +0.347] | vs src_native -0.044 [-0.092, +0.003]
+  native                   n=100 mean=0.0000 | vs kvbridge -0.932 [-1.011, -0.857] | vs src_native -0.362 [-0.401, -0.323]
+
+== noise band: fp32 minus bf16 of the same low-rank mapper (K768+V1536)
+
+== gate (stage 1): exact-information tasks where every translation method is clearly below native (CI excludes 0)
+  gsm8k_h      best translation = rare50: -0.160 [-0.230, -0.090]  -> clear gap
+  squad        best translation = rare50: -0.136 [-0.185, -0.089]  -> clear gap
+  kvret        best translation = rrr_k2048_v2048: -0.620 [-0.690, -0.550]  -> clear gap
+  passkey_2k   best translation = lingua25: -0.140 [-0.190, -0.095]  -> clear gap
+  passkey_8k   best translation = lingua25: +0.110 [+0.020, +0.200]  -> no clear gap

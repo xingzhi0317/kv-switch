@@ -1,0 +1,90 @@
+== quality
+  droid4_16                n=200 mean=0.5650 | vs native +0.005 [-0.040, +0.050]
+  native                   n=200 mean=0.5600
+  droid4_12                n=200 mean=0.5600 | vs native +0.000 [-0.040, +0.040]
+  droid4_20                n=200 mean=0.5500 | vs native -0.010 [-0.060, +0.035]
+  droid0_0                 n=200 mean=0.5450 | vs native -0.015 [-0.065, +0.035]
+  lingua50                 n=200 mean=0.4950 | vs native -0.065 [-0.125, -0.005]
+  lingua25                 n=200 mean=0.4600 | vs native -0.100 [-0.175, -0.025]
+  none                     n=200 mean=0.3700 | vs native -0.190 [-0.280, -0.100]
+== hotpotqa_e
+  native                   n=200 mean=0.4705   em=0.375 trunc=0.040 n_out=5
+  droid4_20                n=200 mean=0.4407 | vs native -0.030 [-0.074, +0.013]   em=0.340 trunc=0.065 n_out=8
+  lingua50                 n=200 mean=0.4229 | vs native -0.048 [-0.103, +0.008]   em=0.320 trunc=0.025 n_out=6
+  droid4_16                n=200 mean=0.4033 | vs native -0.067 [-0.116, -0.019]   em=0.300 trunc=0.060 n_out=8
+  droid4_12                n=200 mean=0.4013 | vs native -0.069 [-0.119, -0.020]   em=0.300 trunc=0.030 n_out=7
+  droid0_0                 n=200 mean=0.3684 | vs native -0.102 [-0.153, -0.053]   em=0.260 trunc=0.060 n_out=10
+  lingua25                 n=200 mean=0.3349 | vs native -0.136 [-0.202, -0.068]   em=0.240 trunc=0.020 n_out=5
+  none                     n=200 mean=0.1753 | vs native -0.295 [-0.367, -0.226]   em=0.120 trunc=0.050 n_out=8
+== gsm8k_h   [exact-information task]
+  native                   n=200 mean=0.7800   score_256=0.750 trunc=0.015 n_out=165
+  droid0_0                 n=200 mean=0.7800 | vs native +0.000 [-0.055, +0.050]   score_256=0.715 trunc=0.005 n_out=180
+  droid4_20                n=200 mean=0.7700 | vs native -0.010 [-0.060, +0.040]   score_256=0.710 trunc=0.010 n_out=177
+  droid4_16                n=200 mean=0.7550 | vs native -0.025 [-0.080, +0.030]   score_256=0.715 trunc=0.005 n_out=172
+  droid4_12                n=200 mean=0.7400 | vs native -0.040 [-0.095, +0.015]   score_256=0.690 trunc=0.005 n_out=175
+  lingua50                 n=200 mean=0.3100 | vs native -0.470 [-0.545, -0.395]   score_256=0.265 trunc=0.025 n_out=269
+  lingua25                 n=200 mean=0.0150 | vs native -0.765 [-0.825, -0.705]   score_256=0.005 trunc=0.965 n_out=501
+  none                     n=200 mean=0.0000 | vs native -0.780 [-0.835, -0.720]   score_256=0.000 trunc=0.000 n_out=29
+== squad   [exact-information task]
+  native                   n=200 mean=0.7840   em=0.600 trunc=0.010 n_out=7
+  droid4_16                n=200 mean=0.7793 | vs native -0.005 [-0.043, +0.032]   em=0.625 trunc=0.005 n_out=7
+  droid4_20                n=200 mean=0.7613 | vs native -0.023 [-0.061, +0.015]   em=0.590 trunc=0.005 n_out=7
+  droid4_12                n=200 mean=0.6427 | vs native -0.141 [-0.188, -0.096]   em=0.390 trunc=0.005 n_out=10
+  droid0_0                 n=200 mean=0.5426 | vs native -0.241 [-0.291, -0.192]   em=0.260 trunc=0.015 n_out=13
+  lingua50                 n=200 mean=0.3350 | vs native -0.449 [-0.510, -0.388]   em=0.170 trunc=0.105 n_out=11
+  lingua25                 n=200 mean=0.0913 | vs native -0.693 [-0.739, -0.645]   em=0.000 trunc=0.950 n_out=31
+  none                     n=200 mean=0.0093 | vs native -0.775 [-0.820, -0.728]   em=0.000 trunc=0.000 n_out=29
+== kvret   [exact-information task]
+  droid4_16                n=200 mean=0.9550 | vs native +0.015 [-0.025, +0.055]   digit_acc=0.958 trunc=0.000 n_out=6
+  native                   n=200 mean=0.9400   digit_acc=0.948 trunc=0.000 n_out=6
+  droid4_20                n=200 mean=0.9250 | vs native -0.015 [-0.055, +0.025]   digit_acc=0.934 trunc=0.000 n_out=6
+  droid4_12                n=200 mean=0.9150 | vs native -0.025 [-0.075, +0.025]   digit_acc=0.924 trunc=0.000 n_out=6
+  droid0_0                 n=200 mean=0.8750 | vs native -0.065 [-0.120, -0.010]   digit_acc=0.892 trunc=0.000 n_out=6
+  lingua50                 n=200 mean=0.0750 | vs native -0.865 [-0.910, -0.815]   digit_acc=0.106 trunc=0.590 n_out=55
+  none                     n=200 mean=0.0000 | vs native -0.940 [-0.970, -0.905]   digit_acc=0.000 trunc=0.000 n_out=29
+  lingua25                 n=200 mean=0.0000 | vs native -0.940 [-0.970, -0.905]   digit_acc=0.004 trunc=0.935 n_out=62
+== passkey_2k   [exact-information task]
+  native                   n=200 mean=1.0000   digit_acc=1.000 trunc=0.000 n_out=6
+  droid4_16                n=200 mean=1.0000 | vs native +0.000 [+0.000, +0.000]   digit_acc=1.000 trunc=0.000 n_out=6
+  droid4_20                n=200 mean=0.9900 | vs native -0.010 [-0.025, +0.000]   digit_acc=0.990 trunc=0.000 n_out=6
+  droid4_12                n=200 mean=0.9500 | vs native -0.050 [-0.080, -0.020]   digit_acc=0.953 trunc=0.000 n_out=6
+  droid0_0                 n=200 mean=0.9350 | vs native -0.065 [-0.100, -0.035]   digit_acc=0.936 trunc=0.000 n_out=6
+  lingua25                 n=200 mean=0.8600 | vs native -0.140 [-0.190, -0.095]   digit_acc=0.862 trunc=0.370 n_out=46
+  lingua50                 n=200 mean=0.6300 | vs native -0.370 [-0.440, -0.305]   digit_acc=0.654 trunc=0.000 n_out=5
+  none                     n=200 mean=0.0000 | vs native -1.000 [-1.000, -1.000]   digit_acc=0.000 trunc=0.000 n_out=29
+== passkey_8k   [exact-information task]
+  droid4_16                n=100 mean=1.0000 | vs native +0.170 [+0.100, +0.250]   digit_acc=1.000 trunc=0.000 n_out=6
+  droid0_0                 n=100 mean=0.9900 | vs native +0.160 [+0.090, +0.240]   digit_acc=0.990 trunc=0.000 n_out=6
+  droid4_20                n=100 mean=0.9900 | vs native +0.160 [+0.090, +0.230]   digit_acc=0.990 trunc=0.000 n_out=6
+  droid4_12                n=100 mean=0.9600 | vs native +0.130 [+0.060, +0.210]   digit_acc=0.967 trunc=0.000 n_out=6
+  lingua25                 n=100 mean=0.9400 | vs native +0.110 [+0.020, +0.200]   digit_acc=0.942 trunc=0.200 n_out=33
+  native                   n=100 mean=0.8300   digit_acc=0.857 trunc=0.000 n_out=6
+  lingua50                 n=100 mean=0.7600 | vs native -0.070 [-0.180, +0.040]   digit_acc=0.792 trunc=0.010 n_out=7
+  none                     n=100 mean=0.0000 | vs native -0.830 [-0.900, -0.750]   digit_acc=0.000 trunc=0.000 n_out=29
+== klchat_2k
+  none                     n=200 mean=1.5159 | vs native +1.516 [+1.445, +1.588]
+  lingua25                 n=200 mean=1.0816 | vs native +1.082 [+1.021, +1.145]
+  lingua50                 n=200 mean=0.8047 | vs native +0.805 [+0.757, +0.855]
+  droid0_0                 n=200 mean=0.1642 | vs native +0.164 [+0.154, +0.175]
+  droid4_12                n=200 mean=0.1314 | vs native +0.131 [+0.123, +0.140]
+  droid4_16                n=200 mean=0.0940 | vs native +0.094 [+0.088, +0.100]
+  droid4_20                n=200 mean=0.0614 | vs native +0.061 [+0.057, +0.066]
+  native                   n=200 mean=0.0000
+== klchat_8k
+  none                     n=100 mean=1.6743 | vs native +1.674 [+1.569, +1.783]
+  lingua25                 n=100 mean=1.1474 | vs native +1.147 [+1.076, +1.222]
+  lingua50                 n=100 mean=0.8319 | vs native +0.832 [+0.775, +0.892]
+  droid0_0                 n=100 mean=0.1426 | vs native +0.143 [+0.126, +0.160]
+  droid4_12                n=100 mean=0.1170 | vs native +0.117 [+0.103, +0.131]
+  droid4_16                n=100 mean=0.0885 | vs native +0.089 [+0.078, +0.100]
+  droid4_20                n=100 mean=0.0601 | vs native +0.060 [+0.052, +0.069]
+  native                   n=100 mean=0.0000
+
+== noise band: fp32 minus bf16 of the same low-rank mapper (K768+V1536)
+
+== gate (stage 1): exact-information tasks where every translation method is clearly below native (CI excludes 0)
+  gsm8k_h      best translation = droid0_0: +0.000 [-0.055, +0.050]  -> no clear gap
+  squad        best translation = droid4_16: -0.005 [-0.043, +0.032]  -> no clear gap
+  kvret        best translation = droid4_16: +0.015 [-0.025, +0.055]  -> no clear gap
+  passkey_2k   best translation = droid4_16: +0.000 [+0.000, +0.000]  -> no clear gap
+  passkey_8k   best translation = droid4_16: +0.170 [+0.100, +0.250]  -> no clear gap

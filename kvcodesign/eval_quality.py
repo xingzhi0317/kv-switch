@@ -36,10 +36,14 @@ MODELS = os.path.expanduser("~/kvswitch/models")
 TASK, NS = E("TASK", "quality"), int(E("N", 200))
 METHODS = E("METHODS", "native,cb_official,cb_fused,kvbridge,dense_fused,dense_fp8").split(",")
 DIR = E("DIR", "17to4")
-SRC_M, TGT_M = {"17to4": ("Qwen3-1.7B", "Qwen3-4B"), "4to17": ("Qwen3-4B", "Qwen3-1.7B")}[DIR]
+SRC_M, TGT_M = {"17to4": ("Qwen3-1.7B", "Qwen3-4B"), "4to17": ("Qwen3-4B", "Qwen3-1.7B"),
+                "b17to17": ("Qwen3-1.7B-Base", "Qwen3-1.7B"), "17tob17": ("Qwen3-1.7B", "Qwen3-1.7B-Base"),   # DroidSpeak pair
+                "same17": ("Qwen3-1.7B", "Qwen3-1.7B")}[DIR]   # same17: sanity check only (every method must equal native)
 CB = E("MAPPER_CB", f"{ROOT}/mappers/cachebridge_{DIR}")
 OUT = E("OUT", os.path.expanduser(f"~/kvcodesign/results/{'' if DIR == '17to4' else DIR + '/'}quality_{TASK}.json"))
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
+# our low-rank maps: 17to4 from screen2.py (mappers/), other directions from fit_lowrank_dir.py (mappers/{DIR}/)
+LRDIR = os.path.expanduser("~/kvcodesign/mappers" + ("" if DIR == "17to4" else f"/{DIR}"))
 dev = "cuda"
 H, D = 8, 128
 
@@ -92,8 +96,8 @@ class LowRank:
         if path:   # one file holding all four matrices (train_kl.py: behaviourally fine-tuned low-rank map)
             a = b = torch.load(path)
         else:
-            a = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/rrr_var_r{rk}.pt"))
-            b = torch.load(os.path.expanduser(f"~/kvcodesign/mappers/rrr_var_r{rv}.pt"))
+            a = torch.load(f"{LRDIR}/rrr_var_r{rk}.pt")
+            b = torch.load(f"{LRDIR}/rrr_var_r{rv}.pt")
         PK = LS * H * D
         g = lambda t: t.to(dev, dtype)
         self.Pk, self.Dk, self.Pv, self.Dv = g(a["Pk"]), g(a["Dk"]), g(b["Pv"]), g(b["Dv"])
@@ -185,8 +189,8 @@ class LowRankTID:
 
 # method suffix "_l0": any translator, with target layer 0 replaced by the exact token-identity K,V
 for m in METHODS:
-    if m.startswith(("rrr_", "kl_", "tid_", "lrf_")):
-        assert DIR == "17to4", "low-rank mappers are fitted for Qwen3-1.7B -> Qwen3-4B only"
+    if m.startswith(("kl_", "tid_")):
+        assert DIR == "17to4", "KL-tuned / token-identity low-rank maps exist for Qwen3-1.7B -> Qwen3-4B only"
     if m.startswith("kl_"):    # kl_k{rk}_v{rv}_{tag}[_bf16]: low-rank map fine-tuned by KL through the frozen target
         base = m[:-5] if m.endswith("_bf16") else m
         TR[m] = LowRank(0, 0, torch.bfloat16 if m.endswith("_bf16") else torch.float32, path=os.path.expanduser(f"~/kvcodesign/mappers/{base}.pt"))
@@ -201,9 +205,12 @@ for m in METHODS:
         continue
     if m in ("lrf_bf16", "lrf_fp8"):   # fused Triton kernels (fastlr.py), K 768 + V 1536
         sys.path.insert(0, os.path.expanduser("~/kvcodesign"))
+        import fastlr
         from fastlr import FastLowRank
+        fastlr.LS, fastlr.LT = LS, LT   # the kernels read the layer counts at call time
+        assert m == "lrf_bf16" or DIR == "17to4", "FP8 activation scales were calibrated for 17to4 only"
         sc = json.load(open(os.path.expanduser("~/kvcodesign/data/fp8_scales_k768_v1536.json")))
-        TR[m] = FastLowRank(768, 1536, fp8=(m == "lrf_fp8"), scales=sc)
+        TR[m] = FastLowRank(768, 1536, fp8=(m == "lrf_fp8"), scales=sc, mapper_dir=LRDIR)
     if m.startswith("rrr_"):
         parts = m.split("_")
         rk, rv = int(parts[1][1:]), int(parts[2][1:])
@@ -213,7 +220,7 @@ for m in METHODS:
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from tasks import build_samples, score   # task construction and format-insensitive scoring (tasks.py)
 
-samples = build_samples(TASK, NS, lambda t: tok(t, add_special_tokens=False).input_ids)
+samples = build_samples(TASK, NS, lambda t: tok(t, add_special_tokens=False).input_ids)[int(E("OFFSET", 0)):]   # OFFSET: profiling split
 if E("MX"):   # optional override of the generation cap
     for s_ in samples:
         if "mx" in s_:
@@ -234,6 +241,9 @@ def prefill(M, ids, c=None, chunk=8192):
 
 
 SC = None   # MODE=ttft: the source cache, computed before the clock starts
+SE = {}     # MODE=ttft: DroidSpeak E caches {a: hidden state entering layer a}, computed before the clock starts
+SND = [None, None, None]   # DroidSpeak: sender KV + all hidden states of the current history, shared by droid* methods
+import droid
 
 
 @torch.no_grad()
@@ -244,6 +254,14 @@ def target_cache(method, hist):   # history prefills run the decoder body only (
         return prefill(T, hist)
     if method == "src_native":   # source model (1.7B) reads the history and answers itself
         return prefill(S, hist)
+    if method.startswith("droid"):   # DroidSpeak (droid.py): sender KV + receiver recomputes layers a..b-1
+        a, b = droid.parse(method)
+        if SC is not None:
+            return droid.receive(T, SC, SE.get(a), a, b)
+        if SND[0] != hist:
+            SND[:] = [None, None, None]; torch.cuda.empty_cache()
+            SND[:] = [list(hist), *droid.sender(S, hist)]
+        return droid.receive(T, SND[1], SND[2].get(a), a, b)
     sc = SC if SC is not None else prefill(S, hist)
     if method.startswith("sum"):    # old model summarises from its own cache, new model reads the summary
         sc = SC if SC is not None else prefill(S, hist)
@@ -318,6 +336,8 @@ def target_cache(method, hist):   # history prefills run the decoder body only (
 
 LETTERS = [tok.encode(x, add_special_tokens=False)[0] for x in "ABCD"]
 STOP = {tok.convert_tokens_to_ids("<|im_end|>"), tok.eos_token_id}
+if TGT_M.endswith("-Base"):   # the base model ends text with <|endoftext|>
+    STOP.add(tok.convert_tokens_to_ids("<|endoftext|>"))
 
 
 @torch.no_grad()
@@ -364,6 +384,10 @@ if E("MODE") == "ttft":
         for m in METHODS:
             if m in res["lens"].get(str(L), {}):
                 continue
+            if m.startswith("droid") and droid.parse(m)[1] > droid.parse(m)[0]:   # E cache: stored with the KV, not timed
+                with torch.no_grad():
+                    SE.clear(); SE.update(droid.sender(S, hist, layers=[droid.parse(m)[0]])[1])
+                torch.cuda.synchronize(); base = torch.cuda.memory_allocated()
             ts, peak, busy, r = [], 0, 0, 0
 
             def foreign_gb():   # memory on this GPU that is not ours (other users' processes)
