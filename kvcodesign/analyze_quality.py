@@ -52,7 +52,8 @@ for t in TASKS:
             idx = sorted(set(d) & set(per.get(ref, {})))
             if idx and m != ref:
                 diff, ci = boot([d[i]["score"] for i in idx], [per[ref][i]["score"] for i in idx], rng)
-                row[f"vs_{ref}"] = dict(n=len(idx), diff=diff, ci95=ci)
+                row[f"vs_{ref}"] = dict(n=len(idx), diff=diff, ci95=ci,
+                                        ref_mean=float(np.mean([per[ref][i]["score"] for i in idx])))   # ref on the same questions
         rows[m] = row
     out[t] = rows
     print(f"== {t}" + ("   [exact-information task]" if t in EXACT_TASKS else ""))

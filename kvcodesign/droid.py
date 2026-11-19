@@ -57,3 +57,28 @@ def receive(T, sc, e, a, b):
     for l in range(b, L):
         c.update(sc.layers[l].keys, sc.layers[l].values, l)
     return c
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# DroidSpeak adapted to models of DIFFERENT sizes (e.g. Qwen3-1.7B <-> 4B; not the paper's setting, labelled
+# "adapted" in every plot).  The paper reuses the sender's KV and recomputes one contiguous layer group starting from
+# the sender's hidden state; across sizes the hidden widths differ (2048 vs 2560), so the group must start at layer 0
+# (the receiver's own token embeddings) and covers layers 0..b-1.  Layers b.. reuse KV obtained in one of three ways:
+#   direct    : the sender's KV copied as is (KV heads x head dim match: 8 x 128), target layer l <- source layer
+#               round(l * (LS-1) / (LT-1)) (depth-proportional; the paper's direct reuse, no translation)
+#   kvbridge  : the official kvbridge translation        lrf : our low-rank translation (fused kernel)
+def depth_map(sc, LS, LT):
+    c = DynamicCache()
+    for l in range(LT):
+        s = round(l * (LS - 1) / (LT - 1))
+        c.update(sc.layers[s].keys, sc.layers[s].values, l)
+    return c
+
+
+@torch.no_grad()
+def prefix_recompute(T, c, ids, b):
+    """Receiver recomputes layers 0..b-1 over the history from its own embeddings; layers b.. taken from cache c."""
+    if b == 0:
+        return c
+    e = T.model.embed_tokens(torch.tensor([ids], device=T.device))
+    return receive(T, c, e, 0, b)

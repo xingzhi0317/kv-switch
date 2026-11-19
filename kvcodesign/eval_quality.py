@@ -52,6 +52,8 @@ S = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{SRC_M}", torch_dtype=torch.
 T = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{TGT_M}", torch_dtype=torch.bfloat16).to(dev).eval()
 LS, LT = S.config.num_hidden_layers, T.config.num_hidden_layers
 TR = {}
+# DroidSpeak adapted across sizes (droid.py): dsx_{direct|kvbridge|lrf}_{b} -- the reused KV comes from a translator
+NEED = list(METHODS) + [x for x, pre in (("kvbridge", "dsx_kvbridge_"), ("lrf_bf16", "dsx_lrf_")) if any(m.startswith(pre) for m in METHODS)]
 if {"cb_official"} & set(METHODS):
     from cachebridge.mapper import PageMapper
     TR["cb_official"] = PageMapper(CB, method="cachebridge", source_rope_theta=1e6, target_rope_theta=1e6, device=dev)
@@ -74,7 +76,7 @@ if any(m.startswith("rare") for m in METHODS):
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import rare
     VR = {k: v.to(dev) for k, v in torch.load(os.path.expanduser(f"~/kvcodesign/mappers/rare_vr_{DIR}.pt")).items()}
-if {"kvbridge", "kvbridge_l0", "dense_fused", "dense_fp8"} & set(METHODS) or any(m.startswith("rare") for m in METHODS):
+if {"kvbridge", "kvbridge_l0", "dense_fused", "dense_fp8"} & set(NEED) or any(m.startswith("rare") for m in METHODS):
     from kvbridge import Mapper as KBMapper, transfer as kb_transfer
     kb = KBMapper.load(f"{ROOT}/mappers/kvbridge_{DIR}", device=dev)
     from fastmap import FastDense
@@ -188,7 +190,7 @@ class LowRankTID:
 
 
 # method suffix "_l0": any translator, with target layer 0 replaced by the exact token-identity K,V
-for m in METHODS:
+for m in NEED:
     if m.startswith(("kl_", "tid_")):
         assert DIR == "17to4", "KL-tuned / token-identity low-rank maps exist for Qwen3-1.7B -> Qwen3-4B only"
     if m.startswith("kl_"):    # kl_k{rk}_v{rv}_{tag}[_bf16]: low-rank map fine-tuned by KL through the frozen target
@@ -254,6 +256,13 @@ def target_cache(method, hist):   # history prefills run the decoder body only (
         return prefill(T, hist)
     if method == "src_native":   # source model (1.7B) reads the history and answers itself
         return prefill(S, hist)
+    if method.startswith("dsx_"):    # DroidSpeak adapted across sizes: reused KV from {direct, kvbridge, lrf}, layers 0..b-1 recomputed
+        _, base, b = method.split("_")
+        if base == "direct":
+            c = droid.depth_map(SC if SC is not None else prefill(S, hist), LS, LT)
+        else:
+            c = target_cache({"kvbridge": "kvbridge", "lrf": "lrf_bf16"}[base], hist)
+        return droid.prefix_recompute(T, c, hist, int(b))
     if method.startswith("droid"):   # DroidSpeak (droid.py): sender KV + receiver recomputes layers a..b-1
         a, b = droid.parse(method)
         if SC is not None:

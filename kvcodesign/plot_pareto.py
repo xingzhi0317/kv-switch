@@ -31,6 +31,17 @@ LABEL.update({"rare10": "RaRe 10%", "rare30": "RaRe 30%", "rare50": "RaRe 50%", 
               "droid0_0": "DroidSpeak: reuse all", "droid4_12": "DroidSpeak: recompute 8 layers",
               "droid4_16": "DroidSpeak: recompute 12 layers", "droid4_20": "DroidSpeak: recompute 16 (chosen)"})
 KEEP |= {"droid0_0", "droid4_12", "droid4_16", "droid4_20"}
+# naive DroidSpeak across sizes (droid.py): sender KV reused as is (depth-proportional layers), layers 0..b-1 recomputed
+DSX = {m for t in summ.values() if isinstance(t, dict) for m in t if m.startswith("dsx_direct_")}
+# not plotted: across sizes it only matches re-prefill when every layer is recomputed (REPORT sec. 15.4)
+LABEL.update({m: "DroidSpeak (naive): " + ("reuse all" if m == "dsx_direct_0" else f"recompute {m.split('_')[2]} layers") + " [50 q/task]" for m in DSX})
+
+
+def ratio(rows, m):   # method score / re-prefill score; a method run on fewer questions is compared on the same questions
+    if rows[m]["n"] >= rows["native"]["n"]:
+        return rows[m]["mean"] / rows["native"]["mean"]
+    v = rows[m].get("vs_native")
+    return (v["ref_mean"] + v["diff"]) / v["ref_mean"] if v and v.get("ref_mean") else None
 
 
 def retention(group):
@@ -41,8 +52,7 @@ def retention(group):
         key = ALIAS.get(m, m)
         if key is None or m == "src_native":
             continue
-        r = [summ[t][m]["mean"] / summ[t]["native"]["mean"] for t in group if m in summ.get(t, {}) and "native" in summ[t]
-             and summ[t][m]["n"] >= summ[t]["native"]["n"]]          # only tasks the method has finished
+        r = [ratio(summ[t], m) for t in group if m in summ.get(t, {}) and "native" in summ[t] and ratio(summ[t], m) is not None]
         if len(r) == len([t for t in group if t in summ]):
             out[key] = 100 * sum(r) / len(r)
     return out
