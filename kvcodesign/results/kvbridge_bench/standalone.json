@@ -1,0 +1,32 @@
+{
+ "mode": "standalone",
+ "n_samples": 2000,
+ "mc": {
+  "hellaswag": {
+   "acc": 0.5295,
+   "acc_norm": 0.687,
+   "n": 2000,
+   "metric": "acc_norm",
+   "floor": 0.25
+  },
+  "arc_challenge": {
+   "acc": 0.5068259385665529,
+   "acc_norm": 0.5409556313993175,
+   "n": 1172,
+   "metric": "acc_norm",
+   "floor": 0.25
+  },
+  "mmlu": {
+   "acc": 0.6915,
+   "acc_norm": 0.6915,
+   "n": 2000,
+   "metric": "acc",
+   "floor": 0.25
+  }
+ },
+ "wikitext": {
+  "ppl": 11.587839427972266,
+  "n_chunks": 145,
+  "prefix_len": 1024
+ }
+}

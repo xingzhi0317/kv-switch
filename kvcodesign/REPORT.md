@@ -807,3 +807,16 @@ CacheBridge（arXiv 2609.00891，v2 2026-11-03）。论文在 Qwen3 8B→14B 上
   - 1.7B→4B：`results/quality_*_lrc.json`、`*_tuned.json`；
   - 验证集扫描：`results/val/`；
   - 拟合和校准记录：`results/cb_fit_reports/`。
+
+### 17.6 kvbridge 公开成绩核对
+
+`bench_kvbridge_local.py`：直接调用 kvbridge 作者的评测代码（`experiments/fit_eval_modal.py` 的 `load_bench_data`、`score_mc_suite`、`wikitext_prefix_ppl`，只把 Modal 平台那一层替换成空壳），用作者发布的 1.7B→4B 映射器和官方 `transfer`；fp16，每个基准 2000 题（ARC-C 只有 1172 题，全部使用）。结果在 `results/kvbridge_bench/`。
+
+| | HellaSwag | ARC-C | MMLU 5-shot | WikiText-2 困惑度 |
+|---|---|---|---|---|
+| 4B 自己读：README / 我们 | 68.7 / 68.7 | 53.9 / 54.1 | 69.2 / 69.2 | 11.59 / 11.59 |
+| 1.7B→4B 映射（k=12）：README / 我们 | 63.3 / 63.4 | 42.7 / 42.7 | 55.1 / 54.9 | 13.25 / 13.25 |
+
+所有数字的差距都在 0.2 个点以内，服务器环境、模型、映射器和映射代码都没有问题。
+
+作者测的是短上下文选择题，保留率 79–92%；我们的评测用长上下文（QuALITY 2.5–8K token、HotpotQA 最长约 16K）和要求逐字准确的任务，同一个映射器在阅读理解上约 62%、精确信息上约 24%。作者 README 自己也写了，保留率会随长度下降：512 token 时 83%，16K 时 58%。
