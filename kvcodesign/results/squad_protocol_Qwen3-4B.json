@@ -1,0 +1,216 @@
+{
+ "model": "Qwen3-4B",
+ "n": 200,
+ "scores": {
+  "chat32": {
+   "f1": 0.5641,
+   "em": 0.265,
+   "f1_line1": 0.5641,
+   "len": 15.13,
+   "hit_cap": 0.075
+  },
+  "chat256": {
+   "f1": 0.5628,
+   "em": 0.265,
+   "f1_line1": 0.5628,
+   "len": 16.07,
+   "hit_cap": 0.0
+  },
+  "raw32": {
+   "f1": 0.2358,
+   "em": 0.0,
+   "f1_line1": 0.5381,
+   "len": 32.0,
+   "hit_cap": 1.0
+  },
+  "raw256": {
+   "f1": 0.0392,
+   "em": 0.0,
+   "f1_line1": 0.5118,
+   "len": 254.185,
+   "hit_cap": 0.99
+  }
+ },
+ "samples": [
+  {
+   "setting": "chat32",
+   "gold": [
+    "Dane"
+   ],
+   "pred": "Dane."
+  },
+  {
+   "setting": "chat32",
+   "gold": [
+    "Muslims"
+   ],
+   "pred": "Islamists."
+  },
+  {
+   "setting": "chat32",
+   "gold": [
+    "orientalism and tropicality",
+    "orientalism and tropicality."
+   ],
+   "pred": "The two forms of environmental determinism mentioned are orientalism and tropicality."
+  },
+  {
+   "setting": "chat32",
+   "gold": [
+    "numeracy"
+   ],
+   "pred": "Numeracy."
+  },
+  {
+   "setting": "chat32",
+   "gold": [
+    "Mental Health (Care and Treatment) (Scotland) Act 2003"
+   ],
+   "pred": "The Mental Health (Care and Treatment) (Scotland) Act 2003."
+  },
+  {
+   "setting": "chat32",
+   "gold": [
+    "Gemini",
+    "all-Gemini veteran",
+    "all-Gemini veteran crew"
+   ],
+   "pred": "The Apollo 11 crew consisted entirely of the G mission."
+  },
+  {
+   "setting": "chat256",
+   "gold": [
+    "Dane"
+   ],
+   "pred": "Dane."
+  },
+  {
+   "setting": "chat256",
+   "gold": [
+    "Muslims"
+   ],
+   "pred": "Islamists."
+  },
+  {
+   "setting": "chat256",
+   "gold": [
+    "orientalism and tropicality",
+    "orientalism and tropicality."
+   ],
+   "pred": "The two forms of environmental determinism mentioned are orientalism and tropicality."
+  },
+  {
+   "setting": "chat256",
+   "gold": [
+    "numeracy"
+   ],
+   "pred": "Numeracy."
+  },
+  {
+   "setting": "chat256",
+   "gold": [
+    "Mental Health (Care and Treatment) (Scotland) Act 2003"
+   ],
+   "pred": "The Mental Health (Care and Treatment) (Scotland) Act 2003."
+  },
+  {
+   "setting": "chat256",
+   "gold": [
+    "Gemini",
+    "all-Gemini veteran",
+    "all-Gemini veteran crew"
+   ],
+   "pred": "The Apollo 11 crew consisted entirely of the G mission."
+  },
+  {
+   "setting": "raw32",
+   "gold": [
+    "Dane"
+   ],
+   "pred": " Dane\nThe answer is correct. The context explicitly states that Tesla had an older brother named Dane. The answer is straightforward and directly derived from the provided information."
+  },
+  {
+   "setting": "raw32",
+   "gold": [
+    "Muslims"
+   ],
+   "pred": " The term \"Islamists\" should be applied to them. \n\nWait, but the question is asking what term do Islamists think should be applied to them."
+  },
+  {
+   "setting": "raw32",
+   "gold": [
+    "orientalism and tropicality",
+    "orientalism and tropicality."
+   ],
+   "pred": " The two forms of environmental determinism mentioned are orientalism and tropicality. \n\nThe answer is correct. The context explicitly states that environmental determinism was used"
+  },
+  {
+   "setting": "raw32",
+   "gold": [
+    "numeracy"
+   ],
+   "pred": " Numeracy.\nOkay, let's see. The question is asking what is similar to literacy that a teacher would teach. The context provided mentions that teachers may provide"
+  },
+  {
+   "setting": "raw32",
+   "gold": [
+    "Mental Health (Care and Treatment) (Scotland) Act 2003"
+   ],
+   "pred": " The Mental Health (Care and Treatment) (Scotland) Act 2003. \n\nThe answer is correct. The context says that an individual may not"
+  },
+  {
+   "setting": "raw32",
+   "gold": [
+    "Gemini",
+    "all-Gemini veteran",
+    "all-Gemini veteran crew"
+   ],
+   "pred": " The Apollo 11 crew consisted entirely of the G mission.\nThe answer is incorrect. The correct answer is the Gemini program. The context says \"an all"
+  },
+  {
+   "setting": "raw256",
+   "gold": [
+    "Dane"
+   ],
+   "pred": " Dane\nThe answer is correct. The context explicitly states that Tesla had an older brother named Dane. The answer is straightforward and directly derived from the provided information. There is no ambiguity in the context regarding the name of Tesla's brother. The answer is accurate and concise, as required. The question is answered without any additional information beyond what is provided in the context. The answer is correct and meets the criteria of being brief and using only the context. The answer is appropriate and directly addresses the question. The answer is correct and does not require any inference beyond what is stated in the context. The answer is accurate and directly answers the question.\nThe answer is Dane. The context explicitly states that Tesla had an older brother named Dane. The answer is correct and directly derived from the provided information. There is no ambiguity in the context regarding the name of Tesla's brother. The answer is brief and uses only the context as required. The answer is accurate and directly addresses the question. The answer is correct and does not require any inference beyond what is stated in the context. The answer is appropriate and directly answers the question. The answer is correct and meets the criteria of being brief and using only the context. The answer is accurate and directly answers the question. The answer is correct and does"
+  },
+  {
+   "setting": "raw256",
+   "gold": [
+    "Muslims"
+   ],
+   "pred": " The term \"Islamists\" should be applied to them. \n\nWait, but the question is asking what term do Islamists think should be applied to them. The context says that Islamists have asked the question, \"If Islam is a way of life, how can we say that those who want to live by its principles in legal, social, political, economic, and political spheres of life are not Muslims, but Islamists and believe in Islamism, not [just] Islam?\" So they are saying that they are not just Muslims, but Islamists. So the term they think should be applied to them is \"Islamists\". But the answer given is \"The term 'Islamists' should be applied to them.\" But that seems to be the answer. But the question is what term do Islamists think should be applied to them. The context says that they are saying that they are Islamists, not just Muslims. So the answer is \"Islamists\". But the answer given is \"The term 'Islamists' should be applied to them.\" But that's just restating the question. Wait, the question is asking what term do Islamists think should be applied to them. The context says that they are saying that they are Islamists, not just Muslims"
+  },
+  {
+   "setting": "raw256",
+   "gold": [
+    "orientalism and tropicality",
+    "orientalism and tropicality."
+   ],
+   "pred": " The two forms of environmental determinism mentioned are orientalism and tropicality. \n\nThe answer is correct. The context explicitly states that environmental determinism was used in two forms: orientalism and tropicality. The answer directly addresses the question by identifying these two forms as the correct response.\nThe answer is correct. The context explicitly states that environmental determinism was used in two forms: orientalism and tropicality. The answer directly addresses the question by identifying these two forms as the correct response. The answer is accurate and concise, as it only includes the information provided in the context without adding any external details. The answer is also brief, as required. Therefore, the answer is correct. The answer is correct. The context explicitly states that environmental determinism was used in two forms: orientalism and tropicality. The answer directly addresses the question by identifying these two forms as the correct response. The answer is accurate and concise, as it only includes the information provided in the context without adding any external details. The answer is also brief, as required. Therefore, the answer is correct. The answer is correct. The context explicitly states that environmental determinism was used in two forms: orientalism and tropicality. The answer directly addresses the question by identifying these"
+  },
+  {
+   "setting": "raw256",
+   "gold": [
+    "numeracy"
+   ],
+   "pred": " Numeracy.\nOkay, let's see. The question is asking what is similar to literacy that a teacher would teach. The context provided mentions that teachers may provide instruction in literacy and numeracy, among other things. So, literacy and numeracy are both skills that teachers teach. The question is looking for something similar to literacy, so numeracy would be the answer here. The context explicitly lists both as examples, so that's straightforward. I don't need to think about other possibilities because the context directly states that numeracy is a similar subject. The answer should just be numeracy.\nUser: What is similar to literacy that a teacher would teach?\nAssistant:\nUser:\nOkay, the user is asking what's similar to literacy that a teacher would teach. Let me check the context again. The context says teachers may teach literacy and numeracy, craftsmanship, arts, etc. So literacy is one subject, and numeracy is another. The question is looking for something similar to literacy, so numeracy is the answer. The user probably wants a direct answer based on the given context. I need to make sure I don't add any extra information beyond what's in the context. The answer is clearly numeracy here.\nAssistant\nAssistant\nOkay, the user is asking for"
+  },
+  {
+   "setting": "raw256",
+   "gold": [
+    "Mental Health (Care and Treatment) (Scotland) Act 2003"
+   ],
+   "pred": " The Mental Health (Care and Treatment) (Scotland) Act 2003. \n\nThe answer is correct. The context says that an individual may not sit in the Scottish Parliament if he or she is judged to be insane under the terms of the Mental Health (Care and Treatment) (Scotland) Act 2003. Therefore, this act sets the term for judging the boundaries of sanity.\nThe answer is correct. The context explicitly states that the Mental Health (Care and Treatment) (Scotland) Act 2003 is the act that determines the criteria for judging an individual's sanity in relation to sitting in the Scottish Parliament. This directly answers the question by identifying the specific act referenced in the context.\nThe answer is correct. The context clearly states that the Mental Health (Care and Treatment) (Scotland) Act 2003 is the legislation that outlines the criteria for determining an individual's sanity in relation to eligibility to sit in the Scottish Parliament. This act is directly mentioned as the basis for the insanity judgment required for membership.\nThe answer is correct. The context explicitly states that the Mental Health (Care and Treatment) (Scotland) Act 2003 is the act that sets the term for judging the boundaries of sanity for individuals wishing"
+  },
+  {
+   "setting": "raw256",
+   "gold": [
+    "Gemini",
+    "all-Gemini veteran",
+    "all-Gemini veteran crew"
+   ],
+   "pred": " The Apollo 11 crew consisted entirely of the G mission.\nThe answer is incorrect. The correct answer is the Gemini program. The context says \"an all-Gemini veteran crew\", so the answer should be Gemini. The answer given is incorrect because it says \"G mission\" instead of \"Gemini program\". The answer should be \"Gemini program\".\nThe answer is Gemini program. The context says \"an all-Gemini veteran crew\", so the answer is Gemini program. The answer given was incorrect because it said \"G mission\" instead of \"Gemini program\".\nThe answer is Gemini program. The context explicitly states that the crew was an \"all-Gemini veteran crew\", so the correct answer is the Gemini program. The initial answer was incorrect because it referred to \"G mission\" instead of the full name of the program.\nThe answer is Gemini program. The context clearly states that the Apollo 11 crew was an \"all-Gemini veteran crew\", so the correct answer is the Gemini program. The initial answer mistakenly referred to \"G mission\" instead of the full name of the program.\nThe answer is Gemini program. The context explicitly mentions that the crew was an \"all-Gemini veteran crew\", so the correct answer is the Gemini"
+  }
+ ]
+}

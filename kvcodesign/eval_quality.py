@@ -38,7 +38,8 @@ METHODS = E("METHODS", "native,cb_official,cb_fused,kvbridge,dense_fused,dense_f
 DIR = E("DIR", "17to4")
 SRC_M, TGT_M = {"17to4": ("Qwen3-1.7B", "Qwen3-4B"), "4to17": ("Qwen3-4B", "Qwen3-1.7B"),
                 "b17to17": ("Qwen3-1.7B-Base", "Qwen3-1.7B"), "17tob17": ("Qwen3-1.7B", "Qwen3-1.7B-Base"),   # DroidSpeak pair
-                "same17": ("Qwen3-1.7B", "Qwen3-1.7B")}[DIR]   # same17: sanity check only (every method must equal native)
+                "same17": ("Qwen3-1.7B", "Qwen3-1.7B"),   # same17: sanity check only (every method must equal native)
+                "8to14": ("Qwen3-8B-ms", "Qwen3-14B-ms")}[DIR]   # CacheBridge paper's pair; target spans two GPUs
 CB = E("MAPPER_CB", f"{ROOT}/mappers/cachebridge_{DIR}")
 OUT = E("OUT", os.path.expanduser(f"~/kvcodesign/results/{'' if DIR == '17to4' else DIR + '/'}quality_{TASK}.json"))
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
@@ -49,8 +50,13 @@ H, D = 8, 128
 
 tok = AutoTokenizer.from_pretrained(f"{MODELS}/Qwen3-4B")   # the Qwen3 sizes share one tokenizer
 S = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{SRC_M}", torch_dtype=torch.bfloat16).to(dev).eval()
-T = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{TGT_M}", torch_dtype=torch.bfloat16).to(dev).eval()
+if DIR == "8to14":   # 3 GPUs: source + mapper on cuda:0, the 14B target split over cuda:1 and cuda:2
+    T = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{TGT_M}", torch_dtype=torch.bfloat16, device_map="auto",
+                                             max_memory={0: "0GiB", 1: "20GiB", 2: "20GiB"}).eval()
+else:
+    T = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{TGT_M}", torch_dtype=torch.bfloat16).to(dev).eval()
 LS, LT = S.config.num_hidden_layers, T.config.num_hidden_layers
+TDEV = [next(T.model.layers[l].parameters()).device for l in range(LT)]   # mapped KV of layer l must live where layer l runs
 TR = {}
 # DroidSpeak adapted across sizes (droid.py): dsx_{direct|kvbridge|lrf}_{b} -- the reused KV comes from a translator
 NEED = list(METHODS) + [x for x, pre in (("kvbridge", "dsx_kvbridge_"), ("lrf_bf16", "dsx_lrf_")) if any(m.startswith(pre) for m in METHODS)]
@@ -85,10 +91,11 @@ if {"kvbridge", "kvbridge_l0", "dense_fused", "dense_fp8"} & set(NEED) or any(m.
     if "dense_fp8" in METHODS:
         TR["dense_fp8"] = FastDense(kb, fp8=True)
 KBS = {"kvbridge": kb} if "kb" in dir() else {}
-for m_ in ("kb3", "kb3kl"):   # train_dense_kl.py: KV-Lingo / Hybrid-KV recipe (top-3 closed form, then KL distillation)
+import re as _re
+for m_ in [x for x in METHODS if _re.fullmatch(r"kb\d+(cb|kl)?", x)]:   # kb{n}[cb|kl]: kvbridge-format map mappers/kvbridge{n}[cb|kl]_{DIR}   # kb3cb: fit_cb5.py (all-head map + CacheBridge energy-constrained V calibration)   # train_dense_kl.py: KV-Lingo / Hybrid-KV recipe (top-3 closed form, then KL distillation)
     if m_ in METHODS:
         from kvbridge import Mapper as KBMapper, transfer as kb_transfer
-        KBS[m_] = KBMapper.load(f"{ROOT}/mappers/{'kvbridge3' if m_ == 'kb3' else 'kvbridge3kl'}_{DIR}", device=dev)
+        KBS[m_] = KBMapper.load(f"{ROOT}/mappers/kvbridge{m_[2:]}_{DIR}", device=dev)
 
 
 class LowRank:
@@ -300,7 +307,7 @@ def target_cache(method, hist):   # history prefills run the decoder body only (
         c.layers[0].keys = rope_keys(k0, len(hist)).transpose(0, 1)[None].to(c.layers[0].keys.dtype)
         c.layers[0].values = v0.transpose(0, 1)[None].to(c.layers[0].values.dtype)
         return c
-    if method in ("kvbridge", "kb3", "kb3kl"):   # kvbridge format: official weights, top-3 closed form, top-3 + KL
+    if method in KBS:   # kvbridge format: official weights, top-3 closed form, top-3 + KL
         mpr = KBS[method]
         n = sc.layers[0].keys.shape[2]
         if n <= 8192:
@@ -339,7 +346,7 @@ def target_cache(method, hist):   # history prefills run the decoder body only (
         k, v = out[0, l].transpose(0, 1)[None], out[1, l].transpose(0, 1)[None]
         if n <= 8192:   # long histories keep views of `out` instead of a second 2.4 GB copy (same values)
             k, v = k.contiguous(), v.contiguous()
-        c.update(k, v, l)
+        c.update(k.to(TDEV[l]), v.to(TDEV[l]), l)
     return c
 
 

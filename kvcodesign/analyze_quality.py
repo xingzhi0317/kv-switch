@@ -16,7 +16,8 @@ def key_of(m, tag, prev):
     if m == "native" and prev:
         return "native_prev"
     if m == "cb_official":
-        return {"cbinit": "cb_init_official", "cbkr1": "cb_kridge1_official"}.get(tag, "cb_full_official")
+        return {"cbinit": "cb_init_official", "cbkr1": "cb_kridge1_official",
+                "cbec": "cb_ec_official"}.get(tag, "cb_full_official")   # cbec: fit_cb4.py (energy-constrained calibration)
     return m
 
 

@@ -4,6 +4,9 @@
 #
 # Tasks (history H is translated, query Q is processed by the target model itself):
 #   quality     QuALITY multiple choice, A-D logits                         (reading comprehension)
+#   quality_cb  QuALITY with CacheBridge's split (paper Table 6): H = short-answer instruction + complete article,
+#               Q = question, four options, "Answer:" + template suffix; A-D logits.  quality_cb_text() is also the
+#               calibration prompt of fit_cb6.py PROMPT=cb, so calibration and evaluation use the same layout.
 #   hotpotqa_e  LongBench HotpotQA-E, F1                                    (reading comprehension)
 #   gsm8k       8-shot CoT, question in Q                                   (question NOT translated)
 #   gsm8k_h     8-shot CoT, question inside H                               (exact information: numbers)
@@ -16,7 +19,7 @@
 #               The cut usually falls inside an assistant reply, so the continuation depends on the history.
 import os, re, json, string, random, collections, zipfile
 
-TASKS = ["quality", "hotpotqa_e", "gsm8k", "gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k", "klchat_2k", "klchat_8k"]
+TASKS = ["quality", "hotpotqa_e", "gsm8k", "gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k", "klchat_2k", "klchat_8k", "squad_cb", "quality_cb"]
 KL_TASKS = {"klchat_2k": 2048, "klchat_8k": 8192}   # continuation KL; history length in tokens
 EXACT_TASKS = ["gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k"]   # exact information must cross the translation
 PASSKEY_LEN = {"passkey_2k": 2000, "passkey_8k": 8000, "passkey_16k": 16000}
@@ -100,6 +103,14 @@ def score(s, pred):
 
 
 # ---------------------------------------------------------------- task construction
+QUALITY_CB_INSTR = "Read the article below, then answer the question with only the letter (A, B, C or D) of the best option."
+
+
+def quality_cb_text(article, r):   # -> (history text, query text) inside one user turn, CacheBridge Table 6 layout
+    opts = "\n".join(f"{c}. {o}" for c, o in zip("ABCD", r["options"]))
+    return f"{QUALITY_CB_INSTR}\n\n{article}", f"\n\nQuestion: {r['question']}\n{opts}\nAnswer:"
+
+
 def chat_split(enc, user_hist, user_query):
     h = f"<|im_start|>user\n{user_hist}"
     q = f"{user_query}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
@@ -208,6 +219,12 @@ def build_samples(task, n, enc):
                                     f"\n\nQuestion: {r['question']}\n{opts}\nAnswer with the letter of the correct option.")
                 samples.append(dict(h=hi[:12000], q=qi, gold=int(r["answer"]), kind="mc"))
         samples = samples[:n]
+    elif task == "quality_cb":   # complete article (longest QuALITY article ~8.1K tokens, no truncation)
+        for d in quality_docs():
+            for r in d:
+                hi, qi = chat_split(enc, *quality_cb_text(d[0]["article"], r))
+                samples.append(dict(h=hi, q=qi, gold=int(r["answer"]), kind="mc"))
+        samples = samples[:n]
     elif task == "hotpotqa_e":
         from huggingface_hub import hf_hub_download
         z = zipfile.ZipFile(hf_hub_download("THUDM/LongBench", "data.zip", repo_type="dataset"))
@@ -230,6 +247,14 @@ def build_samples(task, n, enc):
                 hi, qi = chat_split(enc, f"Solve the math problems.\n\n{shots}Question: {r['question']}\n", "Answer:")
             samples.append(dict(h=hi, q=qi, gold=r["answer"].split("####")[-1].strip().replace(",", ""), kind="gsm",
                                 mx=256 if task == "gsm8k" else 512))
+    elif task == "squad_cb":   # CacheBridge protocol (arXiv 2609.00891 Table 6): passage in the history, question in the query
+        from datasets import load_dataset
+        rows = list(load_dataset("rajpurkar/squad", split="validation"))
+        random.Random(0).shuffle(rows)
+        for r in rows[:n]:
+            hi, qi = chat_split(enc, f"Context: {r['context']}\n\n",
+                                f"Answer the question briefly, using only the context.\nQuestion: {r['question']}\nAnswer:")
+            samples.append(dict(h=hi, q=qi, gold=sorted(set(r["answers"]["text"])), kind="gen", mx=32))
     elif task == "squad":   # passage and question are both inside the translated history
         from datasets import load_dataset
         rows = list(load_dataset("rajpurkar/squad", split="validation"))

@@ -17,20 +17,29 @@ summ = json.load(open(R + "quality_summary.json"))
 tt = json.load(open(f"results/ttft_{DIR}.json"))["lens"].get(L, {})
 READ, EXACT = ["quality", "hotpotqa_e"], ["squad", "gsm8k_h", "kvret", "passkey_2k", "passkey_8k"]
 ALIAS = {"cb_full_official": "cb_official", "native_prev": None}       # summary key -> ttft key
+# CacheBridge refit with the paper's energy-constrained value calibration (fit_cb4.py) replaces the earlier
+# reproduction (fit_cb2.py, no energy constraint) wherever it exists; same mapper shape, so the same TTFT row
+CB_EC = any("cb_ec_official" in t for t in summ.values() if isinstance(t, dict))
+if CB_EC:
+    ALIAS.update({"cb_full_official": None, "cb_ec_official": "cb_official"})
 LABEL = {"native": "re-prefill", "none": "no history", "kvbridge": "kvbridge", "cb_official": "CacheBridge",
          "lrf_bf16": "ours: low-rank (fused)", "rrr_k2048_v2048": "ours: low-rank 2048",
          "rrr_k2048_v2048_bf16": "ours: low-rank 2048"}
-TT_ALIAS = {"rrr_k2048_v2048": "rrr_k2048_v2048_bf16"}               # quality run fp32, timing run bf16 (same map)
+TT_ALIAS = {"rrr_k2048_v2048": "rrr_k2048_v2048_bf16",               # quality run fp32, timing run bf16 (same map)
+            "kb12cb": "kvbridge"}   # same kvbridge-format mapper, 12 source layers per target layer -> same online cost
 
 
 KEEP = {"native", "none", "kvbridge", "cb_official", "lrf_bf16", "rrr_k2048_v2048", "rare10", "rare30", "rare50",
-        "lingua25", "lingua50", "sum10", "kb3", "kb3kl"}   # the methods of PLAN_v6 sec. 3 (older variants are left out)
+        "lingua25", "lingua50", "sum10", "kb3", "kb3kl", "kb12cb"}   # the methods of PLAN_v6 sec. 3 (older variants are left out)
 LABEL.update({"rare10": "RaRe 10%", "rare30": "RaRe 30%", "rare50": "RaRe 50%", "lingua25": "Lingua 25%",
               "lingua50": "Lingua 50%", "sum10": "summary", "kb3": "linear 3-layer (init)",
               "kb3kl": "KL-trained (KV-Lingo/Hybrid-KV)",
+              "kb12cb": "CacheBridge variant: all-head 12 layers + calib.",
               "droid0_0": "DroidSpeak: reuse all", "droid4_12": "DroidSpeak: recompute 8 layers",
               "droid4_16": "DroidSpeak: recompute 12 layers", "droid4_20": "DroidSpeak: recompute 16 (chosen)"})
 KEEP |= {"droid0_0", "droid4_12", "droid4_16", "droid4_20"}
+if CB_EC:
+    LABEL["cb_official"] = "CacheBridge (energy-constrained calib.) [50 q/task]"
 # naive DroidSpeak across sizes (droid.py): sender KV reused as is (depth-proportional layers), layers 0..b-1 recomputed
 DSX = {m for t in summ.values() if isinstance(t, dict) for m in t if m.startswith("dsx_direct_")}
 # not plotted: across sizes it only matches re-prefill when every layer is recomputed (REPORT sec. 15.4)
