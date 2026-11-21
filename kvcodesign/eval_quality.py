@@ -92,7 +92,7 @@ if {"kvbridge", "kvbridge_l0", "dense_fused", "dense_fp8"} & set(NEED) or any(m.
         TR["dense_fp8"] = FastDense(kb, fp8=True)
 KBS = {"kvbridge": kb} if "kb" in dir() else {}
 import re as _re
-for m_ in [x for x in METHODS if _re.fullmatch(r"kb\d+(cb|kl)?", x)]:   # kb{n}[cb|kl]: kvbridge-format map mappers/kvbridge{n}[cb|kl]_{DIR}   # kb3cb: fit_cb5.py (all-head map + CacheBridge energy-constrained V calibration)   # train_dense_kl.py: KV-Lingo / Hybrid-KV recipe (top-3 closed form, then KL distillation)
+for m_ in [x for x in METHODS if _re.fullmatch(r"kb\d+(cb|kl)?[a-z0-9]*", x)]:   # suffix: fit_cb7.py variants (kb3cbv, kb8cb, kb8cbn)   # kb{n}[cb|kl]: kvbridge-format map mappers/kvbridge{n}[cb|kl]_{DIR}   # kb3cb: fit_cb5.py (all-head map + CacheBridge energy-constrained V calibration)   # train_dense_kl.py: KV-Lingo / Hybrid-KV recipe (top-3 closed form, then KL distillation)
     if m_ in METHODS:
         from kvbridge import Mapper as KBMapper, transfer as kb_transfer
         KBS[m_] = KBMapper.load(f"{ROOT}/mappers/kvbridge{m_[2:]}_{DIR}", device=dev)
@@ -200,6 +200,10 @@ class LowRankTID:
 for m in NEED:
     if m.startswith(("kl_", "tid_")):
         assert DIR == "17to4", "KL-tuned / token-identity low-rank maps exist for Qwen3-1.7B -> Qwen3-4B only"
+    if m.startswith("lrc_"):   # lrc_k{rk}_v{rv}_{tag}[_bf16]: low-rank map + CacheBridge-style V calibration (fit_lrc.py)
+        base = m[:-5] if m.endswith("_bf16") else m
+        TR[m] = LowRank(0, 0, torch.bfloat16 if m.endswith("_bf16") else torch.float32, path=f"{LRDIR}/{base}.pt")   # 17to4: ~/kvcodesign/mappers
+        continue
     if m.startswith("kl_"):    # kl_k{rk}_v{rv}_{tag}[_bf16]: low-rank map fine-tuned by KL through the frozen target
         base = m[:-5] if m.endswith("_bf16") else m
         TR[m] = LowRank(0, 0, torch.bfloat16 if m.endswith("_bf16") else torch.float32, path=os.path.expanduser(f"~/kvcodesign/mappers/{base}.pt"))
@@ -311,7 +315,10 @@ def target_cache(method, hist):   # history prefills run the decoder body only (
         mpr = KBS[method]
         n = sc.layers[0].keys.shape[2]
         if n <= 8192:
-            return kb_transfer(sc, mpr)
+            c = kb_transfer(sc, mpr)
+            for l in range(LT):   # 8to14: the target's layers live on two GPUs
+                c.layers[l].keys, c.layers[l].values = c.layers[l].keys.to(TDEV[l]), c.layers[l].values.to(TDEV[l])
+            return c
         # long histories: the official transfer() run on 4096-token slices with explicit positions, then concatenated
         # (identical arithmetic per token; avoids the out-of-memory failure at 16K tokens on a 24 GB card)
         parts = []
@@ -324,7 +331,7 @@ def target_cache(method, hist):   # history prefills run the decoder body only (
         del sc
         c = DynamicCache()
         for l in range(LT):
-            c.update(torch.cat([x.layers[l].keys for x in parts], 2), torch.cat([x.layers[l].values for x in parts], 2), l)
+            c.update(torch.cat([x.layers[l].keys for x in parts], 2).to(TDEV[l]), torch.cat([x.layers[l].values for x in parts], 2).to(TDEV[l]), l)
         return c
     sk = torch.stack([sc.layers[l].keys[0].transpose(0, 1) for l in range(LS)]).contiguous()  # [L,T,H,D]
     sv = torch.stack([sc.layers[l].values[0].transpose(0, 1) for l in range(LS)]).contiguous()
