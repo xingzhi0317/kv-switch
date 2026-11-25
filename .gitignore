@@ -4,3 +4,4 @@ __pycache__/
 *.safetensors
 .venv/
 LOCAL_ACCESS.md
+*.zip

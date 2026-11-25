@@ -28,8 +28,10 @@ def scores(c, vr):
     s = 0
     for l in range(len(c.layers)):
         for kind, x in (("k", _strip_rope(c.layers[l].keys)), ("v", c.layers[l].values.float())):
-            z = x[0].transpose(0, 1).reshape(x.shape[2], -1) - vr["my" + kind][l]          # [T, H*D]
-            s = s + z.square().sum(1) - (z @ vr["V" + kind][l]).square().sum(1)
+            d = x.device   # multi-GPU targets: layer l's cache lives on that layer's GPU
+            z = x[0].transpose(0, 1).reshape(x.shape[2], -1) - vr["my" + kind][l].to(d)    # [T, H*D]
+            r = z.square().sum(1) - (z @ vr["V" + kind][l].to(d)).square().sum(1)
+            s = s + (r if isinstance(s, int) else r.to(s.device))
     return s
 
 
@@ -52,7 +54,8 @@ def recompute(T, c, hist, sel, chunk=4096):
         done += k
     for l in range(len(c.layers)):                                   # move recomputed entries into their slots
         K, V = c.layers[l].keys, c.layers[l].values
-        K[:, :, sel] = K[:, :, n:n + len(sel)]; V[:, :, sel] = V[:, :, n:n + len(sel)]
+        sl = sel.to(K.device)
+        K[:, :, sl] = K[:, :, n:n + len(sl)]; V[:, :, sl] = V[:, :, n:n + len(sl)]
         c.layers[l].keys, c.layers[l].values = K[:, :, :n].contiguous(), V[:, :, :n].contiguous()
     return c
 

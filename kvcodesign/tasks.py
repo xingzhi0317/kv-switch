@@ -19,7 +19,7 @@
 #               The cut usually falls inside an assistant reply, so the continuation depends on the history.
 import os, re, json, string, random, collections, zipfile
 
-TASKS = ["quality", "hotpotqa_e", "gsm8k", "gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k", "klchat_2k", "klchat_8k", "squad_cb", "quality_cb"]
+TASKS = ["quality", "hotpotqa_e", "gsm8k", "gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k", "klchat_2k", "klchat_8k", "squad_cb", "quality_cb", "gsm8k_rr"]
 KL_TASKS = {"klchat_2k": 2048, "klchat_8k": 8192}   # continuation KL; history length in tokens
 EXACT_TASKS = ["gsm8k_h", "squad", "kvret", "passkey_2k", "passkey_8k", "passkey_16k"]   # exact information must cross the translation
 PASSKEY_LEN = {"passkey_2k": 2000, "passkey_8k": 8000, "passkey_16k": 16000}
@@ -109,6 +109,10 @@ QUALITY_CB_INSTR = "Read the article below, then answer the question with only t
 def quality_cb_text(article, r):   # -> (history text, query text) inside one user turn, CacheBridge Table 6 layout
     opts = "\n".join(f"{c}. {o}" for c, o in zip("ABCD", r["options"]))
     return f"{QUALITY_CB_INSTR}\n\n{article}", f"\n\nQuestion: {r['question']}\n{opts}\nAnswer:"
+
+
+def gsm_rr_text(question):   # RaReCache GSM8K prompt (paper gives no template: Qwen's standard math instruction)
+    return f"{question}\nPlease reason step by step, and put your final answer within \\boxed{{}}."
 
 
 def chat_split(enc, user_hist, user_query):
@@ -235,6 +239,11 @@ def build_samples(task, n, enc):
             hi, qi = chat_split(enc, f"{inst}\n\nThe following are given passages.\n{r['context']}",
                                 f"\n\n{inst}\n\nQuestion: {r['input']}\nAnswer:")
             samples.append(dict(h=hi[:12000], q=qi, gold=r["answers"], kind="gen", mx=32))
+    elif task == "gsm8k_rr":   # RaReCache setting (arXiv 2610.11358 Sec 4.1): 0-shot CoT, the whole prompt translated, <=1024 tokens
+        from datasets import load_dataset
+        for r in list(load_dataset("openai/gsm8k", "main", split="test"))[:n]:
+            hi, qi = chat_split(enc, gsm_rr_text(r["question"]), "")
+            samples.append(dict(h=hi, q=qi, gold=r["answer"].split("####")[-1].strip().replace(",", ""), kind="gsm", mx=1024))
     elif task in ("gsm8k", "gsm8k_h"):
         from datasets import load_dataset
         tr = load_dataset("openai/gsm8k", "main", split="train")

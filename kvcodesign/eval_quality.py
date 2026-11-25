@@ -39,7 +39,8 @@ DIR = E("DIR", "17to4")
 SRC_M, TGT_M = {"17to4": ("Qwen3-1.7B", "Qwen3-4B"), "4to17": ("Qwen3-4B", "Qwen3-1.7B"),
                 "b17to17": ("Qwen3-1.7B-Base", "Qwen3-1.7B"), "17tob17": ("Qwen3-1.7B", "Qwen3-1.7B-Base"),   # DroidSpeak pair
                 "same17": ("Qwen3-1.7B", "Qwen3-1.7B"),   # same17: sanity check only (every method must equal native)
-                "8to14": ("Qwen3-8B-ms", "Qwen3-14B-ms")}[DIR]   # CacheBridge paper's pair; target spans two GPUs
+                "8to14": ("Qwen3-8B-ms", "Qwen3-14B-ms"),
+                "06to14": ("Qwen3-0.6B-ms", "Qwen3-14B-ms")}[DIR]   # RaReCache paper's pair (fit_rr.py)   # CacheBridge paper's pair; target spans two GPUs
 CB = E("MAPPER_CB", f"{ROOT}/mappers/cachebridge_{DIR}")
 OUT = E("OUT", os.path.expanduser(f"~/kvcodesign/results/{'' if DIR == '17to4' else DIR + '/'}quality_{TASK}.json"))
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
@@ -53,6 +54,9 @@ S = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{SRC_M}", torch_dtype=torch.
 if DIR == "8to14":   # 3 GPUs: source + mapper on cuda:0, the 14B target split over cuda:1 and cuda:2
     T = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{TGT_M}", torch_dtype=torch.bfloat16, device_map="auto",
                                              max_memory={0: "0GiB", 1: "20GiB", 2: "20GiB"}).eval()
+elif DIR == "06to14":   # 2 GPUs: the 0.6B source + mapper fit next to part of the 14B on cuda:0
+    T = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{TGT_M}", torch_dtype=torch.bfloat16, device_map="auto",
+                                             max_memory={0: "12GiB", 1: "21GiB"}).eval()
 else:
     T = AutoModelForCausalLM.from_pretrained(f"{MODELS}/{TGT_M}", torch_dtype=torch.bfloat16).to(dev).eval()
 LS, LT = S.config.num_hidden_layers, T.config.num_hidden_layers
@@ -198,8 +202,8 @@ class LowRankTID:
 
 # method suffix "_l0": any translator, with target layer 0 replaced by the exact token-identity K,V
 for m in NEED:
-    if m.startswith(("kl_", "tid_")):
-        assert DIR == "17to4", "KL-tuned / token-identity low-rank maps exist for Qwen3-1.7B -> Qwen3-4B only"
+    if m.startswith("tid_"):
+        assert DIR == "17to4", "token-identity low-rank maps exist for Qwen3-1.7B -> Qwen3-4B only"
     if m.startswith("lrc_"):   # lrc_k{rk}_v{rv}_{tag}[_bf16]: low-rank map + CacheBridge-style V calibration (fit_lrc.py)
         base = m[:-5] if m.endswith("_bf16") else m
         TR[m] = LowRank(0, 0, torch.bfloat16 if m.endswith("_bf16") else torch.float32, path=f"{LRDIR}/{base}.pt")   # 17to4: ~/kvcodesign/mappers
@@ -381,6 +385,56 @@ def answer(c, s, M=None):   # -> (prediction, generated token ids or None, trunc
     return tok.decode(outt, skip_special_tokens=True).strip(), outt, trunc
 
 
+@torch.no_grad()
+def answer_batch(cs, ss, M=None):   # greedy generation for several samples at once (BATCH > 1, generation tasks)
+    """Each sample first reads its question on its own cache (as answer()); the caches are then left-padded to a common
+    length and stacked, and all samples decode together: a 2D attention mask hides the padding, explicit position_ids
+    keep every sample's true positions.  Same outputs as answer() up to bf16 batching round-off."""
+    M = M or T
+    first, lens = [], []
+    for c, s in zip(cs, ss):
+        first.append(int(M(torch.tensor([s["q"]], device=dev), past_key_values=c, use_cache=True).logits[0, -1].argmax()))
+        lens.append(c.layers[0].keys.shape[2])
+    B, Lm, nl = len(cs), max(lens), len(cs[0].layers)
+    bc = DynamicCache()
+    for l in range(nl):
+        ks, vs = [], []
+        for c, n in zip(cs, lens):
+            k, v = c.layers[l].keys, c.layers[l].values
+            if n < Lm:
+                z = k.new_zeros(1, k.shape[1], Lm - n, k.shape[3])
+                k, v = torch.cat([z, k], 2), torch.cat([z, v], 2)
+            ks.append(k); vs.append(v)
+            c.layers[l].keys = c.layers[l].values = None   # free the per-sample copy
+        bc.update(torch.cat(ks, 0), torch.cat(vs, 0), l)
+        del ks, vs
+    mask = torch.zeros(B, Lm, dtype=torch.long, device=dev)
+    for b, n in enumerate(lens):
+        mask[b, Lm - n:] = 1
+    pos = torch.tensor(lens, device=dev)
+    nxt = torch.tensor(first, device=dev)
+    mx = max(s["mx"] for s in ss)
+    outs, done, trunc = [[] for _ in range(B)], [False] * B, [True] * B
+    for t in range(mx + 1):
+        for b in range(B):
+            if done[b]:
+                continue
+            x = int(nxt[b])
+            if x in STOP:
+                done[b], trunc[b] = True, False
+            elif len(outs[b]) >= ss[b]["mx"]:
+                done[b] = True   # cap reached; trunc stays True (x is not a stop token)
+            else:
+                outs[b].append(x)
+        if all(done) or t == mx:
+            break
+        mask = torch.cat([mask, torch.ones(B, 1, dtype=torch.long, device=dev)], 1)
+        lg = M(nxt[:, None], past_key_values=bc, attention_mask=mask, position_ids=(pos + t)[:, None], use_cache=True).logits[:, -1]
+        nxt = lg.argmax(-1).to(dev)
+    del bc
+    return [(tok.decode(o, skip_special_tokens=True).strip(), o, tr) for o, tr in zip(outs, trunc)]
+
+
 if E("MODE") == "ttft":
     import time
     from tasks import quality_docs
@@ -465,6 +519,16 @@ def cont_logits(c, s, M):   # teacher-forced log-probs on the continuation (kind
     return M(torch.tensor([s["q"]], device=dev), past_key_values=c, use_cache=True).logits[0].float().log_softmax(-1)
 
 
+def gen_record(s, p, ids, trunc):
+    r = dict(pred=p, **score(s, p))
+    if ids is not None:
+        r.update(n_out=len(ids), trunc=trunc)
+        if s["kind"] == "gsm" and s["mx"] > 256:   # same greedy output cut at 256 tokens (truncation control)
+            r["score_256"] = score(s, tok.decode(ids[:256], skip_special_tokens=True).strip())["score"]
+    return r
+
+
+BATCH = int(E("BATCH", 1))   # >1: generation tasks decode BATCH samples at once (answer_batch)
 res = json.load(open(OUT)) if os.path.exists(OUT) else dict(task=TASK, dir=DIR, samples=[])
 done = len(res["samples"])
 for i, s in enumerate(samples):
@@ -486,15 +550,26 @@ for i, s in enumerate(samples):
             print(TASK, i + 1, "KL", {m: round(float(np.mean([x["m"][m]["score"] for x in res["samples"]])), 4) for m in METHODS}, flush=True)
         torch.cuda.empty_cache()
         continue
+    if BATCH > 1 and s["kind"] != "mc":   # batched generation: the next BATCH samples together, method by method
+        if (i - done) % BATCH:
+            continue                        # already handled by the batch that started at an earlier i
+        grp = samples[i:i + BATCH]
+        recs = [dict(n_hist=len(x["h"]), m={}, **x.get("meta", {})) for x in grp]
+        for m in METHODS:
+            outs = answer_batch([target_cache(m, x["h"]) for x in grp], grp, S if m == "src_native" else T)
+            for x, rc, (p, ids, trunc) in zip(grp, recs, outs):
+                rc["m"][m] = gen_record(x, p, ids, trunc)
+            torch.cuda.empty_cache()
+        res["samples"] += recs
+        i += len(grp) - 1
+        if (i + 1) % 20 < len(grp) or i == len(samples) - 1:
+            json.dump(res, open(OUT, "w"))
+            print(TASK, i + 1, {m: round(float(np.mean([x["m"][m]["score"] for x in res["samples"]])), 4) for m in METHODS}, flush=True)
+        continue
     for m in METHODS:
         c = target_cache(m, s["h"])
         p, ids, trunc = answer(c, s, S if m == "src_native" else T)
-        r = dict(pred=p, **score(s, p))
-        if ids is not None:
-            r.update(n_out=len(ids), trunc=trunc)
-            if s["kind"] == "gsm" and s["mx"] > 256:   # same greedy output cut at 256 tokens (truncation control)
-                r["score_256"] = score(s, tok.decode(ids[:256], skip_special_tokens=True).strip())["score"]
-        rec["m"][m] = r
+        rec["m"][m] = gen_record(s, p, ids, trunc)
         del c
     res["samples"].append(rec)
     if (i + 1) % 20 == 0 or i == len(samples) - 1:

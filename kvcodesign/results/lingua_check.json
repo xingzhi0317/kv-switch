@@ -1,0 +1,32 @@
+{
+ "passkey_2k": {
+  "gold_in_original": 1.0,
+  "kept_0.25": 0.234,
+  "gold_kept_0.25": 0.975,
+  "gold_kept_nospace_0.25": 0.975,
+  "kept_0.5": 0.473,
+  "gold_kept_0.5": 1.0,
+  "gold_kept_nospace_0.5": 1.0,
+  "mean_tokens": 1974
+ },
+ "passkey_8k": {
+  "gold_in_original": 1.0,
+  "kept_0.25": 0.23,
+  "gold_kept_0.25": 0.975,
+  "gold_kept_nospace_0.25": 0.975,
+  "kept_0.5": 0.469,
+  "gold_kept_0.5": 1.0,
+  "gold_kept_nospace_0.5": 1.0,
+  "mean_tokens": 7976
+ },
+ "quality": {
+  "kept_0.25": 0.233,
+  "kept_0.5": 0.492,
+  "mean_tokens": 6860
+ },
+ "hotpotqa_e": {
+  "kept_0.25": 0.265,
+  "kept_0.5": 0.516,
+  "mean_tokens": 8416
+ }
+}

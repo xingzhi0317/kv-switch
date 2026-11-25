@@ -1,0 +1,45 @@
+{
+ "config": {
+  "rk": 768,
+  "rv": 1536,
+  "steps": 40,
+  "acc": 2,
+  "lr": 0.001,
+  "maxn": 3072,
+  "ndocs": 60,
+  "prompts": [
+   "Summarize the text above in one sentence.",
+   "What is the main topic of the text above?",
+   "Quote the first sentence of the text exactly.",
+   "Quote the last sentence of the text exactly.",
+   "List the proper names mentioned in the text.",
+   "List the numbers and dates mentioned in the text, in the order they appear.",
+   "Copy the last twenty words of the text exactly.",
+   "Which sentence of the text is the most surprising? Quote it."
+  ]
+ },
+ "val": [
+  {
+   "step": 0,
+   "A": 0.257,
+   "B": 0.9993,
+   "A_top1": 0.8411,
+   "B_top1": 0.8
+  },
+  {
+   "step": 20,
+   "A": 0.2366,
+   "B": 0.0117,
+   "A_top1": 0.8411,
+   "B_top1": 1.0
+  },
+  {
+   "step": 40,
+   "A": 0.2362,
+   "B": 0.0433,
+   "A_top1": 0.8333,
+   "B_top1": 1.0
+  }
+ ],
+ "train": []
+}

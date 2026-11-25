@@ -1,0 +1,21 @@
+{
+ "config": {
+  "dir": "17to4",
+  "steps": 6,
+  "lr": 0.0001,
+  "batch": 8,
+  "init": "/home/wxz/kvbase/mappers/kvbridge3_17to4"
+ },
+ "val": [
+  [
+   0,
+   0.7194
+  ],
+  [
+   6,
+   0.8037
+  ]
+ ],
+ "train": [],
+ "oom": 14
+}
